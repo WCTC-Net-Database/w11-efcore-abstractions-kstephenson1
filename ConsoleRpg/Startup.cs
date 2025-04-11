@@ -1,20 +1,27 @@
-﻿using Castle.Core.Configuration;
-using ConsoleRpg.Helpers;
-using ConsoleRpg.Services;
-using ConsoleRpgEntities.Data;
-using ConsoleRpgEntities.Helpers;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using NReco.Logging.File;
+using ConsoleRPG.Models.UI.Menus;
+using ConsoleRPG.Data;
+using ConsoleRPG.Helpers;
+using ConsoleRPG.FileIO;
+using ConsoleRPG.Models.UI.Character;
+using ConsoleRPG.Models.UI.Menus.InteractiveMenus;
+using ConsoleRPG.Models.UI;
+using ConsoleRPG.Models.Units.Abstracts;
+using ConsoleRPG.Services;
+using ConsoleRPG.Data;
 
-namespace ConsoleRpg;
+namespace ConsoleRPG;
 
 public static class Startup
 {
     public static void ConfigureServices(IServiceCollection services)
     {
+        Console.Title = "ConsoleRpg";
+
         // Build configuration
         var configuration = ConfigurationHelper.GetConfiguration();
 
@@ -38,16 +45,37 @@ public static class Startup
         });
 
         // Register DbContext with dependency injection
-        var connectionString = configuration.GetConnectionString("DefaultConnection");
         services.AddDbContext<GameContext>(options =>
-        {
-            ConfigurationHelper.ConfigureDbContextOptions(options, connectionString);
-        });
+            options
+                .UseSqlServer(configuration.GetConnectionString("DbConnection"))
+                .UseLazyLoadingProxies()
+        );
 
 
         // Register your services
-        services.AddTransient<GameEngine>();
-        services.AddTransient<MenuManager>();
-        services.AddSingleton<OutputManager>();
+        services.AddTransient<CharacterUtilities>();
+        services.AddTransient<CharacterUI>();
+        services.AddTransient<CombatHandler>();
+        services.AddTransient<CommandHandler>();
+        services.AddTransient<CommandMenu>();
+        services.AddTransient<DungeonFactory>();
+        services.AddTransient<ExitMenu>();
+        services.AddSingleton<FileManager<Unit>>();
+        services.AddDbContext<GameContext>(options => options
+        .UseSqlServer(configuration.GetConnectionString("DbConnection"))
+        .UseLazyLoadingProxies());
+        services.AddTransient<InventoryMenu>();
+        services.AddTransient<ItemCommandMenu>();
+        services.AddTransient<LevelUpMenu>();
+        services.AddTransient<MainMenu>();
+        services.AddTransient<RoomFactory>();
+        services.AddTransient<RoomMenu>();
+        services.AddTransient<RoomNavigationMenu>();
+        services.AddTransient<RoomUI>();
+        services.AddTransient<SeedHandler>();
+        services.AddSingleton<UnitClassMenu>();
+        services.AddSingleton<UnitManager>();
+        services.AddTransient<UnitSelectionMenu>();
+        services.AddTransient<UserInterface>();
     }
 }
