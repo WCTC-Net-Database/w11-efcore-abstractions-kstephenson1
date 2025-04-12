@@ -2,6 +2,8 @@
 using ConsoleRpg.Models.Abilities;
 using ConsoleRpg.Models.UI;
 using ConsoleRpg.Models.Units.Abstracts;
+using ConsoleRpg.Services;
+using Spectre.Console;
 
 namespace ConsoleRpg;
 
@@ -10,19 +12,21 @@ public class GameEngine
     private GameContext _db;
     private SeedHandler _seedHandler;
     private UserInterface _userInterface;
+    private CombatHandler _combatHandler;
 
-    public GameEngine(GameContext db, SeedHandler seedHandler, UserInterface userInterface)
+    public GameEngine(GameContext db, SeedHandler seedHandler, UserInterface userInterface, CombatHandler combatHandler)
     {
         _db = db;
         _seedHandler = seedHandler;
         _userInterface = userInterface;
+        _combatHandler = combatHandler;
     }
 
     public void StartGameEngine()
     {
         Initialization();
         Run();
-        Test();
+        //Test();
         End();
     }
 
@@ -33,6 +37,7 @@ public class GameEngine
         Ability steal = _db.Abilities.Where(a => a.Units.Contains(rogue)).FirstOrDefault();
         rogue.UseAbility(target, steal);
         
+        rogue.Attack(target);
     }
 
     public void Initialization()
@@ -40,18 +45,18 @@ public class GameEngine
         // The Initialization method runs a few things that need to be done before the main part of the program runs.
 
         //_unitManager.ImportUnits(); //Imports the caracters from the csv or json file.
-        _seedHandler.SeedFromJson();
+        _seedHandler.SeedDatabase();
     }
 
     public void Run()
     {
         // Shows the main menu.  Allows you to add/edit characters before the game is started.
-        _userInterface.MainMenu.Display("[[Exit]]");
+        _userInterface.MainMenu.Display("[[Start Game]]");
 
         //Dungeon dungeon = _dungeonFactory.CreateDungeon("intro");
         //dungeon.EnterDungeon();
 
-        //_combatHandler.StartCombat();
+        _combatHandler.StartCombat();
     }
 
     public void End()
