@@ -1,4 +1,4 @@
-﻿namespace ConsoleRPG.Models.Items
+﻿namespace ConsoleRpg.Models.Items
 {
     public class GenericItem : Item
     {

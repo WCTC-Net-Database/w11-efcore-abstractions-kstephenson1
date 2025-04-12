@@ -1,4 +1,4 @@
-﻿namespace ConsoleRPG.Models.Interfaces.FileIO;
+﻿namespace ConsoleRpg.Models.Interfaces.FileIO;
 
 public interface IFileIO
 {

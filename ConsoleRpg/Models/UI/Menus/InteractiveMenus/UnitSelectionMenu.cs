@@ -1,10 +1,10 @@
-﻿using ConsoleRPG.Models.Combat;
-using ConsoleRPG.Models.Interfaces;
-using ConsoleRPG.Models.Units.Abstracts;
-using ConsoleRPG.Services;
-using ConsoleRPG.Data;
+﻿using ConsoleRpg.Models.Combat;
+using ConsoleRpg.Models.Interfaces;
+using ConsoleRpg.Models.Units.Abstracts;
+using ConsoleRpg.Services;
+using ConsoleRpg.Data;
 
-namespace ConsoleRPG.Models.UI.Menus.InteractiveMenus;
+namespace ConsoleRpg.Models.UI.Menus.InteractiveMenus;
 
 public class UnitSelectionMenu : InteractiveSelectionMenu<IUnit>
 {

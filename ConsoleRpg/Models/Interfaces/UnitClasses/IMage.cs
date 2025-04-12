@@ -1,6 +1,6 @@
-﻿using ConsoleRPG.Models.Interfaces.UnitBehaviors;
+﻿using ConsoleRpg.Models.Interfaces.UnitBehaviors;
 
-namespace ConsoleRPG.Models.Interfaces.UnitClasses;
+namespace ConsoleRpg.Models.Interfaces.UnitClasses;
 
 public interface IMage : ICastable
 {

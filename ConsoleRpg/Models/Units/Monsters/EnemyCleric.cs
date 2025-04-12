@@ -1,14 +1,13 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
 using System.Text.Json.Serialization;
 using CsvHelper.Configuration.Attributes;
-using ConsoleRPG.Models.Combat;
-using ConsoleRPG.Models.Commands.UnitCommands;
-using ConsoleRPG.Models.Interfaces;
-using ConsoleRPG.Models.Interfaces.UnitClasses;
-using ConsoleRPG.Models.Inventories;
-using ConsoleRPG.Models.Units.Abstracts;
+using ConsoleRpg.Models.Combat;
+using ConsoleRpg.Models.Commands.UnitCommands;
+using ConsoleRpg.Models.Interfaces.UnitClasses;
+using ConsoleRpg.Models.Inventories;
+using ConsoleRpg.Models.Units.Abstracts;
 
-namespace ConsoleRPG.Models.Units.Monsters;
+namespace ConsoleRpg.Models.Units.Monsters;
 
 public class EnemyCleric : Monster, ICleric
 {
@@ -26,18 +25,8 @@ public class EnemyCleric : Monster, ICleric
     [Ignore]
     [JsonIgnore]
     [NotMapped]
-    public virtual HealCommand HealCommand { get; set; } = null!;
-
-    [Ignore]
-    [JsonIgnore]
-    [NotMapped]
     public virtual CastCommand CastCommand { get; set; } = null!;
 
-    public void Heal(IUnit target)
-    {
-        HealCommand = new(this, target);
-        Invoker.ExecuteCommand(HealCommand);
-    }
     public void Cast(string spellName)
     {
         CastCommand = new(this, spellName);

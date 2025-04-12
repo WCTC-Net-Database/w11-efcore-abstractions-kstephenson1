@@ -1,9 +1,9 @@
 ﻿using Spectre.Console;
-using ConsoleRPG.Models.Interfaces;
-using ConsoleRPG.Models.Interfaces.Commands;
-using ConsoleRPG.Models.UI;
+using ConsoleRpg.Models.Interfaces;
+using ConsoleRpg.Models.Interfaces.Commands;
+using ConsoleRpg.Models.UI;
 
-namespace ConsoleRPG.Services;
+namespace ConsoleRpg.Services;
 
 public class CombatHandler
 {

@@ -1,11 +1,11 @@
-﻿namespace ConsoleRPG.FileIO.Csv;
+﻿namespace ConsoleRpg.FileIO.Csv;
 
 using System.Collections.Generic;
 using System.Globalization;
 using CsvHelper;
 using CsvHelper.Configuration;
-using ConsoleRPG.Configuration;
-using ConsoleRPG.Models.Interfaces.FileIO;
+using ConsoleRpg.Configuration;
+using ConsoleRpg.Models.Interfaces.FileIO;
 
 [Obsolete]
 public class CsvFileHandler<T> : ICharacterIO, IItemIO

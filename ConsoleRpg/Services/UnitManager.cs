@@ -1,9 +1,9 @@
-﻿using ConsoleRPG.FileIO;
-using ConsoleRPG.Models;
-using ConsoleRPG.Models.Interfaces;
-using ConsoleRPG.Models.Units.Abstracts;
+﻿using ConsoleRpg.FileIO;
+using ConsoleRpg.Models;
+using ConsoleRpg.Models.Interfaces;
+using ConsoleRpg.Models.Units.Abstracts;
 
-namespace ConsoleRPG.Services;
+namespace ConsoleRpg.Services;
 
 public class UnitManager
 {

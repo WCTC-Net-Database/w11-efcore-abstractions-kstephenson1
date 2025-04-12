@@ -1,7 +1,7 @@
-﻿using ConsoleRPG.Models.UI.Menus;
-using ConsoleRPG.Models.UI.Menus.InteractiveMenus;
+﻿using ConsoleRpg.Models.UI.Menus;
+using ConsoleRpg.Models.UI.Menus.InteractiveMenus;
 
-namespace ConsoleRPG.Models.UI;
+namespace ConsoleRpg.Models.UI;
 
 // The UserInterface class contains a list of various menu items for easy access.
 public class UserInterface

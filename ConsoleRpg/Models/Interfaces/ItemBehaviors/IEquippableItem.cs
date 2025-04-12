@@ -1,17 +1,12 @@
-﻿using ConsoleRPG.DataTypes;
+﻿using ConsoleRpg.DataTypes;
 
-namespace ConsoleRPG.Models.Interfaces.ItemBehaviors;
+namespace ConsoleRpg.Models.Interfaces.ItemBehaviors;
 
 public interface IEquippableItem : IItem
 {
-    public WeaponType WeaponType { get; set; }
-    public WeaponRank RequiredRank { get; set; }
+    public Rank RequiredRank { get; set; }
     public int MaxDurability { get; set; }
     public int Durability { get; set; }
-    public int Might { get; set; }
-    public int Hit { get; set; }
-    public int Crit { get; set; }
-    public int Range { get; set; }
     public int Weight { get; set; }
     public int ExpModifier { get; set; }
     public void Equip();

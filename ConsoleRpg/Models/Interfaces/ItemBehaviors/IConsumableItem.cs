@@ -1,4 +1,4 @@
-﻿namespace ConsoleRPG.Models.Interfaces.ItemBehaviors;
+﻿namespace ConsoleRpg.Models.Interfaces.ItemBehaviors;
 
 public interface IConsumableItem : IItem
 {

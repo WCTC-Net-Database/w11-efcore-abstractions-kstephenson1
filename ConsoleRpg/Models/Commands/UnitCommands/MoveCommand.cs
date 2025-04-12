@@ -1,7 +1,7 @@
-﻿using ConsoleRPG.Models.Interfaces;
-using ConsoleRPG.Models.Interfaces.Commands;
+﻿using ConsoleRpg.Models.Interfaces;
+using ConsoleRpg.Models.Interfaces.Commands;
 
-namespace ConsoleRPG.Models.Commands.UnitCommands;
+namespace ConsoleRpg.Models.Commands.UnitCommands;
 
 public class MoveCommand : ICommand
 {

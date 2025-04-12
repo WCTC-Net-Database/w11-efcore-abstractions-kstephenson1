@@ -1,13 +1,14 @@
-﻿using ConsoleRPG.Models.Commands.ItemCommands;
-using ConsoleRPG.Models.Commands.UnitCommands;
-using ConsoleRPG.Models.Interfaces;
-using ConsoleRPG.Models.Interfaces.Commands;
-using ConsoleRPG.Models.Interfaces.ItemBehaviors;
-using ConsoleRPG.Models.Interfaces.UnitBehaviors;
-using ConsoleRPG.Models.UI;
-using ConsoleRPG.Services.DataHelpers;
+﻿using ConsoleRpg.Models.Commands.AbilityCommands;
+using ConsoleRpg.Models.Commands.ItemCommands;
+using ConsoleRpg.Models.Commands.UnitCommands;
+using ConsoleRpg.Models.Interfaces;
+using ConsoleRpg.Models.Interfaces.Commands;
+using ConsoleRpg.Models.Interfaces.ItemBehaviors;
+using ConsoleRpg.Models.Interfaces.UnitBehaviors;
+using ConsoleRpg.Models.UI;
+using ConsoleRpg.Services.DataHelpers;
 
-namespace ConsoleRPG.Services;
+namespace ConsoleRpg.Services;
 
 public class CommandHandler
 {
@@ -78,15 +79,6 @@ public class CommandHandler
                 {
                     unit.Attack(targetUnit);
                 }
-            }
-        }
-        // If the unit is able to heal, it heals.
-        else if (command.GetType() == typeof(HealCommand))
-        {
-            IUnit targetUnit = _userInterface.UnitSelectionMenu.Display($"Select unit being healed by {unit.Name}", "[[Go Back]]");
-            if (targetUnit != null)
-            {
-                ((IHeal)unit).Heal(targetUnit);
             }
         }
         // If the unit is able to cast spells, it casts a spell.

@@ -1,4 +1,4 @@
-﻿namespace ConsoleRPG.Models.Interfaces.UnitBehaviors
+﻿namespace ConsoleRpg.Models.Interfaces.UnitBehaviors
 {
     public interface ITargetable
     {

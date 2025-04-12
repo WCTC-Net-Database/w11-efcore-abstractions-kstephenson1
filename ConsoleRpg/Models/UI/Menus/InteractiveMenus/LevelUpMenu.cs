@@ -1,7 +1,7 @@
 ﻿using System.Reflection;
-using ConsoleRPG.Services;
+using ConsoleRpg.Services;
 
-namespace ConsoleRPG.Models.UI.Menus.InteractiveMenus;
+namespace ConsoleRpg.Models.UI.Menus.InteractiveMenus;
 
 public class LevelUpMenu : InteractiveSelectionMenu<int>
 {

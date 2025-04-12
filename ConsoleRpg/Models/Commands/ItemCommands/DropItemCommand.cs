@@ -1,7 +1,7 @@
-﻿using ConsoleRPG.Models.Interfaces;
-using ConsoleRPG.Models.Interfaces.Commands;
+﻿using ConsoleRpg.Models.Interfaces;
+using ConsoleRpg.Models.Interfaces.Commands;
 
-namespace ConsoleRPG.Models.Commands.ItemCommands;
+namespace ConsoleRpg.Models.Commands.ItemCommands;
 
 public class DropItemCommand : ICommand
 {

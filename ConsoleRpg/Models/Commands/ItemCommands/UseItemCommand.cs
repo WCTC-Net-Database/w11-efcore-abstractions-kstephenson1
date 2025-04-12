@@ -1,8 +1,8 @@
-﻿using ConsoleRPG.Models.Interfaces;
-using ConsoleRPG.Models.Interfaces.Commands;
-using ConsoleRPG.Models.Interfaces.ItemBehaviors;
+﻿using ConsoleRpg.Models.Interfaces;
+using ConsoleRpg.Models.Interfaces.Commands;
+using ConsoleRpg.Models.Interfaces.ItemBehaviors;
 
-namespace ConsoleRPG.Models.Commands.ItemCommands;
+namespace ConsoleRpg.Models.Commands.ItemCommands;
 
 public class UseItemCommand : ICommand
 {

@@ -1,6 +1,6 @@
 ﻿using System.Globalization;
 
-namespace ConsoleRPG.Services.DataHelpers;
+namespace ConsoleRpg.Services.DataHelpers;
 
 // The DataHelper.StringFuctions class contains string manipulation methods.
 public static class StringHelper

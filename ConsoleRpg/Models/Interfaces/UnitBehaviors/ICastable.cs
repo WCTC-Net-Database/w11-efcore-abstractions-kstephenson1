@@ -1,8 +1,8 @@
-﻿using ConsoleRPG.Models.Combat;
-using ConsoleRPG.Models.Commands.Invokers;
-using ConsoleRPG.Models.Commands.UnitCommands;
+﻿using ConsoleRpg.Models.Combat;
+using ConsoleRpg.Models.Commands.Invokers;
+using ConsoleRpg.Models.Commands.UnitCommands;
 
-namespace ConsoleRPG.Models.Interfaces.UnitBehaviors;
+namespace ConsoleRpg.Models.Interfaces.UnitBehaviors;
 
 public interface ICastable
 {

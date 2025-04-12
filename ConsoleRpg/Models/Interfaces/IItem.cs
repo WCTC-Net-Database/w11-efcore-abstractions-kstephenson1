@@ -1,6 +1,6 @@
-﻿using ConsoleRPG.Models.Inventories;
+﻿using ConsoleRpg.Models.Inventories;
 
-namespace ConsoleRPG.Models.Interfaces;
+namespace ConsoleRpg.Models.Interfaces;
 
 public interface IItem
 {

@@ -1,8 +1,8 @@
-﻿using ConsoleRPG.Models.Commands.Invokers;
-using ConsoleRPG.Models.Commands.ItemCommands;
-using ConsoleRPG.Models.Inventories;
+﻿using ConsoleRpg.Models.Commands.Invokers;
+using ConsoleRpg.Models.Commands.ItemCommands;
+using ConsoleRpg.Models.Inventories;
 
-namespace ConsoleRPG.Models.Interfaces.InventoryBehaviors;
+namespace ConsoleRpg.Models.Interfaces.InventoryBehaviors;
 
 public interface IHaveInventory
 {

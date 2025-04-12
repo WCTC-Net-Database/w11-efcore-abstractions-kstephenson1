@@ -1,12 +1,12 @@
-﻿using ConsoleRPG.Models.Commands.ItemCommands;
-using ConsoleRPG.Models.Commands.UnitCommands;
-using ConsoleRPG.Models.Interfaces;
-using ConsoleRPG.Models.Interfaces.Commands;
-using ConsoleRPG.Models.Interfaces.InventoryBehaviors;
-using ConsoleRPG.Models.Interfaces.UnitBehaviors;
-using ConsoleRPG.Services;
+﻿using ConsoleRpg.Models.Commands.ItemCommands;
+using ConsoleRpg.Models.Commands.UnitCommands;
+using ConsoleRpg.Models.Interfaces;
+using ConsoleRpg.Models.Interfaces.Commands;
+using ConsoleRpg.Models.Interfaces.InventoryBehaviors;
+using ConsoleRpg.Models.Interfaces.UnitBehaviors;
+using ConsoleRpg.Services;
 
-namespace ConsoleRPG.Models.UI.Menus.InteractiveMenus;
+namespace ConsoleRpg.Models.UI.Menus.InteractiveMenus;
 
 public class CommandMenu : InteractiveSelectionMenu<ICommand>
 {
@@ -65,10 +65,8 @@ public class CommandMenu : InteractiveSelectionMenu<ICommand>
         if (unit is IAttack)
             AddMenuItem("Attack", "Attacks a target unit.", new AttackCommand(null!, null!));
 
-        if (unit is IHeal)
-            AddMenuItem("Heal", "Heals a target unit.", new HealCommand(null!, null!));
 
-        if (unit is IHeal || unit is ICastable)
+        if (unit is ICastable)
             AddMenuItem("Cast", "Casts a spell.", new CastCommand(null!, "null"));
 
         AddMenuItem(exitMessage, "", null!);

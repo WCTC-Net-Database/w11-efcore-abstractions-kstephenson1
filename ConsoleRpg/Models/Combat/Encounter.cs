@@ -1,9 +1,9 @@
-﻿using ConsoleRPG.DataTypes;
-using ConsoleRPG.Models.Interfaces;
-using ConsoleRPG.Models.Interfaces.ItemBehaviors;
-using ConsoleRPG.Models.Items.WeaponItems;
+﻿using ConsoleRpg.DataTypes;
+using ConsoleRpg.Models.Interfaces;
+using ConsoleRpg.Models.Interfaces.ItemBehaviors;
+using ConsoleRpg.Models.Items.EquippableItems.WeaponItems;
 
-namespace ConsoleRPG.Models.Combat;
+namespace ConsoleRpg.Models.Combat;
 
 public class Encounter
 {
@@ -17,8 +17,6 @@ public class Encounter
     public IUnit Target { get; set; }
     public Stat Stat { get; set; }
     public int Damage => RollDamage();
-    public IEquippableItem? UnitWeapon { get; set; }
-    public IEquippableItem? TargetWeapon { get; set; }
 
     public Encounter(IUnit unit, IUnit target)
     {
@@ -28,10 +26,8 @@ public class Encounter
 
         try
         {
-            Unit.Inventory.IsEquipped(out IEquippableItem unitEquippedItem);
-            UnitWeapon = unitEquippedItem;
-            Target.Inventory.IsEquipped(out IEquippableItem targetEquippedItem);
-            TargetWeapon = targetEquippedItem;
+            Unit.Inventory.HasWeaponEquipped();
+            Target.Inventory.HasWeaponEquipped();
         }
         catch
         {
@@ -72,11 +68,11 @@ public class Encounter
     {
         if (IsCrit())
         {
-            if (UnitWeapon is WeaponItem)
+            if (Unit.Inventory.EquippedWeapon is PhysicalWeaponItem)
             {
                 return (int)MathF.Max(GetDamage(), 0) + (int)MathF.Max(GetDamage(), 0);
             }
-            else if (UnitWeapon is MagicWeaponItem)
+            else if (Unit.Inventory.EquippedWeapon is MagicWeaponItem)
             {
                 return (int)MathF.Max(GetMagicDamage(), 0) + (int)MathF.Max(GetMagicDamage(), 0);
             }
@@ -84,11 +80,11 @@ public class Encounter
         }
         else if (IsHit())
         {
-            if (UnitWeapon is WeaponItem)
+            if (Unit.Inventory.EquippedWeapon is PhysicalWeaponItem)
             {
                 return (int)MathF.Max(GetDamage(), 0);
             }
-            else if (UnitWeapon is MagicWeaponItem)
+            else if (Unit.Inventory.EquippedWeapon is MagicWeaponItem)
             {
                 return (int)MathF.Max(GetMagicDamage(), 0);
             }
@@ -111,9 +107,9 @@ public class Encounter
     public int GetTriangleDamageModifier()
     {
 
-        if (UnitWeapon == null || TargetWeapon == null) return 0;
+        if (Unit.Inventory.EquippedWeapon == null || Target.Inventory.EquippedWeapon == null) return 0;
 
-        Tuple<WeaponType,WeaponType> weapons = new(UnitWeapon.WeaponType, TargetWeapon.WeaponType);
+        Tuple<WeaponType,WeaponType> weapons = new(Unit.Inventory.EquippedWeapon.WeaponType, Target.Inventory.EquippedWeapon.WeaponType);
         dict.TryGetValue(weapons, out int value);
         if (value != 0) return value;
         return 0;
@@ -128,14 +124,14 @@ public class Encounter
     {
         // Attack damage = Attacking unit's strength + (Equipped item's might + bonus if the weapon type has an advantage against the defender's)
         int weaponEfficiency = 1; // for future implementation?
-        return Unit.Stat.Strength + weaponEfficiency * (UnitWeapon.Might + GetTriangleDamageModifier());
+        return Unit.Stat.Strength + weaponEfficiency * (Unit.Inventory.EquippedWeapon.Might + GetTriangleDamageModifier());
     }
 
     public int GetMagicAttack()
     {
         // Attack damage = Attacking unit's magic + (Equipped item's might + bonus if the weapon type has an advantage against the defender's)
         int weaponEfficiency = 1; // for future implementation?
-        return Unit.Stat.Magic + weaponEfficiency * (UnitWeapon.Might + GetTriangleDamageModifier());
+        return Unit.Stat.Magic + weaponEfficiency * (Unit.Inventory.EquippedWeapon.Might + GetTriangleDamageModifier());
     }
 
     public int GetPhysicalResiliance(IUnit unit)
@@ -167,13 +163,13 @@ public class Encounter
     public int GetAttackSpeed()
     {
         // Attack speed = speed - (weapon's weight - unit's constitution [min 0])
-        return Unit.Stat.Speed - (int)MathF.Max(UnitWeapon.Weight - Unit.Stat.Constitution, 0);
+        return Unit.Stat.Speed - (int)MathF.Max(Unit.Inventory.EquippedWeapon.Weight - Unit.Stat.Constitution, 0);
     }
 
     public int GetHit()
     {
         // Hit chance = weapon's hit + 2 x attacking unit's DEX + attacking unit's LCK / 2 + weapon advantage modifier of 15%
-        return UnitWeapon.Hit + 2 * Unit.Stat.Dexterity + Unit.Stat.Luck / 2 + GetTriangleHitModifier();
+        return Unit.Inventory.EquippedWeapon.Hit + 2 * Unit.Stat.Dexterity + Unit.Stat.Luck / 2 + GetTriangleHitModifier();
     }
 
     public int GetAvoid()
@@ -190,7 +186,7 @@ public class Encounter
 
     public int GetCrit()
     {
-        return UnitWeapon.Crit + Unit.Stat.Dexterity * 2;
+        return Unit.Inventory.EquippedWeapon.Crit + Unit.Stat.Dexterity * 2;
     }
 
     public int GetCritAvoid()

@@ -1,18 +1,18 @@
-﻿namespace ConsoleRPG.Services;
+﻿namespace ConsoleRpg.Services;
 
 using Spectre.Console;
-using ConsoleRPG.Configuration;
-using ConsoleRPG.Models.Combat;
-using ConsoleRPG.Models.Interfaces;
-using ConsoleRPG.Models.Interfaces.Rooms;
-using ConsoleRPG.Models.Inventories;
-using ConsoleRPG.Models.Items;
-using ConsoleRPG.Models.Rooms;
-using ConsoleRPG.Models.UI.Character;
-using ConsoleRPG.Models.UI.Menus.InteractiveMenus;
-using ConsoleRPG.Models.Units.Abstracts;
-using ConsoleRPG.Services.DataHelpers;
-using ConsoleRPG.Data;
+using ConsoleRpg.Configuration;
+using ConsoleRpg.Models.Combat;
+using ConsoleRpg.Models.Interfaces;
+using ConsoleRpg.Models.Interfaces.Rooms;
+using ConsoleRpg.Models.Inventories;
+using ConsoleRpg.Models.Items;
+using ConsoleRpg.Models.Rooms;
+using ConsoleRpg.Models.UI.Character;
+using ConsoleRpg.Models.UI.Menus.InteractiveMenus;
+using ConsoleRpg.Models.Units.Abstracts;
+using ConsoleRpg.Services.DataHelpers;
+using ConsoleRpg.Data;
 
 public class CharacterUtilities
 {
@@ -236,9 +236,6 @@ public class CharacterUtilities
         Console.Clear();
         List<Unit> units = _db.Units.ToList();
 
-        foreach (Unit unit in units)
-        {
-            _characterUI.DisplayCharacterInfo(unit);
-        }
+        _characterUI.DisplayCharacterInfo(units);
     }
 }

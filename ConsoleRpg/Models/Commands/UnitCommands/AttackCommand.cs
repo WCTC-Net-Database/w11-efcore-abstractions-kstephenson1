@@ -1,10 +1,10 @@
-﻿using ConsoleRPG.Models.Combat;
-using ConsoleRPG.Models.Interfaces;
-using ConsoleRPG.Models.Interfaces.Commands;
-using ConsoleRPG.Models.Interfaces.UnitBehaviors;
-using ConsoleRPG.Models.Items.WeaponItems;
+﻿using ConsoleRpg.Models.Combat;
+using ConsoleRpg.Models.Interfaces;
+using ConsoleRpg.Models.Interfaces.Commands;
+using ConsoleRpg.Models.Interfaces.UnitBehaviors;
+using ConsoleRpg.Models.Items.EquippableItems.WeaponItems;
 
-namespace ConsoleRPG.Models.Commands.UnitCommands;
+namespace ConsoleRpg.Models.Commands.UnitCommands;
 
 public class AttackCommand : ICommand
 {
@@ -34,16 +34,16 @@ public class AttackCommand : ICommand
             {
                 
 
-                if (_encounter.UnitWeapon is WeaponItem)
+                if (_encounter.Unit.Inventory.EquippedWeapon is PhysicalWeaponItem)
                 {
-                    Console.WriteLine($"{_unit.Name} attacks {_target.Name} with {_encounter.UnitWeapon.Name}\n");
+                    Console.WriteLine($"{_unit.Name} attacks {_target.Name} with {_encounter.Unit.Inventory.EquippedWeapon.Name}\n");
                     Console.WriteLine($"Hit Chance: {_encounter.GetDisplayedHit()}");
                     Console.WriteLine($"Critical Strike Chance: {_encounter.GetDisplayedCrit()}");
                     Console.WriteLine($"{_unit.Name}'s Damage: {_encounter.GetAttack()}");
                     Console.WriteLine($"{_target.Name}'s Defense: {_encounter.GetPhysicalResiliance(_target)}");
-                } else if (_encounter.UnitWeapon is MagicWeaponItem)
+                } else if (_encounter.Unit.Inventory.EquippedWeapon is MagicWeaponItem)
                 {
-                    Console.WriteLine($"{_unit.Name} casts {_encounter.UnitWeapon.Name} at {_target.Name}\n");
+                    Console.WriteLine($"{_unit.Name} casts {_encounter.Unit.Inventory.EquippedWeapon.Name} at {_target.Name}\n");
                     Console.WriteLine($"Hit Chance: {_encounter.GetDisplayedHit()}");
                     Console.WriteLine($"Critical Strike Chance: {_encounter.GetDisplayedCrit()}");
                     Console.WriteLine($"{_unit.Name}'s Magic Damage: {_encounter.GetMagicAttack()}");

@@ -1,11 +1,11 @@
-﻿namespace ConsoleRPG.FileIO.Json;
+﻿namespace ConsoleRpg.FileIO.Json;
 
 using System.Collections.Generic;
 using System.Text.Json;
 using System.Text.Json.Serialization;
-using ConsoleRPG.DataTypes;
-using ConsoleRPG.FileIO.Json.Converters;
-using ConsoleRPG.Models.Interfaces.FileIO;
+using ConsoleRpg.DataTypes;
+using ConsoleRpg.FileIO.Json.Converters;
+using ConsoleRpg.Models.Interfaces.FileIO;
 
 [Obsolete]
 public class JsonFileHandler<T> : ICharacterIO, IItemIO

@@ -1,9 +1,9 @@
-﻿using ConsoleRPG.DataTypes;
-using ConsoleRPG.Models.Dungeons;
-using ConsoleRPG.Models.Rooms;
-using ConsoleRPG.Models.UI.Menus.InteractiveMenus;
+﻿using ConsoleRpg.DataTypes;
+using ConsoleRpg.Models.Dungeons;
+using ConsoleRpg.Models.Rooms;
+using ConsoleRpg.Models.UI.Menus.InteractiveMenus;
 
-namespace ConsoleRPG.Services;
+namespace ConsoleRpg.Services;
 
 public class DungeonFactory
 {

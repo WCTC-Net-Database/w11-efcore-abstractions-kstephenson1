@@ -1,12 +1,13 @@
-﻿namespace ConsoleRPG.Services.DataHelpers;
+﻿namespace ConsoleRpg.Services.DataHelpers;
 
 using System.Collections.Generic;
-using ConsoleRPG.DataTypes;
-using ConsoleRPG.Models.Interfaces;
-using ConsoleRPG.Models.Inventories;
-using ConsoleRPG.Models.Items;
-using ConsoleRPG.Models.Items.ConsumableItems;
-using ConsoleRPG.Models.Items.WeaponItems;
+using ConsoleRpg.DataTypes;
+using ConsoleRpg.Models.Interfaces;
+using ConsoleRpg.Models.Inventories;
+using ConsoleRpg.Models.Items;
+using ConsoleRpg.Models.Items.ConsumableItems;
+using ConsoleRpg.Models.Items.EquippableItems.WeaponItems;
+using ConsoleRpg.Models.Items.WeaponItems;
 
 public class InventorySerializer
 {
@@ -84,18 +85,18 @@ public class InventorySerializer
         return itemString switch
         {
             // Weapons
-            "dagger" => new WeaponItem("dagger", "Dagger", WeaponType.Sword, WeaponRank.E, 45, 4, 80, 0, 1, 4, 1),
-            "mace" => new WeaponItem("mace", "Mace", WeaponType.Axe, WeaponRank.E, 45, 4, 80, 0, 1, 4, 1),
-            "staff" => new WeaponItem("staff", "Staff", WeaponType.Lance, WeaponRank.E, 45, 4, 80, 0, 1, 4, 1),
-            "sword" => new WeaponItem("sword", "Sword", WeaponType.Sword, WeaponRank.E, 45, 4, 80, 0, 1, 4, 1),
-            "bow" => new WeaponItem("bow", "Bow", WeaponType.Bow, WeaponRank.E, 45, 6, 70, 0, 2, 4, 1),
+            "dagger" => new PhysicalWeaponItem("Dagger", WeaponType.Sword, Rank.E, 45, 4, 80, 0, 1, 4, 1),
+            "mace" => new PhysicalWeaponItem("Mace", WeaponType.Axe, Rank.E, 45, 4, 80, 0, 1, 4, 1),
+            "staff" => new PhysicalWeaponItem("Staff", WeaponType.Lance, Rank.E, 45, 4, 80, 0, 1, 4, 1),
+            "sword" => new PhysicalWeaponItem("Sword", WeaponType.Sword, Rank.E, 45, 4, 80, 0, 1, 4, 1),
+            "bow" => new PhysicalWeaponItem("Bow", WeaponType.Bow, Rank.E, 45, 6, 70, 0, 2, 4, 1),
 
-            "book_lightning" => new MagicWeaponItem("book_lightning", "Lightning", WeaponType.Elemental, WeaponRank.E, 30, 5, 80, 5, 2, 4, 1),
-            "book_decay" => new MagicWeaponItem("book_decay", "Decay", WeaponType.Dark, WeaponRank.E, 30, 10, 60, 0, 2, 4, 1),
-            "book_smite" => new MagicWeaponItem("book_smite", "Smite", WeaponType.Light, WeaponRank.E, 30, 4, 100, 15, 2, 4, 1),
+            "book_lightning" => new MagicWeaponItem("Lightning", WeaponType.Elemental, Rank.E, 30, 5, 80, 5, 2, 4, 1),
+            "book_decay" => new MagicWeaponItem("Decay", WeaponType.Dark, Rank.E, 30, 10, 60, 0, 2, 4, 1),
+            "book_smite" => new MagicWeaponItem("Smite", WeaponType.Light, Rank.E, 30, 4, 100, 15, 2, 4, 1),
 
             // Monster Only Weapons
-            "ghostly_axe" => new WeaponItem("ghostly_axe", "Ghostly Axe", WeaponType.Axe, WeaponRank.E, 45, 6, 70, 2, 1, 0, 1),
+            "ghostly_axe" => new PhysicalWeaponItem("Ghostly Axe", WeaponType.Axe, Rank.E, 45, 6, 70, 2, 1, 0, 1),
 
             // Consumables
             "potion" => new ItemPotion(),

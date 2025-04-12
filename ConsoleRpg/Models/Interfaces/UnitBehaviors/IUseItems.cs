@@ -1,7 +1,7 @@
-﻿using ConsoleRPG.Models.Commands.Invokers;
-using ConsoleRPG.Models.Commands.ItemCommands;
+﻿using ConsoleRpg.Models.Commands.Invokers;
+using ConsoleRpg.Models.Commands.ItemCommands;
 
-namespace ConsoleRPG.Models.Interfaces.UnitBehaviors;
+namespace ConsoleRpg.Models.Interfaces.UnitBehaviors;
 
 public interface IUseItems
 {

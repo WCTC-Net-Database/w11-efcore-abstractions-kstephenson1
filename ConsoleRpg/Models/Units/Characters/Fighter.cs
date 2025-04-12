@@ -1,8 +1,8 @@
-﻿using ConsoleRPG.Models.Combat;
-using ConsoleRPG.Models.Inventories;
-using ConsoleRPG.Models.Units.Abstracts;
+﻿using ConsoleRpg.Models.Combat;
+using ConsoleRpg.Models.Inventories;
+using ConsoleRpg.Models.Units.Abstracts;
 
-namespace ConsoleRPG.Models.Units.Characters;
+namespace ConsoleRpg.Models.Units.Characters;
 
 public class Fighter : Character
 {

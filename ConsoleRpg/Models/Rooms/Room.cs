@@ -1,4 +1,4 @@
-﻿namespace ConsoleRPG.Models.Rooms;
+﻿namespace ConsoleRpg.Models.Rooms;
 
 public class Room : RoomBase
 {

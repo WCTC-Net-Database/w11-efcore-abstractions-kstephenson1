@@ -1,6 +1,6 @@
-﻿using ConsoleRPG.Models.UI.Menus;
+﻿using ConsoleRpg.Models.UI.Menus;
 
-namespace ConsoleRPG.Models.UI.Menus.InteractiveMenus;
+namespace ConsoleRpg.Models.UI.Menus.InteractiveMenus;
 
 public abstract class InteractiveSelectionMenu<T> : InteractiveMenu
 {

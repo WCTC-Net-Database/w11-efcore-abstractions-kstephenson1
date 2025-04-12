@@ -1,4 +1,4 @@
-﻿namespace ConsoleRPG.Models.Interfaces.Commands;
+﻿namespace ConsoleRpg.Models.Interfaces.Commands;
 
 public interface ICommand
 {

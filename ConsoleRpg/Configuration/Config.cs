@@ -1,6 +1,6 @@
-﻿using ConsoleRPG.DataTypes;
+﻿using ConsoleRpg.DataTypes;
 
-namespace ConsoleRPG.Configuration;
+namespace ConsoleRpg.Configuration;
 
 public static class Config
 {

@@ -1,4 +1,4 @@
-﻿namespace ConsoleRPG.DataTypes;
+﻿namespace ConsoleRpg.DataTypes;
 public enum Direction
 {
     North,

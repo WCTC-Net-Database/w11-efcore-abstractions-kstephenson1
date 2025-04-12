@@ -1,16 +1,19 @@
-﻿using Microsoft.EntityFrameworkCore;
-using ConsoleRPG.Models.Combat;
-using ConsoleRPG.Models.Dungeons;
-using ConsoleRPG.Models.Inventories;
-using ConsoleRPG.Models.Items;
-using ConsoleRPG.Models.Items.ConsumableItems;
-using ConsoleRPG.Models.Items.WeaponItems;
-using ConsoleRPG.Models.Rooms;
-using ConsoleRPG.Models.Units.Abstracts;
-using ConsoleRPG.Models.Units.Characters;
-using ConsoleRPG.Models.Units.Monsters;
+﻿using ConsoleRpg.Models.Abilities;
+using ConsoleRpg.Models.Combat;
+using ConsoleRpg.Models.Dungeons;
+using ConsoleRpg.Models.Inventories;
+using ConsoleRpg.Models.Items;
+using ConsoleRpg.Models.Items.ConsumableItems;
+using ConsoleRpg.Models.Items.EquippableItems.ArmorItems;
+using ConsoleRpg.Models.Items.EquippableItems.WeaponItems;
+using ConsoleRpg.Models.Items.WeaponItems;
+using ConsoleRpg.Models.Rooms;
+using ConsoleRpg.Models.Units.Abstracts;
+using ConsoleRpg.Models.Units.Characters;
+using ConsoleRpg.Models.Units.Monsters;
+using Microsoft.EntityFrameworkCore;
 
-namespace ConsoleRPG.Data;
+namespace ConsoleRpg.Data;
 
 public class GameContext : DbContext
 {
@@ -20,11 +23,47 @@ public class GameContext : DbContext
     public DbSet<Stat> Stats { get; set; }
     public DbSet<Inventory> Inventories { get; set; }
     public DbSet<Item> Items { get; set; }
+    public DbSet<Ability> Abilities { get; set; }
     public GameContext() { }
     public GameContext(DbContextOptions<GameContext> options) : base(options) { }
 
     protected override void OnModelCreating(ModelBuilder builder)
     {
+        builder.Entity<Item>()
+            .HasOne(item => item.Inventory)
+            .WithMany(inventory => inventory.Items)
+            .HasForeignKey(item => item.InventoryId);
+
+        builder.Entity<Inventory>()
+            .HasOne(i => i.EquippedWeapon)
+            .WithMany()
+            .HasForeignKey(i => i.EquippedWeaponId)
+            .OnDelete(DeleteBehavior.NoAction);
+
+        builder.Entity<Inventory>()
+            .HasOne(i => i.EquippedHeadArmor)
+            .WithMany()
+            .HasForeignKey(i => i.EquippedHeadArmorId)
+            .OnDelete(DeleteBehavior.NoAction);
+
+        builder.Entity<Inventory>()
+            .HasOne(i => i.EquippedChestArmor)
+            .WithMany()
+            .HasForeignKey(i => i.EquippedChestArmorId)
+            .OnDelete(DeleteBehavior.NoAction);
+
+        builder.Entity<Inventory>()
+            .HasOne(i => i.EquippedLegArmor)
+            .WithMany()
+            .HasForeignKey(i => i.EquippedLegArmorId)
+            .OnDelete(DeleteBehavior.NoAction);
+
+        builder.Entity<Inventory>()
+            .HasOne(i => i.EquippedFeetArmor)
+            .WithMany()
+            .HasForeignKey(i => i.EquippedFeetArmorId)
+            .OnDelete(DeleteBehavior.NoAction);
+
         builder.Entity<Unit>()
             .HasDiscriminator(unit => unit.UnitType)
             .HasValue<Cleric>(nameof(Cleric))
@@ -48,6 +87,23 @@ public class GameContext : DbContext
             .HasValue<ItemPotion>(nameof(ItemPotion))
 
             .HasValue<MagicWeaponItem>(nameof(MagicWeaponItem))
-            .HasValue<WeaponItem>(nameof(WeaponItem));
+            .HasValue<PhysicalWeaponItem>(nameof(PhysicalWeaponItem))
+
+            .HasValue<HeadArmorItem>(nameof(HeadArmorItem))
+            .HasValue<ChestArmorItem>(nameof(ChestArmorItem))
+            .HasValue<LegArmorItem>(nameof(LegArmorItem))
+            .HasValue<FeetArmorItem>(nameof(FeetArmorItem));
+
+        builder.Entity<Ability>()
+            .HasDiscriminator(ability => ability.AbilityType)
+            .HasValue<FlyAbility>(nameof(FlyAbility))
+            .HasValue<HealAbility>(nameof(HealAbility))
+            .HasValue<StealAbility>(nameof(StealAbility))
+            .HasValue<TauntAbility>(nameof(TauntAbility));
+
+        builder.Entity<Unit>()
+        .HasMany(l => l.Abilities)
+        .WithMany(r => r.Units)
+        .UsingEntity(j => j.ToTable("UnitAbility"));
     }
 }

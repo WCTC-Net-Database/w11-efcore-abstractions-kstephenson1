@@ -1,6 +1,6 @@
-﻿using ConsoleRPG.Models.Interfaces.Commands;
+﻿using ConsoleRpg.Models.Interfaces.Commands;
 
-namespace ConsoleRPG.Models.Commands.Invokers;
+namespace ConsoleRpg.Models.Commands.Invokers;
 
 public class CommandInvoker
 {

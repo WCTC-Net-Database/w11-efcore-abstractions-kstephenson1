@@ -1,8 +1,8 @@
-﻿using ConsoleRPG.DataTypes;
-using ConsoleRPG.Models.Interfaces.Rooms;
-using ConsoleRPG.Models.Units.Abstracts;
+﻿using ConsoleRpg.DataTypes;
+using ConsoleRpg.Models.Interfaces.Rooms;
+using ConsoleRpg.Models.Units.Abstracts;
 
-namespace ConsoleRPG.Models.Rooms;
+namespace ConsoleRpg.Models.Rooms;
 
 public abstract class RoomBase : IRoom
 {

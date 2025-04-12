@@ -1,8 +1,8 @@
 ﻿using Spectre.Console;
-using ConsoleRPG.Models.Interfaces.Rooms;
-using ConsoleRPG.Data;
+using ConsoleRpg.Models.Interfaces.Rooms;
+using ConsoleRpg.Data;
 
-namespace ConsoleRPG.Models.UI.Character;
+namespace ConsoleRpg.Models.UI.Character;
 
 public class RoomUI
 {

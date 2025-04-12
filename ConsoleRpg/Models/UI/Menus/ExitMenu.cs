@@ -1,6 +1,6 @@
 ﻿using Spectre.Console;
 
-namespace ConsoleRPG.Models.UI.Menus;
+namespace ConsoleRpg.Models.UI.Menus;
 
 public class ExitMenu : Menu
 {

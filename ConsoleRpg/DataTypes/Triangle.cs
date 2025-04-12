@@ -1,4 +1,4 @@
-﻿namespace ConsoleRPG.DataTypes;
+﻿namespace ConsoleRpg.DataTypes;
 
 // This is a simple enum that stores a tri-state logic value.
 public enum Triangle

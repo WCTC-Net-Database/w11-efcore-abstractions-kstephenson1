@@ -1,11 +1,12 @@
-﻿using ConsoleRPG.Models.Abilities;
-using ConsoleRPG.Models.Combat;
-using ConsoleRPG.Models.Commands.UnitCommands;
-using ConsoleRPG.Models.Interfaces.InventoryBehaviors;
-using ConsoleRPG.Models.Interfaces.UnitBehaviors;
-using ConsoleRPG.Models.Rooms;
+﻿using ConsoleRpg.Models.Abilities;
+using ConsoleRpg.Models.Combat;
+using ConsoleRpg.Models.Commands.AbilityCommands;
+using ConsoleRpg.Models.Commands.UnitCommands;
+using ConsoleRpg.Models.Interfaces.InventoryBehaviors;
+using ConsoleRpg.Models.Interfaces.UnitBehaviors;
+using ConsoleRpg.Models.Rooms;
 
-namespace ConsoleRPG.Models.Interfaces;
+namespace ConsoleRpg.Models.Interfaces;
 
 public interface IUnit : ITargetable, IAttack, IHaveInventory, IUseItems
 {
@@ -18,7 +19,7 @@ public interface IUnit : ITargetable, IAttack, IHaveInventory, IUseItems
     public int Level { get; set; }
     Room? CurrentRoom { get; set; }
     public Stat Stat { get; set; }
-    public List<Ability> Abilities { get; set; }
+    public List<Ability> Abilities { get; }
 
     void Move();
     string GetHealthBar();

@@ -1,15 +1,10 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
-using System.Text.Json.Serialization;
-using CsvHelper.Configuration.Attributes;
-using ConsoleRPG.Models.Combat;
-using ConsoleRPG.Models.Commands.UnitCommands;
-using ConsoleRPG.Models.Interfaces.UnitBehaviors;
-using ConsoleRPG.Models.Inventories;
-using ConsoleRPG.Models.Units.Abstracts;
+﻿using ConsoleRpg.Models.Combat;
+using ConsoleRpg.Models.Inventories;
+using ConsoleRpg.Models.Units.Abstracts;
 
-namespace ConsoleRPG.Models.Units.Monsters;
+namespace ConsoleRpg.Models.Units.Monsters;
 
-public class EnemyGhost : Monster, IFlyable
+public class EnemyGhost : Monster
 {
     public override string UnitType { get; set; } = "EnemyGhost";
     public EnemyGhost()
@@ -21,18 +16,4 @@ public class EnemyGhost : Monster, IFlyable
     {
 
     }
-
-    [Ignore]
-    [JsonIgnore]
-    [NotMapped]
-    public virtual FlyCommand FlyCommand { get ; set ; } = null!;
-
-    public void Fly()
-    {
-        FlyCommand = new(this);
-        Invoker.ExecuteCommand(FlyCommand);
-    }
-
-    public override void Move() => Fly();
-
 }

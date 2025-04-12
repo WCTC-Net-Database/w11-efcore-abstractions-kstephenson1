@@ -1,8 +1,8 @@
 ﻿using System.Text.Json;
 using System.Text.Json.Serialization;
-using ConsoleRPG.Models.Inventories;
+using ConsoleRpg.Models.Inventories;
 
-namespace ConsoleRPG.FileIO.Json.Converters;
+namespace ConsoleRpg.FileIO.Json.Converters;
 
 [Obsolete]
 public class JsonInventoryValueConverter : JsonConverterFactory

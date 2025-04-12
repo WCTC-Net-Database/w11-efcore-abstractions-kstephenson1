@@ -1,8 +1,8 @@
-﻿using ConsoleRPG.Models.Combat;
-using ConsoleRPG.Models.Inventories;
-using ConsoleRPG.Models.Units.Abstracts;
+﻿using ConsoleRpg.Models.Combat;
+using ConsoleRpg.Models.Inventories;
+using ConsoleRpg.Models.Units.Abstracts;
 
-namespace ConsoleRPG.Models.Units.Monsters;
+namespace ConsoleRpg.Models.Units.Monsters;
 
 public class EnemyGoblin : Monster
 {

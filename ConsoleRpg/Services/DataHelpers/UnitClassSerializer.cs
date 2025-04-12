@@ -1,7 +1,7 @@
-﻿namespace ConsoleRPG.Services.DataHelpers;
+﻿namespace ConsoleRpg.Services.DataHelpers;
 
-using ConsoleRPG.Models.Units.Characters;
-using ConsoleRPG.Models.Units.Monsters;
+using ConsoleRpg.Models.Units.Characters;
+using ConsoleRpg.Models.Units.Monsters;
 
 public static class UnitClassSerializer
 {

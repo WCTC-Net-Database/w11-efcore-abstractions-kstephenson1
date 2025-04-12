@@ -1,9 +1,9 @@
 ﻿using System.Text.Json.Serialization;
-using ConsoleRPG.Models.Interfaces;
-using ConsoleRPG.Models.Inventories;
-using ConsoleRPG.Services.DataHelpers;
+using ConsoleRpg.Models.Interfaces;
+using ConsoleRpg.Models.Inventories;
+using ConsoleRpg.Services.DataHelpers;
 
-namespace ConsoleRPG.Models.Items;
+namespace ConsoleRpg.Models.Items;
 
 public abstract class Item : IItem
 {

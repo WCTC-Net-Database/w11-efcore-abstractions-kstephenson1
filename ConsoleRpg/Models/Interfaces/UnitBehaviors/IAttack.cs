@@ -1,9 +1,9 @@
-﻿using ConsoleRPG.Models.Commands.Invokers;
-using ConsoleRPG.Models.Commands.ItemCommands;
-using ConsoleRPG.Models.Commands.UnitCommands;
-using ConsoleRPG.Models.Interfaces.ItemBehaviors;
+﻿using ConsoleRpg.Models.Commands.Invokers;
+using ConsoleRpg.Models.Commands.ItemCommands;
+using ConsoleRpg.Models.Commands.UnitCommands;
+using ConsoleRpg.Models.Interfaces.ItemBehaviors;
 
-namespace ConsoleRPG.Models.Interfaces.UnitBehaviors;
+namespace ConsoleRpg.Models.Interfaces.UnitBehaviors;
 
 public interface IAttack
 {

@@ -1,9 +1,9 @@
 ﻿using System.Text.Json;
 using System.Text.Json.Serialization;
-using ConsoleRPG.Models.Units.Abstracts;
-using ConsoleRPG.Services.DataHelpers;
+using ConsoleRpg.Models.Units.Abstracts;
+using ConsoleRpg.Services.DataHelpers;
 
-namespace ConsoleRPG.FileIO.Json.Converters;
+namespace ConsoleRpg.FileIO.Json.Converters;
 
 // The JsonInventoryConverter is used to turn json format into an Inventories Object automatically.
 [Obsolete]

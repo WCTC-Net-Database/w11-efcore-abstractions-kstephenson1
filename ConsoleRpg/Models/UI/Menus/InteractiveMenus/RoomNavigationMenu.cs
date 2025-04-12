@@ -1,8 +1,8 @@
-﻿using ConsoleRPG.DataTypes;
-using ConsoleRPG.Models.Interfaces.Rooms;
-using ConsoleRPG.Models.Rooms;
+﻿using ConsoleRpg.DataTypes;
+using ConsoleRpg.Models.Interfaces.Rooms;
+using ConsoleRpg.Models.Rooms;
 
-namespace ConsoleRPG.Models.UI.Menus.InteractiveMenus;
+namespace ConsoleRpg.Models.UI.Menus.InteractiveMenus;
 
 public class RoomNavigationMenu : InteractiveSelectionMenu<IRoom>
 {

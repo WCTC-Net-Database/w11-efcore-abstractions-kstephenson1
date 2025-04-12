@@ -1,8 +1,8 @@
 ﻿
 using System.ComponentModel.DataAnnotations;
-using ConsoleRPG.DataTypes;
+using ConsoleRpg.DataTypes;
 
-namespace ConsoleRPG.Models.Rooms;
+namespace ConsoleRpg.Models.Rooms;
 
 public class AdjacentRoom
 {

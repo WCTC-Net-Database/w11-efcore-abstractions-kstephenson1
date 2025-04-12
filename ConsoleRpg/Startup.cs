@@ -1,27 +1,33 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using System.Reflection;
+using ConsoleRpg.Data;
+using ConsoleRpg.FileIO;
+using ConsoleRpg.Helpers;
+using ConsoleRpg.Models.UI;
+using ConsoleRpg.Models.UI.Character;
+using ConsoleRpg.Models.UI.Menus;
+using ConsoleRpg.Models.UI.Menus.InteractiveMenus;
+using ConsoleRpg.Models.Units.Abstracts;
+using ConsoleRpg.Services;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using NReco.Logging.File;
-using ConsoleRPG.Models.UI.Menus;
-using ConsoleRPG.Data;
-using ConsoleRPG.Helpers;
-using ConsoleRPG.FileIO;
-using ConsoleRPG.Models.UI.Character;
-using ConsoleRPG.Models.UI.Menus.InteractiveMenus;
-using ConsoleRPG.Models.UI;
-using ConsoleRPG.Models.Units.Abstracts;
-using ConsoleRPG.Services;
-using ConsoleRPG.Data;
 
-namespace ConsoleRPG;
+namespace ConsoleRpg;
 
 public static class Startup
 {
+    public static void ConfigureConsole()
+    {
+        string? title = typeof(Startup).GetTypeInfo().Assembly.GetCustomAttribute<AssemblyTitleAttribute>()!.Title;
+        string? version = typeof(Startup).GetTypeInfo().Assembly.GetCustomAttribute<AssemblyInformationalVersionAttribute>()!.InformationalVersion.Split('+')[0];
+        string? author = typeof(Startup).GetTypeInfo().Assembly.GetCustomAttribute<AssemblyCompanyAttribute>()!.Company;
+        Console.Title = $"{title} v{version} by {author}";
+
+    }
     public static void ConfigureServices(IServiceCollection services)
     {
-        Console.Title = "ConsoleRpg";
-
         // Build configuration
         var configuration = ConfigurationHelper.GetConfiguration();
 

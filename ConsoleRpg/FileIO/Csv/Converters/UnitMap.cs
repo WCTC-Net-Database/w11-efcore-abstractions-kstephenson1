@@ -1,7 +1,7 @@
 ﻿using CsvHelper.Configuration;
-using ConsoleRPG.Models.Units.Abstracts;
+using ConsoleRpg.Models.Units.Abstracts;
 
-namespace ConsoleRPG.FileIO.Csv.Converters;
+namespace ConsoleRpg.FileIO.Csv.Converters;
 
 [Obsolete]
 public class UnitMap : ClassMap<Unit>

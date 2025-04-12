@@ -1,8 +1,8 @@
-﻿using ConsoleRPG.Models.Interfaces;
-using ConsoleRPG.Models.Interfaces.Commands;
-using ConsoleRPG.Models.Interfaces.InventoryBehaviors;
+﻿using ConsoleRpg.Models.Interfaces;
+using ConsoleRpg.Models.Interfaces.Commands;
+using ConsoleRpg.Models.Interfaces.InventoryBehaviors;
 
-namespace ConsoleRPG.Models.Commands.ItemCommands;
+namespace ConsoleRpg.Models.Commands.ItemCommands;
 
 public class TradeItemCommand : ICommand
 {
@@ -22,7 +22,7 @@ public class TradeItemCommand : ICommand
     {
         if (_unit is IHaveInventory && _target is IHaveInventory)
         {
-            if (!_target.Inventory.IsFull())
+            if (!_target.Inventory.InventoryIsFull())
             {
                 _unit.Inventory.RemoveItem(_item);
                 _target.Inventory.AddItem(_item);

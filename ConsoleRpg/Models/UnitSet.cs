@@ -1,7 +1,7 @@
-﻿namespace ConsoleRPG.Models;
+﻿namespace ConsoleRpg.Models;
 
-using ConsoleRPG.FileIO;
-using ConsoleRPG.Models.Interfaces;
+using ConsoleRpg.FileIO;
+using ConsoleRpg.Models.Interfaces;
 
 
 // UnitSet<Ttype> is a class contains a list of a generic type of unit and functions that point toward this generic unit type's

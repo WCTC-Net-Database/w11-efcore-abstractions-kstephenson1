@@ -1,9 +1,9 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Design;
 using Microsoft.Extensions.Configuration;
-using ConsoleRPG.Helpers;
+using ConsoleRpg.Helpers;
 
-namespace ConsoleRPG.Data
+namespace ConsoleRpg.Data
 {
     public class GameContextFactory : IDesignTimeDbContextFactory<GameContext>
     {

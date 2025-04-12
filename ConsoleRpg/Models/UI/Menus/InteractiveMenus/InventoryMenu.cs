@@ -1,7 +1,8 @@
-﻿using ConsoleRPG.Models.Interfaces;
-using ConsoleRPG.Models.Interfaces.ItemBehaviors;
+﻿using ConsoleRpg.Models.Interfaces;
+using ConsoleRpg.Models.Interfaces.ItemBehaviors;
+using ConsoleRpg.Models.Units.Abstracts;
 
-namespace ConsoleRPG.Models.UI.Menus.InteractiveMenus;
+namespace ConsoleRpg.Models.UI.Menus.InteractiveMenus;
 
 public class InventoryMenu : InteractiveSelectionMenu<IItem>
 {
@@ -48,8 +49,8 @@ public class InventoryMenu : InteractiveSelectionMenu<IItem>
             }
             else if (item is IEquippableItem weaponItem)
             {
-                unit.Inventory.IsEquipped(out IEquippableItem? equippedItem);
-                if (weaponItem == equippedItem)
+                unit.Inventory.HasWeaponEquipped();
+                if (weaponItem == unit.Inventory.EquippedWeapon)
                 {
                     AddMenuItem($"{weaponItem.Name}", $"[[{weaponItem.Durability}/{weaponItem.MaxDurability}]] {weaponItem.Description} (Equipped)", item);
                 }

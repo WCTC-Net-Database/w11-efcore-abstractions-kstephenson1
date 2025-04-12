@@ -1,12 +1,13 @@
-﻿namespace ConsoleRPG.FileIO;
+﻿namespace ConsoleRpg.FileIO;
 
-using ConsoleRPG.Configuration;
-using ConsoleRPG.DataTypes;
-using ConsoleRPG.FileIO.Csv;
-using ConsoleRPG.FileIO.Json;
-using ConsoleRPG.Models.Interfaces.FileIO;
-using ConsoleRPG.Models.Items.WeaponItems;
-using ConsoleRPG.Models.Units.Abstracts;
+using ConsoleRpg.Configuration;
+using ConsoleRpg.DataTypes;
+using ConsoleRpg.FileIO.Csv;
+using ConsoleRpg.FileIO.Json;
+using ConsoleRpg.Models.Interfaces.FileIO;
+using ConsoleRpg.Models.Items.EquippableItems.WeaponItems;
+using ConsoleRpg.Models.Items.WeaponItems;
+using ConsoleRpg.Models.Units.Abstracts;
 
 [Obsolete]
 public class FileManager<T>

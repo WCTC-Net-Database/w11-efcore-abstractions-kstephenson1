@@ -1,7 +1,7 @@
-﻿using ConsoleRPG.Models.Combat;
-using ConsoleRPG.Models.Inventories;
+﻿using ConsoleRpg.Models.Combat;
+using ConsoleRpg.Models.Inventories;
 
-namespace ConsoleRPG.Models.Units.Abstracts;
+namespace ConsoleRpg.Models.Units.Abstracts;
 
 public abstract class Monster : Unit
 {

@@ -1,8 +1,8 @@
-﻿using ConsoleRPG.Models.Interfaces.Rooms;
-using ConsoleRPG.Models.Rooms;
-using ConsoleRPG.Models.UI.Menus.InteractiveMenus;
+﻿using ConsoleRpg.Models.Interfaces.Rooms;
+using ConsoleRpg.Models.Rooms;
+using ConsoleRpg.Models.UI.Menus.InteractiveMenus;
 
-namespace ConsoleRPG.Models.Dungeons;
+namespace ConsoleRpg.Models.Dungeons;
 
 public class Dungeon
 {

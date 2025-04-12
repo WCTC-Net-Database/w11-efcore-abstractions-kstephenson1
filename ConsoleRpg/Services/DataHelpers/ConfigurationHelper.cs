@@ -1,6 +1,6 @@
 ﻿using Microsoft.Extensions.Configuration;
 
-namespace ConsoleRPG.Helpers;
+namespace ConsoleRpg.Helpers;
 
 public static class ConfigurationHelper
 {

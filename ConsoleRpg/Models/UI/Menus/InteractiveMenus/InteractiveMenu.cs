@@ -1,8 +1,8 @@
 ﻿using Spectre.Console;
 using System.Data;
-using ConsoleRPG.Models.UI.Menus;
+using ConsoleRpg.Models.UI.Menus;
 
-namespace ConsoleRPG.Models.UI.Menus.InteractiveMenus;
+namespace ConsoleRpg.Models.UI.Menus.InteractiveMenus;
 
 public abstract class InteractiveMenu : Menu
 {

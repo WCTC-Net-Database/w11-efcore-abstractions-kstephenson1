@@ -1,6 +1,6 @@
 ﻿using System.Diagnostics;
 
-namespace ConsoleRPG.Services.DataHelpers;
+namespace ConsoleRpg.Services.DataHelpers;
 
 // The DataHelper.Input class contains a few methods and overrides that assist in gaining input from the user that includes different levels of input validation.
 class Input

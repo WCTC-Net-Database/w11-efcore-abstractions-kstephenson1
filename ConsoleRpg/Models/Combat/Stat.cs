@@ -1,8 +1,8 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using ConsoleRPG.Models.Units.Abstracts;
+using ConsoleRpg.Models.Units.Abstracts;
 
-namespace ConsoleRPG.Models.Combat;
+namespace ConsoleRpg.Models.Combat;
 
 public class Stat
 {

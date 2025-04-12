@@ -1,7 +1,7 @@
-﻿using ConsoleRPG.Models.Interfaces.ItemBehaviors;
-using ConsoleRPG.Services.DataHelpers;
+﻿using ConsoleRpg.Models.Interfaces.ItemBehaviors;
+using ConsoleRpg.Services.DataHelpers;
 
-namespace ConsoleRPG.Models.Items.ConsumableItems;
+namespace ConsoleRpg.Models.Items.ConsumableItems;
 
 public class ItemLockpick : ConsumableItem, IConsumableItem
 {

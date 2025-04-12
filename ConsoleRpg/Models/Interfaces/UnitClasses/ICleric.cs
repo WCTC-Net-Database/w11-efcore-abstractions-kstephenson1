@@ -1,8 +1,8 @@
-﻿using ConsoleRPG.Models.Interfaces.UnitBehaviors;
+﻿using ConsoleRpg.Models.Interfaces.UnitBehaviors;
 
-namespace ConsoleRPG.Models.Interfaces.UnitClasses;
+namespace ConsoleRpg.Models.Interfaces.UnitClasses;
 
-public interface ICleric : IHeal, ICastable
+public interface ICleric : ICastable
 {
     // An Cleric unit that is able to heal and cast spells.
 

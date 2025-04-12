@@ -1,8 +1,8 @@
-﻿using ConsoleRPG.DataTypes;
-using ConsoleRPG.Models.Rooms;
-using ConsoleRPG.Models.Units.Abstracts;
+﻿using ConsoleRpg.DataTypes;
+using ConsoleRpg.Models.Rooms;
+using ConsoleRpg.Models.Units.Abstracts;
 
-namespace ConsoleRPG.Models.Interfaces.Rooms;
+namespace ConsoleRpg.Models.Interfaces.Rooms;
 
 public interface IRoom
 {

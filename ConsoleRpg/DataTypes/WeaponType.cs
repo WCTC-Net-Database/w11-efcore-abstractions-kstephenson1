@@ -1,6 +1,6 @@
 ﻿using System.Text.Json.Serialization;
 
-namespace ConsoleRPG.DataTypes
+namespace ConsoleRpg.DataTypes
 {
     public enum WeaponType
     {

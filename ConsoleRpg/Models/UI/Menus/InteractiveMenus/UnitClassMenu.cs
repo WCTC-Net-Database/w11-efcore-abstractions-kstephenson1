@@ -1,7 +1,7 @@
 ﻿using System.Reflection;
-using ConsoleRPG.Services;
+using ConsoleRpg.Services;
 
-namespace ConsoleRPG.Models.UI.Menus.InteractiveMenus;
+namespace ConsoleRpg.Models.UI.Menus.InteractiveMenus;
 
 public class UnitClassMenu : InteractiveSelectionMenu<Type>
 {
@@ -37,7 +37,7 @@ public class UnitClassMenu : InteractiveSelectionMenu<Type>
     {
         _menuItems = new();
 
-        string characterNamespace = "w9_assignment_ksteph.Models.Units.Characters";
+        string characterNamespace = "w10_assignment_ksteph.Models.Units.Characters";
         IEnumerable<Type> unitTypes = from t in Assembly.GetExecutingAssembly().GetTypes()
                 where t.IsClass && t.Namespace == characterNamespace
                 select t;

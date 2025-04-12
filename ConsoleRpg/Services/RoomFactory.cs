@@ -1,8 +1,8 @@
-﻿using ConsoleRPG.Models.Rooms;
-using ConsoleRPG.Services.DataHelpers;
-using ConsoleRPG.Data;
+﻿using ConsoleRpg.Models.Rooms;
+using ConsoleRpg.Services.DataHelpers;
+using ConsoleRpg.Data;
 
-namespace ConsoleRPG.Services;
+namespace ConsoleRpg.Services;
 
 public class RoomFactory
 {

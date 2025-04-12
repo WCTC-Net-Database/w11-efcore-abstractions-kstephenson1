@@ -2,20 +2,22 @@
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Text.Json.Serialization;
 using CsvHelper.Configuration.Attributes;
-using ConsoleRPG.FileIO.Csv.Converters;
-using ConsoleRPG.Models.Abilities;
-using ConsoleRPG.Models.Combat;
-using ConsoleRPG.Models.Commands.Invokers;
-using ConsoleRPG.Models.Commands.ItemCommands;
-using ConsoleRPG.Models.Commands.UnitCommands;
-using ConsoleRPG.Models.Interfaces;
-using ConsoleRPG.Models.Interfaces.InventoryBehaviors;
-using ConsoleRPG.Models.Interfaces.ItemBehaviors;
-using ConsoleRPG.Models.Interfaces.UnitBehaviors;
-using ConsoleRPG.Models.Inventories;
-using ConsoleRPG.Models.Rooms;
+using ConsoleRpg.FileIO.Csv.Converters;
+using ConsoleRpg.Models.Abilities;
+using ConsoleRpg.Models.Combat;
+using ConsoleRpg.Models.Commands.AbilityCommands;
+using ConsoleRpg.Models.Commands.Invokers;
+using ConsoleRpg.Models.Commands.ItemCommands;
+using ConsoleRpg.Models.Commands.UnitCommands;
+using ConsoleRpg.Models.Interfaces;
+using ConsoleRpg.Models.Interfaces.InventoryBehaviors;
+using ConsoleRpg.Models.Interfaces.ItemBehaviors;
+using ConsoleRpg.Models.Interfaces.UnitBehaviors;
+using ConsoleRpg.Models.Inventories;
+using ConsoleRpg.Models.Rooms;
+using ConsoleRpg.Models.Items.EquippableItems;
 
-namespace ConsoleRPG.Models.Units.Abstracts;
+namespace ConsoleRpg.Models.Units.Abstracts;
 
 public abstract class Unit : IUnit, ITargetable, IAttack, IHaveInventory
 {
@@ -36,8 +38,7 @@ public abstract class Unit : IUnit, ITargetable, IAttack, IHaveInventory
     [Name("Inventory")]                                     // CsvHelper Attribute
     [JsonPropertyName("Inventory")]                         // Json Atribute
     [TypeConverter(typeof(CsvInventoryConverter))]          // CsvHelper Attribute that helps CsvHelper import a new inventory object instead of a string.
-    public virtual Inventory Inventory { get; set; } = new();
-    //public int InventoryId { get; set; }
+    public virtual Inventory Inventory { get; set; }
 
     [Ignore]
     [JsonIgnore]
@@ -83,8 +84,8 @@ public abstract class Unit : IUnit, ITargetable, IAttack, IHaveInventory
     [NotMapped]
     public virtual AbilityCommand AbilityCommand { get; set; } = null!;
 
-    public Stat Stat { get; set; }
-    public List<Ability> Abilities { get; set; } = new();
+    public virtual Stat Stat { get; set; }
+    public virtual List<Ability> Abilities { get; } = new();
 
     public Unit()
     {
@@ -211,10 +212,9 @@ public abstract class Unit : IUnit, ITargetable, IAttack, IHaveInventory
         Invoker.ExecuteCommand(UseItemCommand);
     }
 
-    public void UseAbility(Ability ability)
+    public void UseAbility(IUnit target, Ability ability)
     {
-        AbilityCommand = new(this, ability);
+        AbilityCommand = new(this, target, ability);
         Invoker.ExecuteCommand(AbilityCommand);
     }
-
 }
