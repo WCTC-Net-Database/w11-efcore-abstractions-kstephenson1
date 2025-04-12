@@ -35,7 +35,7 @@ public class UnitClassMenu : InteractiveSelectionMenu<Type>
     {
         _menuItems = new();
 
-        string characterNamespace = "w10_assignment_ksteph.Models.Units.Characters";
+        string characterNamespace = "ConsoleRpg.Models.Units.Characters";
         IEnumerable<Type> unitTypes = from t in Assembly.GetExecutingAssembly().GetTypes()
                 where t.IsClass && t.Namespace == characterNamespace
                 select t;

@@ -5,6 +5,7 @@ using ConsoleRpg.Models.Interfaces;
 using ConsoleRpg.Models.Interfaces.Commands;
 using ConsoleRpg.Models.Interfaces.InventoryBehaviors;
 using ConsoleRpg.Models.Interfaces.UnitBehaviors;
+using ConsoleRpg.Models.Units.Abstracts;
 
 namespace ConsoleRpg.Models.UI.Menus.InteractiveMenus;
 
@@ -62,7 +63,7 @@ public class CommandMenu : InteractiveSelectionMenu<ICommand>
                 AddMenuItem("[dim]Items[/]", "[dim]Uses an item in this unit's inventory.[/]", new UseItemCommand(null!, null!));
         }
 
-        if (unit is IAttack)
+        if (unit is IAttack && InventoryHelper.GetEquippedWeapon((Unit)unit) != null)
             AddMenuItem("Attack", "Attacks a target unit.", new AttackCommand(null!, null!));
 
 

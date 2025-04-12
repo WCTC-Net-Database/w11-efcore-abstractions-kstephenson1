@@ -30,8 +30,10 @@ public class CharacterUI
 
     public void DisplayCharacterInfo(List<Unit> units)
     {
+        // Every time display characters is m
         List<Stat> stats = _db.Stats.ToList();
         List<UnitItem> unitItems = _db.UnitItems.ToList();
+        List<Item> items = _db.Items.ToList();
         List<Room> rooms = _db.Rooms.ToList();
         List<Ability> abilities = _db.Abilities.ToList();
 
@@ -39,11 +41,11 @@ public class CharacterUI
         {
             Stat stat = stats.Where(s => s.UnitId == unit.UnitId).FirstOrDefault();
             List<UnitItem> ui = unitItems.Where(ui => ui.Unit == unit).ToList();
-            List<Item> items = new();
+            List<Item> characterItems = new();
             foreach (UnitItem unitItem in ui)
             {
-                Item item = _db.Items.Where(i => i.ItemId == unitItem.ItemId).FirstOrDefault();
-                items.Add(item);
+                Item item = items.Where(i => i.ItemId == unitItem.ItemId).FirstOrDefault();
+                characterItems.Add(item);
             }
             Room unitRoom;
             try
@@ -52,7 +54,7 @@ public class CharacterUI
             }
             catch { unitRoom = null; }
             List<Ability> unitAbilities = abilities.Where(a => a.Units.Contains(unit)).ToList();
-            DisplayCharacterInfo(unit, stat, items, unitRoom, unitAbilities);
+            DisplayCharacterInfo(unit, stat, characterItems, unitRoom, unitAbilities);
         }
     }
 
@@ -127,9 +129,11 @@ public class CharacterUI
         }
 
             invTable.AddRow("\nInventory: ");
-        if (items.Count() != 0)
+
+        List<Item> unequippedInventory = InventoryHelper.GetUnequippedItemsInInventory(unit);
+        if (unequippedInventory.Count() != 0)
         {
-            foreach (IItem item in items!)
+            foreach (IItem item in unequippedInventory!)
             {
                 invTable.AddRow(" - " + item.ToString());
             }
