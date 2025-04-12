@@ -1,7 +1,9 @@
-﻿using ConsoleRpg.Configuration;
-using ConsoleRpg.Data;
-using ConsoleRpg.Models.UI;
+﻿using System.Reflection;
 using ConsoleRpg.Services;
+using ConsoleRpgEntities.Configuration;
+using ConsoleRpgEntities.Data;
+using ConsoleRpgEntities.Models.UI;
+using ConsoleRpgEntities.Services;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace ConsoleRpg;
@@ -10,7 +12,11 @@ class Program
 {
     static void Main()
     {
-        Startup.ConfigureConsole();
+        string? title = typeof(Program).GetTypeInfo().Assembly.GetCustomAttribute<AssemblyTitleAttribute>()!.Title;
+        string? version = typeof(Program).GetTypeInfo().Assembly.GetCustomAttribute<AssemblyInformationalVersionAttribute>()!.InformationalVersion.Split('+')[0];
+        string? author = typeof(Program).GetTypeInfo().Assembly.GetCustomAttribute<AssemblyCompanyAttribute>()!.Company;
+        Console.Title = $"{title} v{version} by {author}";
+
         ServiceCollection serviceCollection = new ServiceCollection();
         Startup.ConfigureServices(serviceCollection);
         
