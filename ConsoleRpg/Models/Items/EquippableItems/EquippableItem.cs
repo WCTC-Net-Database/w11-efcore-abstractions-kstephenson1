@@ -35,7 +35,7 @@ public abstract class EquippableItem : Item, IEquippableItem
 
     public override string ToString()
     {
-        return StringHelper.ToItemIdFormat(Name);
+        return $"[[{Durability}/{MaxDurability}]] {Name}";
     }
 
     public void TakeDurabilityDamage(int durabilityDamage)
