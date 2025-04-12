@@ -14,7 +14,6 @@ public abstract class Item : IItem
     public abstract string ItemType { get; set; }
     public virtual List<Unit> Units { get; set; }
     public virtual List<UnitItem> UnitItems { get; set; }
-    public int InventoryId { get; set; }
     public string Name { get; set; }
     public string Description { get; set; }
 
