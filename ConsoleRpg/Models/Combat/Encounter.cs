@@ -1,5 +1,6 @@
 ﻿using ConsoleRpg.DataTypes;
 using ConsoleRpg.Models.Interfaces;
+using ConsoleRpg.Models.Interfaces.ItemBehaviors;
 using ConsoleRpg.Models.Items.EquippableItems.WeaponItems;
 
 namespace ConsoleRpg.Models.Combat;
@@ -126,15 +127,25 @@ public class Encounter
     public int GetPhysicalResiliance(IUnit unit)
     {
         // Physical Resiliance = unit's Defense stat
-        int terrainBonus = 1; // for future implementation?
-        return unit.Stat.Defense * terrainBonus;
+        int defense = unit.Stat.Defense;
+        List<IEquippableArmor> equippedArmor = InventoryHelper.GetEquippedArmor(unit);
+        foreach (IEquippableArmor armor in equippedArmor)
+        {
+            defense += armor.Defense;
+        }
+        return defense;
     }
 
     public int GetMagicResiliance(IUnit unit)
     {
         // Magic Resiliance = Resistance stat
-        int terrainBonus = 1; // for future implementation?
-        return unit.Stat.Resistance * terrainBonus;
+        int resiliance = unit.Stat.Resistance;
+        List<IEquippableArmor> equippedArmor = InventoryHelper.GetEquippedArmor(unit);
+        foreach(IEquippableArmor armor in equippedArmor)
+        {
+            resiliance += armor.Resistance;
+        }
+        return resiliance;
     }
 
     public int GetDamage()

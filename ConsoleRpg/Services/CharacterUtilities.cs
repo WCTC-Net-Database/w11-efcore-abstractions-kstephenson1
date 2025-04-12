@@ -5,7 +5,6 @@ using ConsoleRpg.Data;
 using ConsoleRpg.Models.Combat;
 using ConsoleRpg.Models.Interfaces;
 using ConsoleRpg.Models.Interfaces.Rooms;
-using ConsoleRpg.Models.Items;
 using ConsoleRpg.Models.Rooms;
 using ConsoleRpg.Models.UI.Character;
 using ConsoleRpg.Models.UI.Menus.InteractiveMenus;
@@ -39,28 +38,15 @@ public class CharacterUtilities
         if (characterClass == null) return;
         int level = Input.GetInt("Enter your character's level: ", 1, Config.CHARACTER_LEVEL_MAX, $"character level must be 1-{Config.CHARACTER_LEVEL_MAX}");
         int hitPoints = Input.GetInt("Enter your character's maximum hit points: ", 1, "must be greater than 0");
-        List<Item> items = new();
-
-        while (true)
-        {
-            string? newItem = Input.GetString($"Enter the name of an item in {name}'s inventory. (Leave blank to end): ", false);
-            if (newItem != "")
-            {
-                items.Add(new GenericItem(newItem));
-                continue;
-            }
-            break;
-        }
 
         Console.Clear();
-        Console.WriteLine($"\nWelcome, {name} the {characterClass.Name}! You are level {level} and your equipment includes: {string.Join(", ", items)}.\n");
+        Console.WriteLine($"\nWelcome, {name} the {characterClass.Name}! You are level {level} and have {hitPoints} health.\n");
 
         //_unitManager.Characters.AddUnit(new(name, characterClass, level, hitPoints, inventory));
         dynamic character = Activator.CreateInstance(characterClass);
         character.Name = name;
         character.Class = characterClass.Name;
         character.Level = level;
-        character.Items = items;
 
         Stat stat = new Stat();
         stat.HitPoints = hitPoints;
@@ -81,11 +67,6 @@ public class CharacterUtilities
         if (room != null)
         {
             character.CurrentRoom = (Room)room;
-        }
-
-        foreach (Item item in items)
-        {
-            _db.Items.Add(item);
         }
         _db.Stats.Add(character.Stat);
         _db.Units.Add(character);
