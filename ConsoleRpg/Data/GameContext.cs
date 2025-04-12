@@ -1,4 +1,5 @@
-﻿using ConsoleRpg.Models.Abilities;
+﻿using System.Reflection.Emit;
+using ConsoleRpg.Models.Abilities;
 using ConsoleRpg.Models.Combat;
 using ConsoleRpg.Models.Dungeons;
 using ConsoleRpg.Models.Items;
@@ -21,46 +22,12 @@ public class GameContext : DbContext
     public DbSet<Stat> Stats { get; set; }
     public DbSet<Item> Items { get; set; }
     public DbSet<Ability> Abilities { get; set; }
+    public DbSet<UnitItem> UnitItems { get; set; }
     public GameContext() { }
     public GameContext(DbContextOptions<GameContext> options) : base(options) { }
 
     protected override void OnModelCreating(ModelBuilder builder)
     {
-        //builder.Entity<Item>()
-        //    .HasOne(item => item.Inventory)
-        //    .WithMany(inventory => inventory.Items)
-        //    .HasForeignKey(item => item.InventoryId);
-
-        //builder.Entity<Inventory>()
-        //    .HasOne(i => i.EquippedWeapon)
-        //    .WithMany()
-        //    .HasForeignKey(i => i.EquippedWeaponId)
-        //    .OnDelete(DeleteBehavior.NoAction);
-
-        //builder.Entity<Inventory>()
-        //    .HasOne(i => i.EquippedHeadArmor)
-        //    .WithMany()
-        //    .HasForeignKey(i => i.EquippedHeadArmorId)
-        //    .OnDelete(DeleteBehavior.NoAction);
-
-        //builder.Entity<Inventory>()
-        //    .HasOne(i => i.EquippedChestArmor)
-        //    .WithMany()
-        //    .HasForeignKey(i => i.EquippedChestArmorId)
-        //    .OnDelete(DeleteBehavior.NoAction);
-
-        //builder.Entity<Inventory>()
-        //    .HasOne(i => i.EquippedLegArmor)
-        //    .WithMany()
-        //    .HasForeignKey(i => i.EquippedLegArmorId)
-        //    .OnDelete(DeleteBehavior.NoAction);
-
-        //builder.Entity<Inventory>()
-        //    .HasOne(i => i.EquippedFeetArmor)
-        //    .WithMany()
-        //    .HasForeignKey(i => i.EquippedFeetArmorId)
-        //    .OnDelete(DeleteBehavior.NoAction);
-
         builder.Entity<Unit>()
             .HasDiscriminator(unit => unit.UnitType)
             .HasValue<Cleric>(nameof(Cleric))
@@ -103,9 +70,21 @@ public class GameContext : DbContext
         .WithMany(ability => ability.Units)
         .UsingEntity(join => join.ToTable("UnitAbility"));
 
-        builder.Entity<Unit>()
-        .HasMany(unit => unit.Items)
-        .WithMany(item => item.Units)
-        .UsingEntity(join => join.ToTable("UnitItems"));
+        //builder.Entity<Unit>()
+        //.HasMany(unit => unit.Items)
+        //.WithMany(item => item.Units)
+        //.UsingEntity(join => join.ToTable("UnitItems"));
+
+        //builder.Entity<UnitItem>()
+        //    .HasOne(ui => ui.Unit)
+        //    .WithMany(u => u.UnitItems)
+        //    .HasForeignKey(ui => ui.UnitId)
+        //    .HasConstraintName("FK_UnitItems_UnitId");
+
+        //builder.Entity<UnitItem>()
+        //    .HasOne(ui => ui.Item)
+        //    .WithMany(i => i.UnitItems)
+        //    .HasForeignKey(ui => ui.ItemId)
+        //    .HasConstraintName("FK_UnitItems_ItemId");
     }
 }

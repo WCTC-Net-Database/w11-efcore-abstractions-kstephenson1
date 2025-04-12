@@ -25,7 +25,8 @@ public abstract class Unit : IUnit, ITargetable, IAttack, IHaveInventory
     public virtual string Name { get; set; }
     public virtual string Class { get; set; }
     public virtual int Level { get; set; }
-    public virtual List<Item> Items { get; set; }
+    //public virtual List<Item> Items { get; set; }
+    public virtual List<UnitItem> UnitItems { get; set; }
     public Room? CurrentRoom { get; set; }
     [NotMapped]
     public virtual CommandInvoker Invoker { get; set; } = new();
@@ -57,7 +58,7 @@ public abstract class Unit : IUnit, ITargetable, IAttack, IHaveInventory
         Name = name;
         Class = characterClass;
         Level = level;
-        Items = items;
+        //Items = items;
         Stat = stats;
     }
 
@@ -114,7 +115,7 @@ public abstract class Unit : IUnit, ITargetable, IAttack, IHaveInventory
 
     public override string ToString()
     {
-        return $"{Name},{Class},{Level},{Stat.HitPoints},{Items}";
+        return $"{Name},{Class},{Level},{Stat.HitPoints}";
     }
 
     public string GetHealthBar()

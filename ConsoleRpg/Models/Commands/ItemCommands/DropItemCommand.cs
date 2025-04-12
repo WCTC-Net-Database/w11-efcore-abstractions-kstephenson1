@@ -20,6 +20,13 @@ public class DropItemCommand : ICommand
     public void Execute()
     {
         Console.WriteLine($"{_unit.Name} threw away {_item.Name}.");
-        _unit.Items.Remove((Item)_item);
+        foreach (UnitItem unitItem in _unit.UnitItems)
+        {
+            if (unitItem.Item == _item)
+            {
+                _unit.UnitItems.Remove(unitItem);
+                break;
+            }
+        }
     }
 }

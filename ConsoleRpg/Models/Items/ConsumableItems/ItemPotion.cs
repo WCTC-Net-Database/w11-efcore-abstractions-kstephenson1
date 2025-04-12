@@ -38,7 +38,15 @@ public class ItemPotion : ConsumableItem, IConsumableItem
 
             if (UsesLeft == 0)
             {
-                unit.Items.Remove(this);
+                Console.WriteLine($"{unit.Name} used the last {Name} and it is now gone.");
+                foreach (UnitItem unitItem in unit.UnitItems)
+                {
+                    if (unitItem.Item == this)
+                    {
+                        unit.UnitItems.Remove(unitItem);
+                        break;
+                    }
+                }
             }
         }
     }

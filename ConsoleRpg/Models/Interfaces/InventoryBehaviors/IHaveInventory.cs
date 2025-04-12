@@ -10,7 +10,7 @@ public interface IHaveInventory
     CommandInvoker Invoker { get; set; }
     DropItemCommand DropItemCommand { get; set; }
     TradeItemCommand TradeItemCommand { get; set; }
-    List<Item> Items { get; set; }
+    List<UnitItem> UnitItems { get; set; }
     void DropItem(IItem item);
     void TradeItem(IItem item, IUnit target);
 }

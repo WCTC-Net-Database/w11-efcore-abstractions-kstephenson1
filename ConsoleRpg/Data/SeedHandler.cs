@@ -133,9 +133,9 @@ public class SeedHandler
 
         _db.Units.Add(unit);
         _db.Stats.Add(unit.Stat);
-        foreach (Item item in unit.Items)
+        foreach (UnitItem unitItem in unit.UnitItems)
         {
-            _db.Items.Add(item);
+            _db.Items.Add(unitItem.Item);
         }
         switch (unit.UnitType)
         {
@@ -160,12 +160,12 @@ public class SeedHandler
         unit.Name = "John, Brave";
         unit.Class = "Fighter";
         unit.Level = 1;
-        unit.Items = new List<Item>
-        {
-            sword,
-            tunic,
-            potion
-        };
+        unit.UnitItems =
+        [
+            new() { Item = sword},
+            new() { Item = tunic },
+            new() { Item = potion },
+        ];
         unit.Stat = new Stat
         {
             HitPoints = 28,
@@ -184,20 +184,25 @@ public class SeedHandler
 
         _db.Units.Add(unit);
         _db.Stats.Add(unit.Stat);
-        _db.Items.AddRange(unit.Items);
+        foreach(UnitItem unitItem in unit.UnitItems)
+        {
+            _db.Items.Add(unitItem.Item);
+        }
 
 
         unit = new Wizard();
         unit.Name = "Jane";
         unit.Class = "Wizard";
         unit.Level = 2;
-        unit.Items = new List<Item>
-        {
-            decay,
-            shirt,
-            staff,
-            pants
-        };
+        unit.UnitItems =
+        [
+            new() { Item = decay },
+            new() { Item = hood },
+            new() { Item = staff },
+            new() { Item = potion },
+            new() { Item = book },
+        ];
+
         unit.Stat = new Stat
         {
             HitPoints = 25,
@@ -215,19 +220,23 @@ public class SeedHandler
         unit.CurrentRoom = GetRandomRoom();
         _db.Units.Add(unit);
         _db.Stats.Add(unit.Stat);
-        _db.Items.AddRange(unit.Items);
-
+        foreach (UnitItem unitItem in unit.UnitItems)
+        {
+            _db.Items.Add(unitItem.Item);
+        }
 
         unit = new Rogue();
         unit.Name = "Bob, Sneaky";
         unit.Class = "Rogue";
         unit.Level = 3;
-        unit.Items = new List<Item>
-        {
-            dagger,
-            lockpick,
-            cloak            
-        };
+        unit.UnitItems =
+        [
+            new() { Item = lockpick },
+            new() { Item = dagger },
+            new() { Item = pants },
+            new() { Item = shoes },
+            new() { Item = potion },
+        ];
         unit.Stat = new Stat
         {
             HitPoints = 26,
@@ -245,21 +254,23 @@ public class SeedHandler
         unit.CurrentRoom = GetRandomRoom();
         _db.Units.Add(unit);
         _db.Stats.Add(unit.Stat);
-        _db.Items.AddRange(unit.Items);
-
+        foreach (UnitItem unitItem in unit.UnitItems)
+        {
+            _db.Items.Add(unitItem.Item);
+        }
 
         unit = new Cleric();
         unit.Name = "Alice";
         unit.Class = "Cleric";
         unit.Level = 4;
-        unit.Items = new List<Item>
-        {
-            smite,
-            mace,
-            plate,
-            greaves,
-            potion
-        };
+        unit.UnitItems =
+        [
+            new() { Item = potion },
+            new() { Item = smite },
+            new() { Item = mace },
+            new() { Item = plate },
+            new() { Item = greaves },
+        ];
         unit.Stat = new Stat
         {
             HitPoints = 27,
@@ -277,21 +288,23 @@ public class SeedHandler
         unit.CurrentRoom = GetRandomRoom();
         _db.Units.Add(unit);
         _db.Stats.Add(unit.Stat);
-        _db.Items.AddRange(unit.Items);
-
+        foreach (UnitItem unitItem in unit.UnitItems)
+        {
+            _db.Items.Add(unitItem.Item);
+        }
 
         unit = new Knight();
         unit.Name = "Reginald III, Sir";
         unit.Class = "Knight";
         unit.Level = 5;
-        unit.Items = new List<Item>
-        {
-            sword,
-            helm,
-            plate,
-            greaves,
-            potion
-        };
+        unit.UnitItems =
+        [
+            new() { Item = potion },
+            new() { Item = sword },
+            new() { Item = helm },
+            new() { Item = plate },
+            new() { Item = greaves },
+        ];
         unit.Stat = new Stat
         {
             HitPoints = 30,
@@ -309,17 +322,16 @@ public class SeedHandler
         unit.CurrentRoom = GetRandomRoom();
         _db.Units.Add(unit);
         _db.Stats.Add(unit.Stat);
-        _db.Items.AddRange(unit.Items);
-
+        foreach (UnitItem unitItem in unit.UnitItems)
+        {
+            _db.Items.Add(unitItem.Item);
+        }
 
         unit = new EnemyGhost();
         unit.Name = "Poltergeist";
         unit.Class = "Ghost";
         unit.Level = 1;
-        unit.Items = new List<Item>
-        {
-            axe
-        };
+        unit.UnitItems = [new() { Item = axe }];
         unit.Stat = new Stat
         {
             HitPoints = 25,
@@ -337,17 +349,16 @@ public class SeedHandler
         unit.CurrentRoom = GetRandomRoom();
         _db.Units.Add(unit);
         _db.Stats.Add(unit.Stat);
-        _db.Items.AddRange(unit.Items);
-
+        foreach (UnitItem unitItem in unit.UnitItems)
+        {
+            _db.Items.Add(unitItem.Item);
+        }
 
         unit = new EnemyGoblin();
         unit.Name = "Ruthless Treasure-Gather";
         unit.Class = "Goblin";
         unit.Level = 2;
-        unit.Items = new List<Item>
-        {
-            sword
-        };
+        unit.UnitItems = [new() { Item = sword }];
         unit.Stat = new Stat
         {
             HitPoints = 28,
@@ -365,17 +376,17 @@ public class SeedHandler
         unit.CurrentRoom = GetRandomRoom();
         _db.Units.Add(unit);
         _db.Stats.Add(unit.Stat);
-        _db.Items.AddRange(unit.Items);
-
+        foreach (UnitItem unitItem in unit.UnitItems)
+        {
+            _db.Items.Add(unitItem.Item);
+        }
 
         unit = new EnemyArcher();
         unit.Name = "Sniper";
         unit.Class = "Archer";
         unit.Level = 3;
-        unit.Items = new List<Item>
-        {
-            bow
-        };
+        unit.UnitItems = [new() { Item = bow }];
+
         unit.Stat = new Stat
         {
             HitPoints = 27,
@@ -393,17 +404,20 @@ public class SeedHandler
         unit.CurrentRoom = GetRandomRoom();
         _db.Units.Add(unit);
         _db.Stats.Add(unit.Stat);
-        _db.Items.AddRange(unit.Items);
-
+        foreach (UnitItem unitItem in unit.UnitItems)
+        {
+            _db.Items.Add(unitItem.Item);
+        }
 
         unit = new EnemyMage();
         unit.Name = "Studious Spellcaster";
         unit.Class = "Mage";
         unit.Level = 4;
-        unit.Items = new List<Item>
-        {
-            lightning, potion
-        };
+        unit.UnitItems =
+        [
+            new() { Item = lightning },
+            new() { Item = potion }
+        ];
         unit.Stat = new Stat
         {
             HitPoints = 26,
@@ -421,17 +435,22 @@ public class SeedHandler
         unit.CurrentRoom = GetRandomRoom();
         _db.Units.Add(unit);
         _db.Stats.Add(unit.Stat);
-        _db.Items.AddRange(unit.Items);
-
+        foreach (UnitItem unitItem in unit.UnitItems)
+        {
+            _db.Items.Add(unitItem.Item);
+        }
 
         unit = new EnemyCleric();
         unit.Name = "Doctor of the Fallen";
         unit.Class = "Cleric";
         unit.Level = 5;
-        unit.Items = new List<Item>
-        {
-            smite, potion, mace
-        };
+        unit.UnitItems =
+        [
+            new() { Item = potion },
+            new() { Item = mace },
+            new() { Item = plate },
+            new() { Item = smite },
+        ];
         unit.Stat = new Stat
         {
             HitPoints = 29,
@@ -449,7 +468,10 @@ public class SeedHandler
         unit.CurrentRoom = GetRandomRoom();
         _db.Units.Add(unit);
         _db.Stats.Add(unit.Stat);
-        _db.Items.AddRange(unit.Items);
+        foreach (UnitItem unitItem in unit.UnitItems)
+        {
+            _db.Items.Add(unitItem.Item);
+        }
         _db.SaveChanges();
     }
 

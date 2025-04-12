@@ -40,26 +40,26 @@ public class InventoryMenu : InteractiveSelectionMenu<IItem>
     {
         _menuItems = new();
 
-        foreach (IItem item in unit.Items!)
+        foreach (UnitItem unitItem in unit.UnitItems!)
         {
-            if (item is IConsumableItem consumableItem)
+            if (unitItem.Item is IConsumableItem consumableItem)
             {
-                AddMenuItem($"{consumableItem.Name}", $"[[{consumableItem.UsesLeft}/{consumableItem.MaxUses}]] {consumableItem.Description}", item);
+                AddMenuItem($"{consumableItem.Name}", $"[[{consumableItem.UsesLeft}/{consumableItem.MaxUses}]] {consumableItem.Description}", unitItem.Item);
             }
-            else if (item is IEquippableItem weaponItem)
+            else if (unitItem.Item is IEquippableItem weaponItem)
             {
                 if (weaponItem == unit.GetEquippedWeapon())
                 {
-                    AddMenuItem($"{weaponItem.Name}", $"[[{weaponItem.Durability}/{weaponItem.MaxDurability}]] {weaponItem.Description} (Equipped)", item);
+                    AddMenuItem($"{weaponItem.Name}", $"[[{weaponItem.Durability}/{weaponItem.MaxDurability}]] {weaponItem.Description} (Equipped)", unitItem.Item);
                 }
                 else
                 {
-                    AddMenuItem($"{weaponItem.Name}", $"[[{weaponItem.Durability}/{weaponItem.MaxDurability}]] {weaponItem.Description}", item);
+                    AddMenuItem($"{weaponItem.Name}", $"[[{weaponItem.Durability}/{weaponItem.MaxDurability}]] {weaponItem.Description}", unitItem.Item);
                 }
             }
             else
             {
-                AddMenuItem(item.Name, item.Description, item);
+                AddMenuItem(unitItem.Item.Name, unitItem.Item.Description, unitItem.Item);
             }
         }
         AddMenuItem(exitMessage, "", null!);

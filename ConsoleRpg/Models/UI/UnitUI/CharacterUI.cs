@@ -31,14 +31,20 @@ public class CharacterUI
     public void DisplayCharacterInfo(List<Unit> units)
     {
         List<Stat> stats = _db.Stats.ToList();
-        List<Item> items = _db.Items.ToList();
+        List<UnitItem> unitItems = _db.UnitItems.ToList();
         List<Room> rooms = _db.Rooms.ToList();
         List<Ability> abilities = _db.Abilities.ToList();
 
         foreach (Unit unit in units)
         {
             Stat stat = stats.Where(s => s.UnitId == unit.UnitId).FirstOrDefault();
-            List<Item> unitItems = items.Where(i => i.Units.Contains(unit)).ToList();
+            List<UnitItem> ui = unitItems.Where(ui => ui.Unit == unit).ToList();
+            List<Item> items = new();
+            foreach (UnitItem unitItem in ui)
+            {
+                Item item = _db.Items.Where(i => i.ItemId == unitItem.ItemId).FirstOrDefault();
+                items.Add(item);
+            }
             Room unitRoom;
             try
             {
@@ -46,7 +52,7 @@ public class CharacterUI
             }
             catch { unitRoom = null; }
             List<Ability> unitAbilities = abilities.Where(a => a.Units.Contains(unit)).ToList();
-            DisplayCharacterInfo(unit, stat, unitItems, unitRoom, unitAbilities);
+            DisplayCharacterInfo(unit, stat, items, unitRoom, unitAbilities);
         }
     }
 

@@ -1,4 +1,5 @@
-﻿using ConsoleRpg.DataTypes;
+﻿using System.Linq;
+using ConsoleRpg.DataTypes;
 using ConsoleRpg.Models.Interfaces;
 using ConsoleRpg.Models.Interfaces.ItemBehaviors;
 using ConsoleRpg.Models.Items;
@@ -23,9 +24,9 @@ namespace ConsoleRpg
 
         public static IEquippableArmor? GetEquippedArmorInSlot(Unit unit, ArmorType armorType)
         {
-            foreach(Item item in unit.Items)
+            foreach(UnitItem unitItem in unit.UnitItems)
             {
-                if (item is IEquippableArmor armorItem && unit.Items.Contains(item) && armorItem.ArmorType == armorType)
+                if (unitItem.Item is IEquippableArmor armorItem && armorItem.ArmorType == armorType)
                 {
                     return armorItem;
                 }
@@ -45,9 +46,9 @@ namespace ConsoleRpg
 
         public static bool IsItemEquipped(IUnit unit, IEquippableItem equippableItem)
         {
-            foreach (Item item in unit.Items)
+            foreach (UnitItem unitItem in unit.UnitItems)
             {
-                if (item is IEquippableItem equippedItem)
+                if (unitItem.Item is IEquippableItem equippedItem)
                 {
                     return true;
                 }

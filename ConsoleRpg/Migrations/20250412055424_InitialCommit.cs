@@ -5,7 +5,7 @@
 namespace ConsoleRpg.Migrations
 {
     /// <inheritdoc />
-    public partial class InitialCreate : Migration
+    public partial class InitialCommit : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -104,11 +104,17 @@ namespace ConsoleRpg.Migrations
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Class = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Level = table.Column<int>(type: "int", nullable: false),
-                    CurrentRoomRoomId = table.Column<int>(type: "int", nullable: true)
+                    CurrentRoomRoomId = table.Column<int>(type: "int", nullable: true),
+                    ItemId = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Units", x => x.UnitId);
+                    table.ForeignKey(
+                        name: "FK_Units_Items_ItemId",
+                        column: x => x.ItemId,
+                        principalTable: "Items",
+                        principalColumn: "ItemId");
                     table.ForeignKey(
                         name: "FK_Units_Rooms_CurrentRoomRoomId",
                         column: x => x.CurrentRoomRoomId,
@@ -172,21 +178,22 @@ namespace ConsoleRpg.Migrations
                 name: "UnitItems",
                 columns: table => new
                 {
-                    ItemsItemId = table.Column<int>(type: "int", nullable: false),
-                    UnitsUnitId = table.Column<int>(type: "int", nullable: false)
+                    UnitId = table.Column<int>(type: "int", nullable: false),
+                    ItemId = table.Column<int>(type: "int", nullable: false),
+                    Quantity = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_UnitItems", x => new { x.ItemsItemId, x.UnitsUnitId });
+                    table.PrimaryKey("PK_UnitItems", x => new { x.UnitId, x.ItemId });
                     table.ForeignKey(
-                        name: "FK_UnitItems_Items_ItemsItemId",
-                        column: x => x.ItemsItemId,
+                        name: "FK_UnitItems_Items_ItemId",
+                        column: x => x.ItemId,
                         principalTable: "Items",
                         principalColumn: "ItemId",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_UnitItems_Units_UnitsUnitId",
-                        column: x => x.UnitsUnitId,
+                        name: "FK_UnitItems_Units_UnitId",
+                        column: x => x.UnitId,
                         principalTable: "Units",
                         principalColumn: "UnitId",
                         onDelete: ReferentialAction.Cascade);
@@ -203,14 +210,19 @@ namespace ConsoleRpg.Migrations
                 column: "UnitsUnitId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_UnitItems_UnitsUnitId",
+                name: "IX_UnitItems_ItemId",
                 table: "UnitItems",
-                column: "UnitsUnitId");
+                column: "ItemId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Units_CurrentRoomRoomId",
                 table: "Units",
                 column: "CurrentRoomRoomId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Units_ItemId",
+                table: "Units",
+                column: "ItemId");
         }
 
         /// <inheritdoc />
@@ -232,10 +244,10 @@ namespace ConsoleRpg.Migrations
                 name: "Abilities");
 
             migrationBuilder.DropTable(
-                name: "Items");
+                name: "Units");
 
             migrationBuilder.DropTable(
-                name: "Units");
+                name: "Items");
 
             migrationBuilder.DropTable(
                 name: "Rooms");

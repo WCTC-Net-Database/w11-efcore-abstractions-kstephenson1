@@ -27,7 +27,7 @@ public class CommandHandler
         // If the unit has a usable item, it can use an item.
         else if (command.GetType() == typeof(UseItemCommand))
         {
-            if (unit.Items!.Count > 0)
+            if (unit.UnitItems!.Count > 0)
             {
                 // Shows a list of items that are in the selected unit's inventory and asks the user to select an item.
                 IItem item = _userInterface.InventoryMenu.Display(unit, $"Select item for {unit.Name}.", "[[Go Back]]");

@@ -30,7 +30,14 @@ public class ItemLockpick : ConsumableItem, IConsumableItem
         if (UsesLeft == 0)
         {
             Console.WriteLine($"The lockpick broke!");
-            unit.Items.Remove(this);
+            foreach (UnitItem unitItem in unit.UnitItems)
+            {
+                if (unitItem.Item == this)
+                {
+                    unit.UnitItems.Remove(unitItem);
+                    break;
+                }
+            }
         }
     }
     public override string ToString()

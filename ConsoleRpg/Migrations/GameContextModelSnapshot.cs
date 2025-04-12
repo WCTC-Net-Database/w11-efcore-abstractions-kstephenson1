@@ -204,6 +204,9 @@ namespace ConsoleRpg.Migrations
                     b.Property<int?>("CurrentRoomRoomId")
                         .HasColumnType("int");
 
+                    b.Property<int?>("ItemId")
+                        .HasColumnType("int");
+
                     b.Property<int>("Level")
                         .HasColumnType("int");
 
@@ -220,6 +223,8 @@ namespace ConsoleRpg.Migrations
 
                     b.HasIndex("CurrentRoomRoomId");
 
+                    b.HasIndex("ItemId");
+
                     b.ToTable("Units");
 
                     b.HasDiscriminator<string>("UnitType").HasValue("Unit");
@@ -227,19 +232,22 @@ namespace ConsoleRpg.Migrations
                     b.UseTphMappingStrategy();
                 });
 
-            modelBuilder.Entity("ItemUnit", b =>
+            modelBuilder.Entity("UnitItem", b =>
                 {
-                    b.Property<int>("ItemsItemId")
+                    b.Property<int>("UnitId")
                         .HasColumnType("int");
 
-                    b.Property<int>("UnitsUnitId")
+                    b.Property<int>("ItemId")
                         .HasColumnType("int");
 
-                    b.HasKey("ItemsItemId", "UnitsUnitId");
+                    b.Property<int>("Quantity")
+                        .HasColumnType("int");
 
-                    b.HasIndex("UnitsUnitId");
+                    b.HasKey("UnitId", "ItemId");
 
-                    b.ToTable("UnitItems", (string)null);
+                    b.HasIndex("ItemId");
+
+                    b.ToTable("UnitItems");
                 });
 
             modelBuilder.Entity("ConsoleRpg.Models.Abilities.FlyAbility", b =>
@@ -699,22 +707,37 @@ namespace ConsoleRpg.Migrations
                         .WithMany("Units")
                         .HasForeignKey("CurrentRoomRoomId");
 
+                    b.HasOne("ConsoleRpg.Models.Items.Item", null)
+                        .WithMany("Units")
+                        .HasForeignKey("ItemId");
+
                     b.Navigation("CurrentRoom");
                 });
 
-            modelBuilder.Entity("ItemUnit", b =>
+            modelBuilder.Entity("UnitItem", b =>
                 {
-                    b.HasOne("ConsoleRpg.Models.Items.Item", null)
-                        .WithMany()
-                        .HasForeignKey("ItemsItemId")
+                    b.HasOne("ConsoleRpg.Models.Items.Item", "Item")
+                        .WithMany("UnitItems")
+                        .HasForeignKey("ItemId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("ConsoleRpg.Models.Units.Abstracts.Unit", null)
-                        .WithMany()
-                        .HasForeignKey("UnitsUnitId")
+                    b.HasOne("ConsoleRpg.Models.Units.Abstracts.Unit", "Unit")
+                        .WithMany("UnitItems")
+                        .HasForeignKey("UnitId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("Item");
+
+                    b.Navigation("Unit");
+                });
+
+            modelBuilder.Entity("ConsoleRpg.Models.Items.Item", b =>
+                {
+                    b.Navigation("UnitItems");
+
+                    b.Navigation("Units");
                 });
 
             modelBuilder.Entity("ConsoleRpg.Models.Rooms.Room", b =>
@@ -726,6 +749,8 @@ namespace ConsoleRpg.Migrations
                 {
                     b.Navigation("Stat")
                         .IsRequired();
+
+                    b.Navigation("UnitItems");
                 });
 #pragma warning restore 612, 618
         }

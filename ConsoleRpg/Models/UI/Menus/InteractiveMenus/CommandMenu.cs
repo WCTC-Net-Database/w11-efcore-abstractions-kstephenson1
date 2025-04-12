@@ -56,7 +56,7 @@ public class CommandMenu : InteractiveSelectionMenu<ICommand>
 
         if (unit is IHaveInventory)
         {
-            if (unit.Items!.Count != 0)
+            if (unit.UnitItems!.Count != 0)
                 AddMenuItem("Items", "Uses an item in this unit's inventory.", new UseItemCommand(null!, null!));
             else
                 AddMenuItem("[dim]Items[/]", "[dim]Uses an item in this unit's inventory.[/]", new UseItemCommand(null!, null!));

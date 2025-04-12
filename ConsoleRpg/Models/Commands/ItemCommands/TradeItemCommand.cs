@@ -25,8 +25,15 @@ public class TradeItemCommand : ICommand
         {
             if (!InventoryHelper.IsInventoryFull(_target))
             {
-                _unit.Items.Remove((Item)_item);
-                _target.Items.Add((Item)_item);
+                foreach (UnitItem unitItem in _unit.UnitItems)
+                {
+                    if (unitItem.Item == _item)
+                    {
+                        _unit.UnitItems.Remove(unitItem);
+                        _target.UnitItems.Add(unitItem);
+                        break;
+                    }
+                }
                 Console.WriteLine($"{_unit.Name} traded {_item.Name} to {_target.Name}");
             }
             else
