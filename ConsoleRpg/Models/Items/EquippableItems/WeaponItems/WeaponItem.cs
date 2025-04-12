@@ -28,10 +28,4 @@ public abstract class WeaponItem : EquippableItem, IEquippableWeapon
         Crit = crit;
         Range = range;
     }
-
-    public override string ToString()
-    {
-        return $"[[{Durability}/{MaxDurability}]] {Name}";
-    }
-
 }

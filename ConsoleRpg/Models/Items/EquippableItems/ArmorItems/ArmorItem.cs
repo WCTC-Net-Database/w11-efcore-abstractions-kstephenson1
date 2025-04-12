@@ -10,6 +10,8 @@ public abstract class ArmorItem : EquippableItem, IEquippableArmor
     public int Defense { get; set; }
     public int Resistance { get; set; }
 
+    protected ArmorItem() { }
+
     public ArmorItem(string name, ArmorType armorType, Rank requiredRank, int maxDurability, int defense, int resistance, int weight, int expModifier) : base(name, requiredRank, maxDurability, weight, expModifier)
     {
         ArmorType = armorType;

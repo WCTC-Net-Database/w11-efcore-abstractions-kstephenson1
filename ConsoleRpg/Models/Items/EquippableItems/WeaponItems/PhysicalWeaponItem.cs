@@ -19,10 +19,4 @@ public class PhysicalWeaponItem : WeaponItem
     {
 
     }
-
-    public override string ToString()
-    {
-        return $"[[{Durability}/{MaxDurability}]] {Name}";
-    }
-
 }
