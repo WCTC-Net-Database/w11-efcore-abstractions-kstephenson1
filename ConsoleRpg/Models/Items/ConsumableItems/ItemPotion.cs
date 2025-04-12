@@ -1,5 +1,5 @@
-﻿using ConsoleRpg.Models.Interfaces.ItemBehaviors;
-using ConsoleRpg.Services.DataHelpers;
+﻿using ConsoleRpg.Models.Interfaces;
+using ConsoleRpg.Models.Interfaces.ItemBehaviors;
 
 namespace ConsoleRpg.Models.Items.ConsumableItems;
 
@@ -21,24 +21,24 @@ public class ItemPotion : ConsumableItem, IConsumableItem
         UsesLeft = MaxUses;
     }
 
-    public void UseItem()
+    public void UseItem(IUnit unit)
     {
-        if (Inventory.Unit!.Stat.HitPoints >= Inventory.Unit.Stat.MaxHitPoints)
+        if (unit!.Stat.HitPoints >= unit.Stat.MaxHitPoints)
         {
-            Console.WriteLine($"{Inventory.Unit.Name} is already at max health.");
+            Console.WriteLine($"{unit.Name} is already at max health.");
         }
         else
         {
-            int preItemHP = Inventory.Unit.Stat.HitPoints;
-            Inventory.Unit.Heal(10);
-            int postItemHP = Inventory.Unit.Stat.MaxHitPoints;
+            int preItemHP = unit.Stat.HitPoints;
+            unit.Heal(10);
+            int postItemHP = unit.Stat.MaxHitPoints;
             int healedHP = postItemHP - preItemHP;
-            Console.WriteLine($"{Inventory.Unit.Name} used {Name} and gained {healedHP} hit points");
+            Console.WriteLine($"{unit.Name} used {Name} and gained {healedHP} hit points");
             UsesLeft--;
 
             if (UsesLeft == 0)
             {
-                Inventory.RemoveItem(this);
+                unit.Items.Remove(this);
             }
         }
     }

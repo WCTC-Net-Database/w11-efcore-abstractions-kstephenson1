@@ -2,7 +2,6 @@
 using ConsoleRpg.Models.Interfaces;
 using ConsoleRpg.Models.Interfaces.Commands;
 using ConsoleRpg.Models.Interfaces.ItemBehaviors;
-using ConsoleRpg.Models.Units.Abstracts;
 
 namespace ConsoleRpg.Models.UI.Menus.InteractiveMenus;
 
@@ -17,7 +16,7 @@ public class ItemCommandMenu : InteractiveSelectionMenu<ICommand>
         throw new ArgumentException("CommandMenu(unit, prompt) requires a unit.");
     }
 
-    public ICommand Display(IItem item, string prompt, string exitMessage)
+    public ICommand Display(IUnit unit, IItem item, string prompt, string exitMessage)
     {
         ICommand selection = default!;
         bool exit = false;
@@ -25,7 +24,7 @@ public class ItemCommandMenu : InteractiveSelectionMenu<ICommand>
         {
             Console.Clear();
             Console.WriteLine(prompt);
-            Update(item, exitMessage);
+            Update(unit, item, exitMessage);
             BuildTable(exitMessage);
             Show();
             ConsoleKey key = ReturnValidKey();
@@ -39,7 +38,7 @@ public class ItemCommandMenu : InteractiveSelectionMenu<ICommand>
         throw new ArgumentException("Update(item) requires an item.");
     }
 
-    public void Update(IItem item, string exitMessage)
+    public void Update(IUnit unit, IItem item, string exitMessage)
     {
         _menuItems = new();
 
@@ -48,19 +47,18 @@ public class ItemCommandMenu : InteractiveSelectionMenu<ICommand>
 
         if (item is IConsumableItem consumableItem)
         {
-            AddMenuItem($"Use Item", $"{consumableItem.Description}", new UseItemCommand(null!));
+            AddMenuItem($"Use Item", $"{consumableItem.Description}", new UseItemCommand(null!, null!));
         }
 
-        if (item is IEquippableItem weaponItem)
+        if (item is IEquippableItem equippableItem)
         {
-            weaponItem.Inventory.HasWeaponEquipped();
-            if (weaponItem == item.Inventory.EquippedWeapon)
+            if (InventoryHelper.IsItemEquipped(unit, equippableItem))
             {
-                AddMenuItem($"[dim]Equip Item[/]", $"[[{weaponItem.Durability}/{weaponItem.MaxDurability}]] {weaponItem.Description}", null!);
+                AddMenuItem($"[dim]Equip Item[/]", $"[[{equippableItem.Durability}/{equippableItem.MaxDurability}]] {equippableItem.Description}", null!);
             }
             else
             {
-                AddMenuItem($"Equip Item", $"[[{weaponItem.Durability}/{weaponItem.MaxDurability}]] {weaponItem.Description}", new EquipCommand(null!, null!));
+                AddMenuItem($"Equip Item", $"[[{equippableItem.Durability}/{equippableItem.MaxDurability}]] {equippableItem.Description}", new EquipCommand(null!, null!));
             }
         }
 

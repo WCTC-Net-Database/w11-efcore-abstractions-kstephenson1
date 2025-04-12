@@ -9,11 +9,9 @@ public class UnitClassMenu : InteractiveSelectionMenu<Type>
     // The MainMenu contains items that have 4 parts, the index, the name, the description, and the action that
     // is completed when that menu item is chosen.
 
-    private readonly UnitManager _unitManager;
-
-    public UnitClassMenu(UnitManager unitManager)
+    public UnitClassMenu()
     {
-        _unitManager = unitManager;
+
     }
 
     public override Type Display(string prompt, string exitMessage)

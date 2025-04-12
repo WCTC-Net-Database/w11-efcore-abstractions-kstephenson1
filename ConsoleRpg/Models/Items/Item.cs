@@ -1,6 +1,6 @@
 ﻿using System.Text.Json.Serialization;
 using ConsoleRpg.Models.Interfaces;
-using ConsoleRpg.Models.Inventories;
+using ConsoleRpg.Models.Units.Abstracts;
 using ConsoleRpg.Services.DataHelpers;
 
 namespace ConsoleRpg.Models.Items;
@@ -12,7 +12,7 @@ public abstract class Item : IItem
     [JsonIgnore]
 
     public abstract string ItemType { get; set; }
-    public virtual Inventory Inventory { get; set; }
+    public virtual List<Unit> Units { get; set; }
     public int InventoryId { get; set; }
     public string Name { get; set; }
     public string Description { get; set; }

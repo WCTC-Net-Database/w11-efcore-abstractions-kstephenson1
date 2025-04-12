@@ -1,4 +1,5 @@
-﻿using ConsoleRpg.Models.Interfaces.ItemBehaviors;
+﻿using ConsoleRpg.Models.Interfaces;
+using ConsoleRpg.Models.Interfaces.ItemBehaviors;
 using ConsoleRpg.Services.DataHelpers;
 
 namespace ConsoleRpg.Models.Items.ConsumableItems;
@@ -21,7 +22,7 @@ public class ItemBook : ConsumableItem, IConsumableItem
         UsesLeft = MaxUses;
     }
 
-    public void UseItem()
+    public void UseItem(IUnit unit)
     {
         Console.WriteLine($"You read the book. Isn't there a battle going on right now!?");
     }

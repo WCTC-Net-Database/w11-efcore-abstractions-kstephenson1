@@ -1,7 +1,4 @@
-﻿using System.Reflection;
-using ConsoleRpg.Services;
-
-namespace ConsoleRpg.Models.UI.Menus.InteractiveMenus;
+﻿namespace ConsoleRpg.Models.UI.Menus.InteractiveMenus;
 
 public class LevelUpMenu : InteractiveSelectionMenu<int>
 {
@@ -9,11 +6,10 @@ public class LevelUpMenu : InteractiveSelectionMenu<int>
     // The MainMenu contains items that have 4 parts, the index, the name, the description, and the action that
     // is completed when that menu item is chosen.
 
-    private readonly UnitManager _unitManager;
 
-    public LevelUpMenu(UnitManager unitManager)
+    public LevelUpMenu()
     {
-        _unitManager = unitManager;
+
     }
 
     public override int Display(string prompt, string exitMessage)

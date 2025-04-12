@@ -1,6 +1,5 @@
 ﻿using System.Reflection;
 using ConsoleRpg.Data;
-using ConsoleRpg.FileIO;
 using ConsoleRpg.Helpers;
 using ConsoleRpg.Models.UI;
 using ConsoleRpg.Models.UI.Character;
@@ -66,7 +65,6 @@ public static class Startup
         services.AddTransient<CommandMenu>();
         services.AddTransient<DungeonFactory>();
         services.AddTransient<ExitMenu>();
-        services.AddSingleton<FileManager<Unit>>();
         services.AddDbContext<GameContext>(options => options
         .UseSqlServer(configuration.GetConnectionString("DbConnection"))
         .UseLazyLoadingProxies());
@@ -80,7 +78,6 @@ public static class Startup
         services.AddTransient<RoomUI>();
         services.AddTransient<SeedHandler>();
         services.AddSingleton<UnitClassMenu>();
-        services.AddSingleton<UnitManager>();
         services.AddTransient<UnitSelectionMenu>();
         services.AddTransient<UserInterface>();
     }

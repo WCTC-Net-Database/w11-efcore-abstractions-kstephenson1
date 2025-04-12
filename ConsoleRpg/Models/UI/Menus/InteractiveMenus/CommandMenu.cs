@@ -1,10 +1,10 @@
-﻿using ConsoleRpg.Models.Commands.ItemCommands;
+﻿using ConsoleRpg.Data;
+using ConsoleRpg.Models.Commands.ItemCommands;
 using ConsoleRpg.Models.Commands.UnitCommands;
 using ConsoleRpg.Models.Interfaces;
 using ConsoleRpg.Models.Interfaces.Commands;
 using ConsoleRpg.Models.Interfaces.InventoryBehaviors;
 using ConsoleRpg.Models.Interfaces.UnitBehaviors;
-using ConsoleRpg.Services;
 
 namespace ConsoleRpg.Models.UI.Menus.InteractiveMenus;
 
@@ -14,11 +14,11 @@ public class CommandMenu : InteractiveSelectionMenu<ICommand>
     // The MainMenu contains items that have 4 parts, the index, the name, the description, and the action that
     // is completed when that menu item is chosen.
 
-    private readonly UnitManager _unitManager;
+    private readonly GameContext _db;
 
-    public CommandMenu(UnitManager unitManager)
+    public CommandMenu(GameContext context)
     {
-        _unitManager = unitManager;
+        _db = context;
     }
 
     public override void Display(string errorMessage)
@@ -56,10 +56,10 @@ public class CommandMenu : InteractiveSelectionMenu<ICommand>
 
         if (unit is IHaveInventory)
         {
-            if (unit.Inventory.Items!.Count != 0)
-                AddMenuItem("Items", "Uses an item in this unit's inventory.", new UseItemCommand(null!));
+            if (unit.Items!.Count != 0)
+                AddMenuItem("Items", "Uses an item in this unit's inventory.", new UseItemCommand(null!, null!));
             else
-                AddMenuItem("[dim]Items[/]", "[dim]Uses an item in this unit's inventory.[/]", new UseItemCommand(null!));
+                AddMenuItem("[dim]Items[/]", "[dim]Uses an item in this unit's inventory.[/]", new UseItemCommand(null!, null!));
         }
 
         if (unit is IAttack)

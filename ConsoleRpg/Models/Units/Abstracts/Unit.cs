@@ -1,8 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Text.Json.Serialization;
-using CsvHelper.Configuration.Attributes;
-using ConsoleRpg.FileIO.Csv.Converters;
+using ConsoleRpg.DataTypes;
 using ConsoleRpg.Models.Abilities;
 using ConsoleRpg.Models.Combat;
 using ConsoleRpg.Models.Commands.AbilityCommands;
@@ -13,9 +11,8 @@ using ConsoleRpg.Models.Interfaces;
 using ConsoleRpg.Models.Interfaces.InventoryBehaviors;
 using ConsoleRpg.Models.Interfaces.ItemBehaviors;
 using ConsoleRpg.Models.Interfaces.UnitBehaviors;
-using ConsoleRpg.Models.Inventories;
+using ConsoleRpg.Models.Items;
 using ConsoleRpg.Models.Rooms;
-using ConsoleRpg.Models.Items.EquippableItems;
 
 namespace ConsoleRpg.Models.Units.Abstracts;
 
@@ -25,62 +22,25 @@ public abstract class Unit : IUnit, ITargetable, IAttack, IHaveInventory
     [Key]
     public int UnitId { get; set; }
     public abstract string UnitType { get; set; }
-
-    [Name("Name")]                                          // CsvHelper Attribute
     public virtual string Name { get; set; }
-
-    [Name("Class")]                                         // CsvHelper Attribute
     public virtual string Class { get; set; }
-
-    [Name("Level")]                                         // CsvHelper Attribute
     public virtual int Level { get; set; }
-
-    [Name("Inventory")]                                     // CsvHelper Attribute
-    [JsonPropertyName("Inventory")]                         // Json Atribute
-    [TypeConverter(typeof(CsvInventoryConverter))]          // CsvHelper Attribute that helps CsvHelper import a new inventory object instead of a string.
-    public virtual Inventory Inventory { get; set; }
-
-    [Ignore]
-    [JsonIgnore]
+    public virtual List<Item> Items { get; set; }
     public Room? CurrentRoom { get; set; }
-
-    [Ignore]
-    [JsonIgnore]
     [NotMapped]
     public virtual CommandInvoker Invoker { get; set; } = new();
-
-    [Ignore]
-    [JsonIgnore]
     [NotMapped]
     public virtual UseItemCommand UseItemCommand { get; set; } = null!;
-
-    [Ignore]
-    [JsonIgnore]
     [NotMapped]
     public virtual EquipCommand EquipCommand { get; set; } = null!;
-
-    [Ignore]
-    [JsonIgnore]
     [NotMapped]
     public virtual DropItemCommand DropItemCommand { get; set; } = null!;
-
-    [Ignore]
-    [JsonIgnore]
     [NotMapped]
     public virtual TradeItemCommand TradeItemCommand { get; set; } = null!;
-
-    [Ignore]
-    [JsonIgnore]
     [NotMapped]
     public virtual AttackCommand AttackCommand { get; set; } = null!;
-
-    [Ignore]
-    [JsonIgnore]
     [NotMapped]
     public virtual MoveCommand MoveCommand { get; set; } = null!;
-
-    [Ignore]
-    [JsonIgnore]
     [NotMapped]
     public virtual AbilityCommand AbilityCommand { get; set; } = null!;
 
@@ -92,23 +52,13 @@ public abstract class Unit : IUnit, ITargetable, IAttack, IHaveInventory
         
     }
 
-    public Unit(string name, string characterClass, int level, Inventory inventory)
+    public Unit(string name, string characterClass, int level, List<Item> items, Stat stats)
     {
         Name = name;
         Class = characterClass;
         Level = level;
-        Inventory = inventory;
-        Inventory.Unit = this;
-    }
-
-    public Unit(string name, string characterClass, int level, Inventory inventory, Stat stats)
-    {
-        Name = name;
-        Class = characterClass;
-        Level = level;
-        Inventory = inventory;
+        Items = items;
         Stat = stats;
-        Inventory.Unit = this;
     }
 
     // Attacks the target unit.
@@ -164,7 +114,7 @@ public abstract class Unit : IUnit, ITargetable, IAttack, IHaveInventory
 
     public override string ToString()
     {
-        return $"{Name},{Class},{Level},{Stat.HitPoints},{Inventory}";
+        return $"{Name},{Class},{Level},{Stat.HitPoints},{Items}";
     }
 
     public string GetHealthBar()
@@ -208,7 +158,7 @@ public abstract class Unit : IUnit, ITargetable, IAttack, IHaveInventory
 
     public void UseItem(IItem item)
     {
-        UseItemCommand = new(item);
+        UseItemCommand = new(this, item);
         Invoker.ExecuteCommand(UseItemCommand);
     }
 
@@ -217,4 +167,8 @@ public abstract class Unit : IUnit, ITargetable, IAttack, IHaveInventory
         AbilityCommand = new(this, target, ability);
         Invoker.ExecuteCommand(AbilityCommand);
     }
+
+    public IEquippableWeapon? GetEquippedWeapon() => InventoryHelper.GetEquippedWeapon(this);
+    public IEquippableArmor? GetEquippedArmorInSlot(ArmorType armorType) => InventoryHelper.GetEquippedArmorInSlot(this, armorType);
+
 }

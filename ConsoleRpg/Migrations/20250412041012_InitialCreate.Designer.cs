@@ -11,7 +11,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ConsoleRpg.Migrations
 {
     [DbContext(typeof(GameContext))]
-    [Migration("20250411221954_InitialCreate")]
+    [Migration("20250412041012_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />
@@ -138,52 +138,6 @@ namespace ConsoleRpg.Migrations
                     b.ToTable("Dungeons");
                 });
 
-            modelBuilder.Entity("ConsoleRpg.Models.Inventories.Inventory", b =>
-                {
-                    b.Property<int>("InventoryId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("InventoryId"));
-
-                    b.Property<int?>("EquippedChestArmorId")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("EquippedFeetArmorId")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("EquippedHeadArmorId")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("EquippedLegArmorId")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("EquippedWeaponId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("UnitId")
-                        .HasColumnType("int");
-
-                    b.HasKey("InventoryId");
-
-                    b.HasIndex("EquippedChestArmorId");
-
-                    b.HasIndex("EquippedFeetArmorId");
-
-                    b.HasIndex("EquippedHeadArmorId");
-
-                    b.HasIndex("EquippedLegArmorId");
-
-                    b.HasIndex("EquippedWeaponId");
-
-                    b.HasIndex("UnitId")
-                        .IsUnique();
-
-                    b.ToTable("Inventories");
-
-                    b.HasAnnotation("Relational:JsonPropertyName", "Inventory");
-                });
-
             modelBuilder.Entity("ConsoleRpg.Models.Items.Item", b =>
                 {
                     b.Property<int>("ItemId")
@@ -209,8 +163,6 @@ namespace ConsoleRpg.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("ItemId");
-
-                    b.HasIndex("InventoryId");
 
                     b.ToTable("Items");
 
@@ -276,6 +228,21 @@ namespace ConsoleRpg.Migrations
                     b.HasDiscriminator<string>("UnitType").HasValue("Unit");
 
                     b.UseTphMappingStrategy();
+                });
+
+            modelBuilder.Entity("ItemUnit", b =>
+                {
+                    b.Property<int>("ItemsItemId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("UnitsUnitId")
+                        .HasColumnType("int");
+
+                    b.HasKey("ItemsItemId", "UnitsUnitId");
+
+                    b.HasIndex("UnitsUnitId");
+
+                    b.ToTable("UnitItems", (string)null);
                 });
 
             modelBuilder.Entity("ConsoleRpg.Models.Abilities.FlyAbility", b =>
@@ -351,7 +318,7 @@ namespace ConsoleRpg.Migrations
                     b.HasDiscriminator().HasValue("ItemPotion");
                 });
 
-            modelBuilder.Entity("ConsoleRpg.Models.Items.EquippableItems.ArmorItems.ArmorItem", b =>
+            modelBuilder.Entity("ConsoleRpg.Models.Items.EquippableItems.ArmorItems.ChestArmorItem", b =>
                 {
                     b.HasBaseType("ConsoleRpg.Models.Items.Item");
 
@@ -359,6 +326,7 @@ namespace ConsoleRpg.Migrations
                         .HasColumnType("int");
 
                     b.Property<int>("Defense")
+                        .ValueGeneratedOnUpdateSometimes()
                         .HasColumnType("int");
 
                     b.Property<int>("Durability")
@@ -378,27 +346,154 @@ namespace ConsoleRpg.Migrations
                         .HasColumnType("int");
 
                     b.Property<int>("Resistance")
+                        .ValueGeneratedOnUpdateSometimes()
                         .HasColumnType("int");
 
                     b.Property<int>("Weight")
                         .ValueGeneratedOnUpdateSometimes()
                         .HasColumnType("int");
 
-                    b.HasDiscriminator().HasValue("ArmorItem");
+                    b.ToTable("Items", t =>
+                        {
+                            t.Property("ArmorType")
+                                .HasColumnName("ChestArmorItem_ArmorType");
+                        });
+
+                    b.HasDiscriminator().HasValue("ChestArmorItem");
                 });
 
-            modelBuilder.Entity("ConsoleRpg.Models.Items.GenericItem", b =>
+            modelBuilder.Entity("ConsoleRpg.Models.Items.EquippableItems.ArmorItems.FeetArmorItem", b =>
                 {
                     b.HasBaseType("ConsoleRpg.Models.Items.Item");
 
-                    b.HasDiscriminator().HasValue("GenericItem");
+                    b.Property<int>("ArmorType")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Defense")
+                        .ValueGeneratedOnUpdateSometimes()
+                        .HasColumnType("int");
+
+                    b.Property<int>("Durability")
+                        .ValueGeneratedOnUpdateSometimes()
+                        .HasColumnType("int");
+
+                    b.Property<int>("ExpModifier")
+                        .ValueGeneratedOnUpdateSometimes()
+                        .HasColumnType("int");
+
+                    b.Property<int>("MaxDurability")
+                        .ValueGeneratedOnUpdateSometimes()
+                        .HasColumnType("int");
+
+                    b.Property<int>("RequiredRank")
+                        .ValueGeneratedOnUpdateSometimes()
+                        .HasColumnType("int");
+
+                    b.Property<int>("Resistance")
+                        .ValueGeneratedOnUpdateSometimes()
+                        .HasColumnType("int");
+
+                    b.Property<int>("Weight")
+                        .ValueGeneratedOnUpdateSometimes()
+                        .HasColumnType("int");
+
+                    b.ToTable("Items", t =>
+                        {
+                            t.Property("ArmorType")
+                                .HasColumnName("FeetArmorItem_ArmorType");
+                        });
+
+                    b.HasDiscriminator().HasValue("FeetArmorItem");
                 });
 
-            modelBuilder.Entity("ConsoleRpg.Models.Items.WeaponItems.WeaponItem", b =>
+            modelBuilder.Entity("ConsoleRpg.Models.Items.EquippableItems.ArmorItems.HeadArmorItem", b =>
+                {
+                    b.HasBaseType("ConsoleRpg.Models.Items.Item");
+
+                    b.Property<int>("ArmorType")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Defense")
+                        .ValueGeneratedOnUpdateSometimes()
+                        .HasColumnType("int");
+
+                    b.Property<int>("Durability")
+                        .ValueGeneratedOnUpdateSometimes()
+                        .HasColumnType("int");
+
+                    b.Property<int>("ExpModifier")
+                        .ValueGeneratedOnUpdateSometimes()
+                        .HasColumnType("int");
+
+                    b.Property<int>("MaxDurability")
+                        .ValueGeneratedOnUpdateSometimes()
+                        .HasColumnType("int");
+
+                    b.Property<int>("RequiredRank")
+                        .ValueGeneratedOnUpdateSometimes()
+                        .HasColumnType("int");
+
+                    b.Property<int>("Resistance")
+                        .ValueGeneratedOnUpdateSometimes()
+                        .HasColumnType("int");
+
+                    b.Property<int>("Weight")
+                        .ValueGeneratedOnUpdateSometimes()
+                        .HasColumnType("int");
+
+                    b.ToTable("Items", t =>
+                        {
+                            t.Property("ArmorType")
+                                .HasColumnName("HeadArmorItem_ArmorType");
+                        });
+
+                    b.HasDiscriminator().HasValue("HeadArmorItem");
+                });
+
+            modelBuilder.Entity("ConsoleRpg.Models.Items.EquippableItems.ArmorItems.LegArmorItem", b =>
+                {
+                    b.HasBaseType("ConsoleRpg.Models.Items.Item");
+
+                    b.Property<int>("ArmorType")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Defense")
+                        .ValueGeneratedOnUpdateSometimes()
+                        .HasColumnType("int");
+
+                    b.Property<int>("Durability")
+                        .ValueGeneratedOnUpdateSometimes()
+                        .HasColumnType("int");
+
+                    b.Property<int>("ExpModifier")
+                        .ValueGeneratedOnUpdateSometimes()
+                        .HasColumnType("int");
+
+                    b.Property<int>("MaxDurability")
+                        .ValueGeneratedOnUpdateSometimes()
+                        .HasColumnType("int");
+
+                    b.Property<int>("RequiredRank")
+                        .ValueGeneratedOnUpdateSometimes()
+                        .HasColumnType("int");
+
+                    b.Property<int>("Resistance")
+                        .ValueGeneratedOnUpdateSometimes()
+                        .HasColumnType("int");
+
+                    b.Property<int>("Weight")
+                        .ValueGeneratedOnUpdateSometimes()
+                        .HasColumnType("int");
+
+                    b.HasDiscriminator().HasValue("LegArmorItem");
+                });
+
+            modelBuilder.Entity("ConsoleRpg.Models.Items.EquippableItems.WeaponItems.MagicWeaponItem", b =>
                 {
                     b.HasBaseType("ConsoleRpg.Models.Items.Item");
 
                     b.Property<int>("Crit")
+                        .ValueGeneratedOnUpdateSometimes()
                         .HasColumnType("int");
 
                     b.Property<int>("Durability")
@@ -410,6 +505,7 @@ namespace ConsoleRpg.Migrations
                         .HasColumnType("int");
 
                     b.Property<int>("Hit")
+                        .ValueGeneratedOnUpdateSometimes()
                         .HasColumnType("int");
 
                     b.Property<int>("MaxDurability")
@@ -417,9 +513,11 @@ namespace ConsoleRpg.Migrations
                         .HasColumnType("int");
 
                     b.Property<int>("Might")
+                        .ValueGeneratedOnUpdateSometimes()
                         .HasColumnType("int");
 
                     b.Property<int>("Range")
+                        .ValueGeneratedOnUpdateSometimes()
                         .HasColumnType("int");
 
                     b.Property<int>("RequiredRank")
@@ -427,13 +525,68 @@ namespace ConsoleRpg.Migrations
                         .HasColumnType("int");
 
                     b.Property<int>("WeaponType")
+                        .ValueGeneratedOnUpdateSometimes()
                         .HasColumnType("int");
 
                     b.Property<int>("Weight")
                         .ValueGeneratedOnUpdateSometimes()
                         .HasColumnType("int");
 
-                    b.HasDiscriminator().HasValue("WeaponItem");
+                    b.HasDiscriminator().HasValue("MagicWeaponItem");
+                });
+
+            modelBuilder.Entity("ConsoleRpg.Models.Items.EquippableItems.WeaponItems.PhysicalWeaponItem", b =>
+                {
+                    b.HasBaseType("ConsoleRpg.Models.Items.Item");
+
+                    b.Property<int>("Crit")
+                        .ValueGeneratedOnUpdateSometimes()
+                        .HasColumnType("int");
+
+                    b.Property<int>("Durability")
+                        .ValueGeneratedOnUpdateSometimes()
+                        .HasColumnType("int");
+
+                    b.Property<int>("ExpModifier")
+                        .ValueGeneratedOnUpdateSometimes()
+                        .HasColumnType("int");
+
+                    b.Property<int>("Hit")
+                        .ValueGeneratedOnUpdateSometimes()
+                        .HasColumnType("int");
+
+                    b.Property<int>("MaxDurability")
+                        .ValueGeneratedOnUpdateSometimes()
+                        .HasColumnType("int");
+
+                    b.Property<int>("Might")
+                        .ValueGeneratedOnUpdateSometimes()
+                        .HasColumnType("int");
+
+                    b.Property<int>("Range")
+                        .ValueGeneratedOnUpdateSometimes()
+                        .HasColumnType("int");
+
+                    b.Property<int>("RequiredRank")
+                        .ValueGeneratedOnUpdateSometimes()
+                        .HasColumnType("int");
+
+                    b.Property<int>("WeaponType")
+                        .ValueGeneratedOnUpdateSometimes()
+                        .HasColumnType("int");
+
+                    b.Property<int>("Weight")
+                        .ValueGeneratedOnUpdateSometimes()
+                        .HasColumnType("int");
+
+                    b.HasDiscriminator().HasValue("PhysicalWeaponItem");
+                });
+
+            modelBuilder.Entity("ConsoleRpg.Models.Items.GenericItem", b =>
+                {
+                    b.HasBaseType("ConsoleRpg.Models.Items.Item");
+
+                    b.HasDiscriminator().HasValue("GenericItem");
                 });
 
             modelBuilder.Entity("ConsoleRpg.Models.Units.Characters.Cleric", b =>
@@ -506,48 +659,6 @@ namespace ConsoleRpg.Migrations
                     b.HasDiscriminator().HasValue("EnemyMage");
                 });
 
-            modelBuilder.Entity("ConsoleRpg.Models.Items.EquippableItems.ArmorItems.ChestArmorItem", b =>
-                {
-                    b.HasBaseType("ConsoleRpg.Models.Items.EquippableItems.ArmorItems.ArmorItem");
-
-                    b.HasDiscriminator().HasValue("ChestArmorItem");
-                });
-
-            modelBuilder.Entity("ConsoleRpg.Models.Items.EquippableItems.ArmorItems.FeetArmorItem", b =>
-                {
-                    b.HasBaseType("ConsoleRpg.Models.Items.EquippableItems.ArmorItems.ArmorItem");
-
-                    b.HasDiscriminator().HasValue("FeetArmorItem");
-                });
-
-            modelBuilder.Entity("ConsoleRpg.Models.Items.EquippableItems.ArmorItems.HeadArmorItem", b =>
-                {
-                    b.HasBaseType("ConsoleRpg.Models.Items.EquippableItems.ArmorItems.ArmorItem");
-
-                    b.HasDiscriminator().HasValue("HeadArmorItem");
-                });
-
-            modelBuilder.Entity("ConsoleRpg.Models.Items.EquippableItems.ArmorItems.LegArmorItem", b =>
-                {
-                    b.HasBaseType("ConsoleRpg.Models.Items.EquippableItems.ArmorItems.ArmorItem");
-
-                    b.HasDiscriminator().HasValue("LegArmorItem");
-                });
-
-            modelBuilder.Entity("ConsoleRpg.Models.Items.EquippableItems.WeaponItems.MagicWeaponItem", b =>
-                {
-                    b.HasBaseType("ConsoleRpg.Models.Items.WeaponItems.WeaponItem");
-
-                    b.HasDiscriminator().HasValue("MagicWeaponItem");
-                });
-
-            modelBuilder.Entity("ConsoleRpg.Models.Items.EquippableItems.WeaponItems.PhysicalWeaponItem", b =>
-                {
-                    b.HasBaseType("ConsoleRpg.Models.Items.WeaponItems.WeaponItem");
-
-                    b.HasDiscriminator().HasValue("PhysicalWeaponItem");
-                });
-
             modelBuilder.Entity("AbilityUnit", b =>
                 {
                     b.HasOne("ConsoleRpg.Models.Abilities.Ability", null)
@@ -585,61 +696,6 @@ namespace ConsoleRpg.Migrations
                     b.Navigation("StartingRoom");
                 });
 
-            modelBuilder.Entity("ConsoleRpg.Models.Inventories.Inventory", b =>
-                {
-                    b.HasOne("ConsoleRpg.Models.Items.EquippableItems.ArmorItems.ArmorItem", "EquippedChestArmor")
-                        .WithMany()
-                        .HasForeignKey("EquippedChestArmorId")
-                        .OnDelete(DeleteBehavior.NoAction);
-
-                    b.HasOne("ConsoleRpg.Models.Items.EquippableItems.ArmorItems.ArmorItem", "EquippedFeetArmor")
-                        .WithMany()
-                        .HasForeignKey("EquippedFeetArmorId")
-                        .OnDelete(DeleteBehavior.NoAction);
-
-                    b.HasOne("ConsoleRpg.Models.Items.EquippableItems.ArmorItems.ArmorItem", "EquippedHeadArmor")
-                        .WithMany()
-                        .HasForeignKey("EquippedHeadArmorId")
-                        .OnDelete(DeleteBehavior.NoAction);
-
-                    b.HasOne("ConsoleRpg.Models.Items.EquippableItems.ArmorItems.ArmorItem", "EquippedLegArmor")
-                        .WithMany()
-                        .HasForeignKey("EquippedLegArmorId")
-                        .OnDelete(DeleteBehavior.NoAction);
-
-                    b.HasOne("ConsoleRpg.Models.Items.WeaponItems.WeaponItem", "EquippedWeapon")
-                        .WithMany()
-                        .HasForeignKey("EquippedWeaponId")
-                        .OnDelete(DeleteBehavior.NoAction);
-
-                    b.HasOne("ConsoleRpg.Models.Units.Abstracts.Unit", null)
-                        .WithOne("Inventory")
-                        .HasForeignKey("ConsoleRpg.Models.Inventories.Inventory", "UnitId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("EquippedChestArmor");
-
-                    b.Navigation("EquippedFeetArmor");
-
-                    b.Navigation("EquippedHeadArmor");
-
-                    b.Navigation("EquippedLegArmor");
-
-                    b.Navigation("EquippedWeapon");
-                });
-
-            modelBuilder.Entity("ConsoleRpg.Models.Items.Item", b =>
-                {
-                    b.HasOne("ConsoleRpg.Models.Inventories.Inventory", "Inventory")
-                        .WithMany("Items")
-                        .HasForeignKey("InventoryId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Inventory");
-                });
-
             modelBuilder.Entity("ConsoleRpg.Models.Units.Abstracts.Unit", b =>
                 {
                     b.HasOne("ConsoleRpg.Models.Rooms.Room", "CurrentRoom")
@@ -649,9 +705,19 @@ namespace ConsoleRpg.Migrations
                     b.Navigation("CurrentRoom");
                 });
 
-            modelBuilder.Entity("ConsoleRpg.Models.Inventories.Inventory", b =>
+            modelBuilder.Entity("ItemUnit", b =>
                 {
-                    b.Navigation("Items");
+                    b.HasOne("ConsoleRpg.Models.Items.Item", null)
+                        .WithMany()
+                        .HasForeignKey("ItemsItemId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("ConsoleRpg.Models.Units.Abstracts.Unit", null)
+                        .WithMany()
+                        .HasForeignKey("UnitsUnitId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("ConsoleRpg.Models.Rooms.Room", b =>
@@ -661,9 +727,6 @@ namespace ConsoleRpg.Migrations
 
             modelBuilder.Entity("ConsoleRpg.Models.Units.Abstracts.Unit", b =>
                 {
-                    b.Navigation("Inventory")
-                        .IsRequired();
-
                     b.Navigation("Stat")
                         .IsRequired();
                 });

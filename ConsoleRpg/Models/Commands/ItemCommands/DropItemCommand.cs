@@ -1,5 +1,6 @@
 ﻿using ConsoleRpg.Models.Interfaces;
 using ConsoleRpg.Models.Interfaces.Commands;
+using ConsoleRpg.Models.Items;
 
 namespace ConsoleRpg.Models.Commands.ItemCommands;
 
@@ -19,6 +20,6 @@ public class DropItemCommand : ICommand
     public void Execute()
     {
         Console.WriteLine($"{_unit.Name} threw away {_item.Name}.");
-        _unit.Inventory.RemoveItem(_item);
+        _unit.Items.Remove((Item)_item);
     }
 }

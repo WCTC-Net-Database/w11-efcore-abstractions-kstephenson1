@@ -1,4 +1,5 @@
-﻿using ConsoleRpg.Models.Interfaces.ItemBehaviors;
+﻿using ConsoleRpg.Models.Interfaces;
+using ConsoleRpg.Models.Interfaces.ItemBehaviors;
 using ConsoleRpg.Services.DataHelpers;
 
 namespace ConsoleRpg.Models.Items.ConsumableItems;
@@ -21,15 +22,15 @@ public class ItemLockpick : ConsumableItem, IConsumableItem
         UsesLeft = MaxUses;
     }
 
-    public void UseItem()
+    public void UseItem(IUnit unit)
     {
-        Console.WriteLine($"{Inventory.Unit!.Name} unlocked something!");
+        Console.WriteLine($"{unit!.Name} unlocked something!");
         UsesLeft--;
 
         if (UsesLeft == 0)
         {
             Console.WriteLine($"The lockpick broke!");
-            Inventory.RemoveItem(this);
+            unit.Items.Remove(this);
         }
     }
     public override string ToString()

@@ -1,8 +1,10 @@
-﻿using ConsoleRpg.Models.Abilities;
+﻿using ConsoleRpg.DataTypes;
+using ConsoleRpg.Models.Abilities;
 using ConsoleRpg.Models.Combat;
 using ConsoleRpg.Models.Commands.AbilityCommands;
 using ConsoleRpg.Models.Commands.UnitCommands;
 using ConsoleRpg.Models.Interfaces.InventoryBehaviors;
+using ConsoleRpg.Models.Interfaces.ItemBehaviors;
 using ConsoleRpg.Models.Interfaces.UnitBehaviors;
 using ConsoleRpg.Models.Rooms;
 
@@ -23,4 +25,6 @@ public interface IUnit : ITargetable, IAttack, IHaveInventory, IUseItems
 
     void Move();
     string GetHealthBar();
+    public IEquippableWeapon? GetEquippedWeapon();
+    public IEquippableArmor? GetEquippedArmorInSlot(ArmorType armorType);
 }

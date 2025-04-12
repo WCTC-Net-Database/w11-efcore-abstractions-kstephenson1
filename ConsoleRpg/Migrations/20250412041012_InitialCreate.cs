@@ -26,6 +26,40 @@ namespace ConsoleRpg.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Items",
+                columns: table => new
+                {
+                    ItemId = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    ItemType = table.Column<string>(type: "nvarchar(21)", maxLength: 21, nullable: false),
+                    InventoryId = table.Column<int>(type: "int", nullable: false),
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Description = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    MaxUses = table.Column<int>(type: "int", nullable: true),
+                    UsesLeft = table.Column<int>(type: "int", nullable: true),
+                    ChestArmorItem_ArmorType = table.Column<int>(type: "int", nullable: true),
+                    RequiredRank = table.Column<int>(type: "int", nullable: true),
+                    MaxDurability = table.Column<int>(type: "int", nullable: true),
+                    Durability = table.Column<int>(type: "int", nullable: true),
+                    Weight = table.Column<int>(type: "int", nullable: true),
+                    ExpModifier = table.Column<int>(type: "int", nullable: true),
+                    Defense = table.Column<int>(type: "int", nullable: true),
+                    Resistance = table.Column<int>(type: "int", nullable: true),
+                    FeetArmorItem_ArmorType = table.Column<int>(type: "int", nullable: true),
+                    HeadArmorItem_ArmorType = table.Column<int>(type: "int", nullable: true),
+                    ArmorType = table.Column<int>(type: "int", nullable: true),
+                    WeaponType = table.Column<int>(type: "int", nullable: true),
+                    Might = table.Column<int>(type: "int", nullable: true),
+                    Hit = table.Column<int>(type: "int", nullable: true),
+                    Crit = table.Column<int>(type: "int", nullable: true),
+                    Range = table.Column<int>(type: "int", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Items", x => x.ItemId);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Rooms",
                 columns: table => new
                 {
@@ -135,63 +169,26 @@ namespace ConsoleRpg.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Inventories",
+                name: "UnitItems",
                 columns: table => new
                 {
-                    InventoryId = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    UnitId = table.Column<int>(type: "int", nullable: false),
-                    EquippedWeaponId = table.Column<int>(type: "int", nullable: true),
-                    EquippedHeadArmorId = table.Column<int>(type: "int", nullable: true),
-                    EquippedChestArmorId = table.Column<int>(type: "int", nullable: true),
-                    EquippedLegArmorId = table.Column<int>(type: "int", nullable: true),
-                    EquippedFeetArmorId = table.Column<int>(type: "int", nullable: true)
+                    ItemsItemId = table.Column<int>(type: "int", nullable: false),
+                    UnitsUnitId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Inventories", x => x.InventoryId);
+                    table.PrimaryKey("PK_UnitItems", x => new { x.ItemsItemId, x.UnitsUnitId });
                     table.ForeignKey(
-                        name: "FK_Inventories_Units_UnitId",
-                        column: x => x.UnitId,
+                        name: "FK_UnitItems_Items_ItemsItemId",
+                        column: x => x.ItemsItemId,
+                        principalTable: "Items",
+                        principalColumn: "ItemId",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_UnitItems_Units_UnitsUnitId",
+                        column: x => x.UnitsUnitId,
                         principalTable: "Units",
                         principalColumn: "UnitId",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Items",
-                columns: table => new
-                {
-                    ItemId = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    ItemType = table.Column<string>(type: "nvarchar(21)", maxLength: 21, nullable: false),
-                    InventoryId = table.Column<int>(type: "int", nullable: false),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Description = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    MaxUses = table.Column<int>(type: "int", nullable: true),
-                    UsesLeft = table.Column<int>(type: "int", nullable: true),
-                    ArmorType = table.Column<int>(type: "int", nullable: true),
-                    Defense = table.Column<int>(type: "int", nullable: true),
-                    Resistance = table.Column<int>(type: "int", nullable: true),
-                    RequiredRank = table.Column<int>(type: "int", nullable: true),
-                    MaxDurability = table.Column<int>(type: "int", nullable: true),
-                    Durability = table.Column<int>(type: "int", nullable: true),
-                    Weight = table.Column<int>(type: "int", nullable: true),
-                    ExpModifier = table.Column<int>(type: "int", nullable: true),
-                    WeaponType = table.Column<int>(type: "int", nullable: true),
-                    Might = table.Column<int>(type: "int", nullable: true),
-                    Hit = table.Column<int>(type: "int", nullable: true),
-                    Crit = table.Column<int>(type: "int", nullable: true),
-                    Range = table.Column<int>(type: "int", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Items", x => x.ItemId);
-                    table.ForeignKey(
-                        name: "FK_Items_Inventories_InventoryId",
-                        column: x => x.InventoryId,
-                        principalTable: "Inventories",
-                        principalColumn: "InventoryId",
                         onDelete: ReferentialAction.Cascade);
                 });
 
@@ -201,114 +198,24 @@ namespace ConsoleRpg.Migrations
                 column: "StartingRoomRoomId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Inventories_EquippedChestArmorId",
-                table: "Inventories",
-                column: "EquippedChestArmorId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Inventories_EquippedFeetArmorId",
-                table: "Inventories",
-                column: "EquippedFeetArmorId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Inventories_EquippedHeadArmorId",
-                table: "Inventories",
-                column: "EquippedHeadArmorId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Inventories_EquippedLegArmorId",
-                table: "Inventories",
-                column: "EquippedLegArmorId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Inventories_EquippedWeaponId",
-                table: "Inventories",
-                column: "EquippedWeaponId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Inventories_UnitId",
-                table: "Inventories",
-                column: "UnitId",
-                unique: true);
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Items_InventoryId",
-                table: "Items",
-                column: "InventoryId");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_UnitAbility_UnitsUnitId",
                 table: "UnitAbility",
+                column: "UnitsUnitId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_UnitItems_UnitsUnitId",
+                table: "UnitItems",
                 column: "UnitsUnitId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Units_CurrentRoomRoomId",
                 table: "Units",
                 column: "CurrentRoomRoomId");
-
-            migrationBuilder.AddForeignKey(
-                name: "FK_Inventories_Items_EquippedChestArmorId",
-                table: "Inventories",
-                column: "EquippedChestArmorId",
-                principalTable: "Items",
-                principalColumn: "ItemId");
-
-            migrationBuilder.AddForeignKey(
-                name: "FK_Inventories_Items_EquippedFeetArmorId",
-                table: "Inventories",
-                column: "EquippedFeetArmorId",
-                principalTable: "Items",
-                principalColumn: "ItemId");
-
-            migrationBuilder.AddForeignKey(
-                name: "FK_Inventories_Items_EquippedHeadArmorId",
-                table: "Inventories",
-                column: "EquippedHeadArmorId",
-                principalTable: "Items",
-                principalColumn: "ItemId");
-
-            migrationBuilder.AddForeignKey(
-                name: "FK_Inventories_Items_EquippedLegArmorId",
-                table: "Inventories",
-                column: "EquippedLegArmorId",
-                principalTable: "Items",
-                principalColumn: "ItemId");
-
-            migrationBuilder.AddForeignKey(
-                name: "FK_Inventories_Items_EquippedWeaponId",
-                table: "Inventories",
-                column: "EquippedWeaponId",
-                principalTable: "Items",
-                principalColumn: "ItemId");
         }
 
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.DropForeignKey(
-                name: "FK_Units_Rooms_CurrentRoomRoomId",
-                table: "Units");
-
-            migrationBuilder.DropForeignKey(
-                name: "FK_Inventories_Items_EquippedChestArmorId",
-                table: "Inventories");
-
-            migrationBuilder.DropForeignKey(
-                name: "FK_Inventories_Items_EquippedFeetArmorId",
-                table: "Inventories");
-
-            migrationBuilder.DropForeignKey(
-                name: "FK_Inventories_Items_EquippedHeadArmorId",
-                table: "Inventories");
-
-            migrationBuilder.DropForeignKey(
-                name: "FK_Inventories_Items_EquippedLegArmorId",
-                table: "Inventories");
-
-            migrationBuilder.DropForeignKey(
-                name: "FK_Inventories_Items_EquippedWeaponId",
-                table: "Inventories");
-
             migrationBuilder.DropTable(
                 name: "Dungeons");
 
@@ -319,19 +226,19 @@ namespace ConsoleRpg.Migrations
                 name: "UnitAbility");
 
             migrationBuilder.DropTable(
-                name: "Abilities");
+                name: "UnitItems");
 
             migrationBuilder.DropTable(
-                name: "Rooms");
+                name: "Abilities");
 
             migrationBuilder.DropTable(
                 name: "Items");
 
             migrationBuilder.DropTable(
-                name: "Inventories");
+                name: "Units");
 
             migrationBuilder.DropTable(
-                name: "Units");
+                name: "Rooms");
         }
     }
 }

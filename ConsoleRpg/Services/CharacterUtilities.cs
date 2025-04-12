@@ -1,18 +1,17 @@
 ﻿namespace ConsoleRpg.Services;
 
-using Spectre.Console;
 using ConsoleRpg.Configuration;
+using ConsoleRpg.Data;
 using ConsoleRpg.Models.Combat;
 using ConsoleRpg.Models.Interfaces;
 using ConsoleRpg.Models.Interfaces.Rooms;
-using ConsoleRpg.Models.Inventories;
 using ConsoleRpg.Models.Items;
 using ConsoleRpg.Models.Rooms;
 using ConsoleRpg.Models.UI.Character;
 using ConsoleRpg.Models.UI.Menus.InteractiveMenus;
 using ConsoleRpg.Models.Units.Abstracts;
 using ConsoleRpg.Services.DataHelpers;
-using ConsoleRpg.Data;
+using Spectre.Console;
 
 public class CharacterUtilities
 {
@@ -40,28 +39,28 @@ public class CharacterUtilities
         if (characterClass == null) return;
         int level = Input.GetInt("Enter your character's level: ", 1, Config.CHARACTER_LEVEL_MAX, $"character level must be 1-{Config.CHARACTER_LEVEL_MAX}");
         int hitPoints = Input.GetInt("Enter your character's maximum hit points: ", 1, "must be greater than 0");
-        Inventory inventory = new();
+        List<Item> items = new();
 
         while (true)
         {
             string? newItem = Input.GetString($"Enter the name of an item in {name}'s inventory. (Leave blank to end): ", false);
             if (newItem != "")
             {
-                inventory.AddItem(new GenericItem(newItem));
+                items.Add(new GenericItem(newItem));
                 continue;
             }
             break;
         }
 
         Console.Clear();
-        Console.WriteLine($"\nWelcome, {name} the {characterClass.Name}! You are level {level} and your equipment includes: {string.Join(", ", inventory)}.\n");
+        Console.WriteLine($"\nWelcome, {name} the {characterClass.Name}! You are level {level} and your equipment includes: {string.Join(", ", items)}.\n");
 
         //_unitManager.Characters.AddUnit(new(name, characterClass, level, hitPoints, inventory));
         dynamic character = Activator.CreateInstance(characterClass);
         character.Name = name;
         character.Class = characterClass.Name;
         character.Level = level;
-        character.Inventory = inventory;
+        character.Items = items;
 
         Stat stat = new Stat();
         stat.HitPoints = hitPoints;
@@ -84,8 +83,7 @@ public class CharacterUtilities
             character.CurrentRoom = (Room)room;
         }
 
-        _db.Inventories.Add(inventory);
-        foreach (Item item in inventory.Items)
+        foreach (Item item in items)
         {
             _db.Items.Add(item);
         }

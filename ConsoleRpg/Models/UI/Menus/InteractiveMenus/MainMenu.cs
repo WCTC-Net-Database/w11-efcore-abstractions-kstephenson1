@@ -1,6 +1,4 @@
-﻿using ConsoleRpg.FileIO;
-using ConsoleRpg.Models.UI.Character;
-using ConsoleRpg.Models.Units.Abstracts;
+﻿using ConsoleRpg.Models.UI.Character;
 using ConsoleRpg.Services;
 
 namespace ConsoleRpg.Models.UI.Menus.InteractiveMenus;

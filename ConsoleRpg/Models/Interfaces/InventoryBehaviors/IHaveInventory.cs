@@ -1,6 +1,6 @@
 ﻿using ConsoleRpg.Models.Commands.Invokers;
 using ConsoleRpg.Models.Commands.ItemCommands;
-using ConsoleRpg.Models.Inventories;
+using ConsoleRpg.Models.Items;
 
 namespace ConsoleRpg.Models.Interfaces.InventoryBehaviors;
 
@@ -10,7 +10,7 @@ public interface IHaveInventory
     CommandInvoker Invoker { get; set; }
     DropItemCommand DropItemCommand { get; set; }
     TradeItemCommand TradeItemCommand { get; set; }
-    Inventory Inventory { get; set; }
+    List<Item> Items { get; set; }
     void DropItem(IItem item);
     void TradeItem(IItem item, IUnit target);
 }

@@ -9,7 +9,6 @@ public interface IEquippableItem : IItem
     public int Durability { get; set; }
     public int Weight { get; set; }
     public int ExpModifier { get; set; }
-    public void Equip();
     public void TakeDurabilityDamage(int durabilityDamage);
     public void BreakItem();
 }

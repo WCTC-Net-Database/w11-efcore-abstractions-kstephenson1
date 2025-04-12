@@ -38,19 +38,6 @@ public abstract class EquippableItem : Item, IEquippableItem
         return StringHelper.ToItemIdFormat(Name);
     }
 
-    public void Equip()
-    {
-        bool wasEquipped = Inventory.TryEquipItem(this);
-        if (wasEquipped)
-        {
-            Console.WriteLine($"{Inventory.Unit!.Name} equipped {Name}");
-        }
-        else
-        {
-            Console.WriteLine($"{Inventory.Unit!.Name} already has {Name} equipped!");
-        }
-    }
-
     public void TakeDurabilityDamage(int durabilityDamage)
     {
         throw new NotImplementedException();

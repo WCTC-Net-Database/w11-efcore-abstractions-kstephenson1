@@ -19,6 +19,6 @@ public class EquipCommand : ICommand
     public void Execute()
     {
         Console.WriteLine($"{_unit.Name} equipped {_item.Name}");
-        _item.Equip();
+        InventoryHelper.EquipItem(_unit, _item);
     }
 }

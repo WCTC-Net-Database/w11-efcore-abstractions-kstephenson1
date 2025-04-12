@@ -1,17 +1,15 @@
-﻿using Microsoft.IdentityModel.Tokens;
-using Spectre.Console;
+﻿using ConsoleRpg.Data;
+using ConsoleRpg.DataTypes;
 using ConsoleRpg.Models.Abilities;
 using ConsoleRpg.Models.Combat;
 using ConsoleRpg.Models.Interfaces;
+using ConsoleRpg.Models.Interfaces.ItemBehaviors;
 using ConsoleRpg.Models.Items;
+using ConsoleRpg.Models.Items.EquippableItems.ArmorItems;
+using ConsoleRpg.Models.Items.WeaponItems;
 using ConsoleRpg.Models.Rooms;
 using ConsoleRpg.Models.Units.Abstracts;
-using ConsoleRpg.Data;
-using ConsoleRpg.DataTypes;
-using ConsoleRpg.Models.Items.EquippableItems.ArmorItems;
-using ConsoleRpg.Models.Inventories;
-using ConsoleRpg.Models.Items.WeaponItems;
-using ConsoleRpg.Models.Interfaces.ItemBehaviors;
+using Spectre.Console;
 
 namespace ConsoleRpg.Models.UI.Character;
 
@@ -40,7 +38,7 @@ public class CharacterUI
         foreach (Unit unit in units)
         {
             Stat stat = stats.Where(s => s.UnitId == unit.UnitId).FirstOrDefault();
-            List<Item> unitItems = items.Where(s => s.InventoryId == unit.Inventory.InventoryId).ToList();
+            List<Item> unitItems = items.Where(i => i.Units.Contains(unit)).ToList();
             Room unitRoom;
             try
             {
@@ -93,7 +91,7 @@ public class CharacterUI
         //            select i;
         List<IEquippableItem> equippedInventory = new();
 
-        WeaponItem? weapon = unit.Inventory.EquippedWeapon;
+        IEquippableWeapon? weapon = unit.GetEquippedWeapon();
         if (weapon != null)
         {
             equippedInventory.Add(weapon);
@@ -101,7 +99,7 @@ public class CharacterUI
 
         foreach (ArmorType armorType in Enum.GetValues(typeof(ArmorType)))
         {
-            ArmorItem? armor = unit.Inventory.GetArmorItemInSlot(armorType);
+            IEquippableArmor? armor = unit.GetEquippedArmorInSlot(armorType);
             if (armor != null)
             {
                 equippedInventory.Add(armor);

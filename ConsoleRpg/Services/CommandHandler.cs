@@ -1,5 +1,4 @@
-﻿using ConsoleRpg.Models.Commands.AbilityCommands;
-using ConsoleRpg.Models.Commands.ItemCommands;
+﻿using ConsoleRpg.Models.Commands.ItemCommands;
 using ConsoleRpg.Models.Commands.UnitCommands;
 using ConsoleRpg.Models.Interfaces;
 using ConsoleRpg.Models.Interfaces.Commands;
@@ -28,7 +27,7 @@ public class CommandHandler
         // If the unit has a usable item, it can use an item.
         else if (command.GetType() == typeof(UseItemCommand))
         {
-            if (unit.Inventory.Items!.Count > 0)
+            if (unit.Items!.Count > 0)
             {
                 // Shows a list of items that are in the selected unit's inventory and asks the user to select an item.
                 IItem item = _userInterface.InventoryMenu.Display(unit, $"Select item for {unit.Name}.", "[[Go Back]]");
@@ -37,7 +36,7 @@ public class CommandHandler
                 if (item != null)
                 {
                     // Checks the items to see what commands are allowed, displays those commands to the user and asks for a selection
-                    ICommand itemCommand = _userInterface.ItemCommandMenu.Display(item, $"Select action for {unit.Name} to use on {item.Name}", "[[Go Back]]");
+                    ICommand itemCommand = _userInterface.ItemCommandMenu.Display(unit, item, $"Select action for {unit.Name} to use on {item.Name}", "[[Go Back]]");
 
                     // Command is null if the user selects "Go Back"
                     if (itemCommand != null)
