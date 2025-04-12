@@ -11,8 +11,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ConsoleRpg.Migrations
 {
     [DbContext(typeof(GameContext))]
-    [Migration("20250412055424_InitialCommit")]
-    partial class InitialCommit
+    [Migration("20250412203107_InitialCreate")]
+    partial class InitialCreate
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -150,9 +150,6 @@ namespace ConsoleRpg.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("InventoryId")
-                        .HasColumnType("int");
-
                     b.Property<string>("ItemType")
                         .IsRequired()
                         .HasMaxLength(21)
@@ -244,6 +241,9 @@ namespace ConsoleRpg.Migrations
                         .HasColumnType("int");
 
                     b.Property<int>("Quantity")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Slot")
                         .HasColumnType("int");
 
                     b.HasKey("UnitId", "ItemId");

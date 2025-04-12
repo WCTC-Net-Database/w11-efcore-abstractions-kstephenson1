@@ -147,9 +147,6 @@ namespace ConsoleRpg.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("InventoryId")
-                        .HasColumnType("int");
-
                     b.Property<string>("ItemType")
                         .IsRequired()
                         .HasMaxLength(21)
@@ -241,6 +238,9 @@ namespace ConsoleRpg.Migrations
                         .HasColumnType("int");
 
                     b.Property<int>("Quantity")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Slot")
                         .HasColumnType("int");
 
                     b.HasKey("UnitId", "ItemId");
