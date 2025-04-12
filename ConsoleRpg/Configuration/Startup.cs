@@ -13,7 +13,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using NReco.Logging.File;
 
-namespace ConsoleRpg;
+namespace ConsoleRpg.Configuration;
 
 public static class Startup
 {
@@ -31,7 +31,7 @@ public static class Startup
         var configuration = ConfigurationHelper.GetConfiguration();
 
         // Create and bind FileLoggerOptions
-        var fileLoggerOptions = new NReco.Logging.File.FileLoggerOptions();
+        var fileLoggerOptions = new FileLoggerOptions();
         configuration.GetSection("Logging:File").Bind(fileLoggerOptions);
 
         // Configure logging
