@@ -54,14 +54,13 @@ public class ItemCommandMenu : InteractiveSelectionMenu<ICommand>
         {
             if (InventoryHelper.IsItemEquipped(unit, equippableItem))
             {
-                AddMenuItem($"[dim]Equip Item[/]", $"[[{equippableItem.Durability}/{equippableItem.MaxDurability}]] {equippableItem.Description}", null!);
+                AddMenuItem($"Unequip Item", $"[[{equippableItem.Durability}/{equippableItem.MaxDurability}]] {equippableItem.Description}", new UnequipCommand(null!, null!));
             }
             else
             {
                 AddMenuItem($"Equip Item", $"[[{equippableItem.Durability}/{equippableItem.MaxDurability}]] {equippableItem.Description}", new EquipCommand(null!, null!));
             }
         }
-
         AddMenuItem(exitMessage, "", null!);
     }
 }

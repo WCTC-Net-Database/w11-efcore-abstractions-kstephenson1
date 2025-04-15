@@ -45,6 +45,9 @@ public class CommandHandler
                         // The selected command is executed by the selected unit.
                         switch (itemCommand)
                         {
+                            case UnequipCommand:
+                                unit.Unequip((item as IEquippableItem)!);
+                                break;
                             case EquipCommand:
                                 unit.Equip((item as IEquippableItem)!);
                                 break;

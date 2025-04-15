@@ -33,6 +33,8 @@ public abstract class Unit : IUnit, ITargetable, IAttack, IHaveInventory
     [NotMapped]
     public virtual UseItemCommand UseItemCommand { get; set; } = null!;
     [NotMapped]
+    public virtual UnequipCommand UnequipCommand { get; set; } = null!;
+    [NotMapped]
     public virtual EquipCommand EquipCommand { get; set; } = null!;
     [NotMapped]
     public virtual DropItemCommand DropItemCommand { get; set; } = null!;
@@ -143,6 +145,12 @@ public abstract class Unit : IUnit, ITargetable, IAttack, IHaveInventory
     {
         EquipCommand = new(this, item);
         Invoker.ExecuteCommand(EquipCommand);
+    }
+
+    public void Unequip(IEquippableItem item)
+    {
+        UnequipCommand = new(this, item);
+        Invoker.ExecuteCommand(UnequipCommand);
     }
 
     public void DropItem(IItem item)

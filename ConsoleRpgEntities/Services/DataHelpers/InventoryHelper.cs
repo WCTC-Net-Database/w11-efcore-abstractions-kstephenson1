@@ -10,7 +10,7 @@ namespace ConsoleRpgEntities;
 
 public static class InventoryHelper
 {
-    public static IEquippableWeapon? GetEquippedWeapon(Unit unit)
+    public static IEquippableWeapon? GetEquippedWeapon(IUnit unit)
     {
         if (unit.UnitItems == null) return null;
         foreach (UnitItem unitItem in unit.UnitItems)
@@ -38,13 +38,31 @@ public static class InventoryHelper
 
     public static void EquipItem(IUnit unit, IEquippableItem equippableItem)
     {
-        throw new NotImplementedException();
+        if(equippableItem is IEquippableWeapon weaponItem)
+        {
+            EquipItem(unit, weaponItem, EquipmentSlot.Weapon);
+        }
+        else if (equippableItem is IEquippableArmor armorItem)
+        {
+            EquipItem(unit, armorItem, GetEquipmentSlotFromArmorType(armorItem.ArmorType));
+        }
     }
 
     public static void EquipItem(IUnit unit, IEquippableItem equippableItem, EquipmentSlot slot)
     {
-        throw new NotImplementedException();
+        foreach (UnitItem unitItem in unit.UnitItems)
+        {
+            if (unitItem.Slot == slot)
+            {
+                unitItem.Slot = EquipmentSlot.None;
+            }
+            if (unitItem.Item == equippableItem)
+            {
+                unitItem.Slot = slot;
+            }
+        }
     }
+
 
     public static bool IsInventoryFull(IUnit unit)
     {
@@ -53,9 +71,12 @@ public static class InventoryHelper
 
     public static bool IsItemEquipped(IUnit unit, IEquippableItem equippableItem)
     {
+        IEquippableWeapon? equippedWeapon = GetEquippedWeapon(unit);
+        List<IEquippableArmor> equippedArmor = GetEquippedArmor(unit);
+
         foreach (UnitItem unitItem in unit.UnitItems)
         {
-            if (unitItem.Item is IEquippableItem equippedItem)
+            if (equippableItem == equippedWeapon || equippedArmor.Contains(equippableItem))
             {
                 return true;
             }

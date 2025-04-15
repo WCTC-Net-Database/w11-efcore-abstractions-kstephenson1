@@ -15,4 +15,5 @@ public interface IAttack
 
     void Attack(IUnit target);
     void Equip(IEquippableItem item);
+    void Unequip(IEquippableItem item);
 }

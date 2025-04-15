@@ -1,4 +1,5 @@
-﻿using ConsoleRpgEntities.Models.Interfaces;
+﻿using ConsoleRpgEntities.DataTypes;
+using ConsoleRpgEntities.Models.Interfaces;
 using ConsoleRpgEntities.Models.Interfaces.ItemBehaviors;
 
 namespace ConsoleRpgEntities.Models.UI.Menus.InteractiveMenus;
@@ -46,15 +47,15 @@ public class InventoryMenu : InteractiveSelectionMenu<IItem>
             {
                 AddMenuItem($"{consumableItem.Name}", $"[[{consumableItem.UsesLeft}/{consumableItem.MaxUses}]] {consumableItem.Description}", unitItem.Item);
             }
-            else if (unitItem.Item is IEquippableItem weaponItem)
+            else if (unitItem.Item is IEquippableItem equippableItem)
             {
-                if (weaponItem == unit.GetEquippedWeapon())
+                if (InventoryHelper.IsItemEquipped(unit, equippableItem))
                 {
-                    AddMenuItem($"{weaponItem.Name}", $"[[{weaponItem.Durability}/{weaponItem.MaxDurability}]] {weaponItem.Description} (Equipped)", unitItem.Item);
+                    AddMenuItem($"{equippableItem.Name}", $"[[E]] [[{equippableItem.Durability}/{equippableItem.MaxDurability}]] {equippableItem.Description}", unitItem.Item);
                 }
                 else
                 {
-                    AddMenuItem($"{weaponItem.Name}", $"[[{weaponItem.Durability}/{weaponItem.MaxDurability}]] {weaponItem.Description}", unitItem.Item);
+                    AddMenuItem($"{equippableItem.Name}", $"[[{equippableItem.Durability}/{equippableItem.MaxDurability}]] {equippableItem.Description}", unitItem.Item);
                 }
             }
             else
