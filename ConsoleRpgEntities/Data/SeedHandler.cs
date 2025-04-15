@@ -21,45 +21,43 @@ public class SeedHandler
     private RoomFactory _roomFactory;
     private List<Room> _rooms = new();
 
-    private FlyAbility fly = new();
-    private HealAbility heal = new();
-    private StealAbility steal = new();
-    private TauntAbility taunt = new();
+    private FlyAbility _abilityFly = new();
+    private HealAbility _abilityHeal = new();
+    private StealAbility _abilitySteal = new();
+    private TauntAbility _abilityTaunt = new();
 
-    private ItemPotion potion;
-    private ItemBook book;
-    private ItemLockpick lockpick;
+    private ItemPotion _itemPotion;
+    private ItemBook _itemBook;
+    private ItemLockpick _itemLockpick;
 
-    private PhysicalWeaponItem sword;
-    private PhysicalWeaponItem axe;
-    private PhysicalWeaponItem dagger;
-    private PhysicalWeaponItem bow;
-    private PhysicalWeaponItem staff;
-    private PhysicalWeaponItem mace;
+    private PhysicalWeaponItem _itemSword;
+    private PhysicalWeaponItem _itemAxe;
+    private PhysicalWeaponItem _itemDagger;
+    private PhysicalWeaponItem _itemBow;
+    private PhysicalWeaponItem _itemStaff;
+    private PhysicalWeaponItem _itemMace;
 
-    private MagicWeaponItem fire;
-    private MagicWeaponItem ice;
-    private MagicWeaponItem lightning;
-    private MagicWeaponItem decay;
-    private MagicWeaponItem smite;
+    private MagicWeaponItem _itemFire;
+    private MagicWeaponItem _itemIce;
+    private MagicWeaponItem _itemLightning;
+    private MagicWeaponItem _itemDecay;
+    private MagicWeaponItem _itemSmite;
 
-    private HeadArmorItem hood;
-    private ChestArmorItem shirt;
-    private ChestArmorItem cloak;
-    private LegArmorItem pants;
-    private FeetArmorItem shoes;
+    private HeadArmorItem _itemHood;
+    private ChestArmorItem _itemShirt;
+    private ChestArmorItem _itemCloak;
+    private LegArmorItem _itemPants;
+    private FeetArmorItem _itemShoes;
 
-    private HeadArmorItem cap;
-    private ChestArmorItem tunic;
-    private LegArmorItem studdedPants;
-    private FeetArmorItem boots;
+    private HeadArmorItem _itemCap;
+    private ChestArmorItem _itemTunic;
+    private LegArmorItem _itemStuddedPants;
+    private FeetArmorItem _itemBoots;
 
-    private HeadArmorItem helm;
-    private ChestArmorItem plate;
-    private LegArmorItem greaves;
-    private FeetArmorItem sabatons;
-
-
+    private HeadArmorItem _itemHelm;
+    private ChestArmorItem _itemPlate;
+    private LegArmorItem _itemGreaves;
+    private FeetArmorItem _itemSabatons;
 
     public SeedHandler(GameContext context, RoomFactory roomFactory)
     {
@@ -91,12 +89,12 @@ public class SeedHandler
 
     private void GenerateItems()
     {
-        potion = new();
-        lockpick = new();
-        book = new();
+        _itemPotion = new();
+        _itemLockpick = new();
+        _itemBook = new();
 
         //Physical Weapons
-        sword = new()
+        _itemSword = new()
         {
             Name = "Sword",
             Description = "A basic sword.",
@@ -112,7 +110,7 @@ public class SeedHandler
             ExpModifier = 1,
         };
 
-        axe = new()
+        _itemAxe = new()
         {
             Name = "Axe",
             Description = "A basic axe",
@@ -128,7 +126,7 @@ public class SeedHandler
             ExpModifier = 1,
         };
 
-        dagger = new()
+        _itemDagger = new()
         {
             Name = "Dagger",
             Description = "A basic dagger",
@@ -144,7 +142,7 @@ public class SeedHandler
             ExpModifier = 1,
         };
 
-        bow = new()
+        _itemBow = new()
         {
             Name = "Bow",
             Description = "A basic bow",
@@ -160,7 +158,7 @@ public class SeedHandler
             ExpModifier = 1,
         };
 
-        staff = new()
+        _itemStaff = new()
         {
             Name = "Staff",
             Description = "A basic staff",
@@ -176,7 +174,7 @@ public class SeedHandler
             ExpModifier = 1,
         };
 
-        mace = new()
+        _itemMace = new()
         {
             Name = "Mace",
             Description = "A basic mace",
@@ -194,7 +192,7 @@ public class SeedHandler
 
         // Magic Weapons
 
-        fire = new()
+        _itemFire = new()
         {
             Name = "Fire",
             Description = "A basic fire spell",
@@ -210,7 +208,7 @@ public class SeedHandler
             ExpModifier = 1,
         };
 
-        ice = new()
+        _itemIce = new()
         {
             Name = "Ice",
             Description = "A basic ice spell",
@@ -226,7 +224,7 @@ public class SeedHandler
             ExpModifier = 1,
         };
 
-        lightning = new()
+        _itemLightning = new()
         {
             Name = "Lightning",
             Description = "A basic lightning spell",
@@ -242,7 +240,7 @@ public class SeedHandler
             ExpModifier = 1,
         };
 
-        decay = new()
+        _itemDecay = new()
         {
             Name = "Decay",
             Description = "A basic decay spell",
@@ -258,7 +256,7 @@ public class SeedHandler
             ExpModifier = 1,
         };
 
-        smite = new()
+        _itemSmite = new()
         {
             Name = "Smite",
             Description = "A basic smite spell",
@@ -275,7 +273,7 @@ public class SeedHandler
         };
 
         // Armor Items
-        hood = new()
+        _itemHood = new()
         {
             Name = "Hood",
             Description = "A basic hood",
@@ -289,7 +287,7 @@ public class SeedHandler
             ExpModifier = 1,
         };
 
-        shirt = new()
+        _itemShirt = new()
         {
             Name = "Shirt",
             Description = "A basic shirt",
@@ -303,7 +301,7 @@ public class SeedHandler
             ExpModifier = 1,
         };
 
-        cloak = new()
+        _itemCloak = new()
         {
             Name = "Cloak",
             Description = "A basic cloak",
@@ -317,7 +315,7 @@ public class SeedHandler
             ExpModifier = 1,
         };
 
-        pants = new()
+        _itemPants = new()
         {
             Name = "Pants",
             Description = "A basic pants",
@@ -331,7 +329,7 @@ public class SeedHandler
             ExpModifier = 1,
         };
 
-        shoes = new()
+        _itemShoes = new()
         {
             Name = "Shoes",
             Description = "A basic shoes",
@@ -345,7 +343,7 @@ public class SeedHandler
             ExpModifier = 1,
         };
 
-        cap = new()
+        _itemCap = new()
         {
             Name = "Leather Cap",
             Description = "A basic leather cap",
@@ -359,7 +357,7 @@ public class SeedHandler
             ExpModifier = 1,
         };
 
-        tunic = new()
+        _itemTunic = new()
         {
             Name = "Leather Tunic",
             Description = "A basic leather tunic",
@@ -373,7 +371,7 @@ public class SeedHandler
             ExpModifier = 1,
         };
 
-        studdedPants = new()
+        _itemStuddedPants = new()
         {
             Name = "Studded Pants",
             Description = "A basic studded pants",
@@ -387,7 +385,7 @@ public class SeedHandler
             ExpModifier = 1,
         };
 
-        boots = new()
+        _itemBoots = new()
         {
             Name = "Leather Boots",
             Description = "A basic leather boots",
@@ -401,7 +399,7 @@ public class SeedHandler
             ExpModifier = 1,
         };
 
-        helm = new()
+        _itemHelm = new()
         {
             Name = "Helm",
             Description = "A basic plate helm",
@@ -410,12 +408,12 @@ public class SeedHandler
             MaxDurability = 30,
             Durability = 30,
             Defense = 2,
-            Resistance = -1,
+            Resistance = 0,
             Weight = 3,
             ExpModifier = 1,
         };
 
-        plate = new()
+        _itemPlate = new()
         {
             Name = "Plate Armor",
             Description = "A basic plate armor",
@@ -424,12 +422,12 @@ public class SeedHandler
             MaxDurability = 30,
             Durability = 30,
             Defense = 2,
-            Resistance = -1,
+            Resistance = 0,
             Weight = 3,
             ExpModifier = 1,
         };
 
-        greaves = new()
+        _itemGreaves = new()
         {
             Name = "Greaves",
             Description = "A basic plate greaves",
@@ -438,12 +436,12 @@ public class SeedHandler
             MaxDurability = 30,
             Durability = 30,
             Defense = 2,
-            Resistance = -1,
+            Resistance = 0,
             Weight = 3,
             ExpModifier = 1,
         };
 
-        sabatons = new()
+        _itemSabatons = new()
         {
             Name = "Sabatons",
             Description = "A basic plate sabatons",
@@ -452,17 +450,17 @@ public class SeedHandler
             MaxDurability = 30,
             Durability = 30,
             Defense = 2,
-            Resistance = -1,
+            Resistance = 0,
             Weight = 3,
             ExpModifier = 1,
         };
 
-        _db.Items.AddRange(potion, lockpick, book,
-            sword, axe, dagger, bow, staff, mace,
-            fire, ice, lightning, decay, smite,
-            hood, shirt, cloak, pants, shoes,
-            cap, tunic, studdedPants, boots,
-            helm, plate, greaves, sabatons);
+        _db.Items.AddRange(_itemPotion, _itemLockpick, _itemBook,
+            _itemSword, _itemAxe, _itemDagger, _itemBow, _itemStaff, _itemMace,
+            _itemFire, _itemIce, _itemLightning, _itemDecay, _itemSmite,
+            _itemHood, _itemShirt, _itemCloak, _itemPants, _itemShoes,
+            _itemCap, _itemTunic, _itemStuddedPants, _itemBoots,
+            _itemHelm, _itemPlate, _itemGreaves, _itemSabatons);
 
         _db.SaveChanges();
     }
@@ -474,9 +472,9 @@ public class SeedHandler
         unit.Name = "John, Brave";
         unit.Class = "Fighter";
         unit.Level = 1;
-        AddItem(unit, sword, EquipmentSlot.Weapon);
-        AddItem(unit, tunic, EquipmentSlot.Chest);
-        AddItem(unit, potion);
+        AddItem(unit, _itemSword, EquipmentSlot.Weapon);
+        AddItem(unit, _itemTunic, EquipmentSlot.Chest);
+        AddItem(unit, _itemPotion);
         unit.Stat = new Stat
         {
             HitPoints = 28,
@@ -503,11 +501,11 @@ public class SeedHandler
         unit.Name = "Jane";
         unit.Class = "Wizard";
         unit.Level = 2;
-        AddItem(unit, decay, EquipmentSlot.Weapon);
-        AddItem(unit, hood, EquipmentSlot.Head);
-        AddItem(unit, staff, EquipmentSlot.Weapon);
-        AddItem(unit, potion, EquipmentSlot.Weapon);
-        AddItem(unit, book, EquipmentSlot.Weapon);
+        AddItem(unit, _itemDecay, EquipmentSlot.Weapon);
+        AddItem(unit, _itemHood, EquipmentSlot.Head);
+        AddItem(unit, _itemStaff, EquipmentSlot.Weapon);
+        AddItem(unit, _itemPotion, EquipmentSlot.Weapon);
+        AddItem(unit, _itemBook, EquipmentSlot.Weapon);
 
 
         unit.Stat = new Stat
@@ -534,12 +532,12 @@ public class SeedHandler
         unit.Name = "Bob, Sneaky";
         unit.Class = "Rogue";
         unit.Level = 3;
-        AddItem(unit, lockpick);
-        AddItem(unit, dagger, EquipmentSlot.Weapon);
-        AddItem(unit, pants, EquipmentSlot.Legs);
-        AddItem(unit, shoes, EquipmentSlot.Feet);
-        AddItem(unit, potion);
-        unit.Abilities.Add(steal);
+        AddItem(unit, _itemLockpick);
+        AddItem(unit, _itemDagger, EquipmentSlot.Weapon);
+        AddItem(unit, _itemPants, EquipmentSlot.Legs);
+        AddItem(unit, _itemShoes, EquipmentSlot.Feet);
+        AddItem(unit, _itemPotion);
+        unit.Abilities.Add(_abilitySteal);
         unit.Stat = new Stat
         {
             HitPoints = 26,
@@ -564,13 +562,13 @@ public class SeedHandler
         unit.Name = "Alice";
         unit.Class = "Cleric";
         unit.Level = 4;
-        AddItem(unit, potion);
-        AddItem(unit, plate, EquipmentSlot.Chest);
-        AddItem(unit, greaves, EquipmentSlot.Legs);
-        AddItem(unit, smite, EquipmentSlot.Weapon);
-        AddItem(unit, mace);
+        AddItem(unit, _itemPotion);
+        AddItem(unit, _itemPlate, EquipmentSlot.Chest);
+        AddItem(unit, _itemGreaves, EquipmentSlot.Legs);
+        AddItem(unit, _itemSmite, EquipmentSlot.Weapon);
+        AddItem(unit, _itemMace);
 
-        unit.Abilities.Add(heal);
+        unit.Abilities.Add(_abilityHeal);
         unit.Stat = new Stat
         {
             HitPoints = 27,
@@ -595,13 +593,13 @@ public class SeedHandler
         unit.Name = "Reginald III, Sir";
         unit.Class = "Knight";
         unit.Level = 5;
-        AddItem(unit, potion);
-        AddItem(unit, sword, EquipmentSlot.Weapon);
-        AddItem(unit, helm, EquipmentSlot.Head);
-        AddItem(unit, plate, EquipmentSlot.Chest);
-        AddItem(unit, greaves, EquipmentSlot.Legs);
-        AddItem(unit, sabatons, EquipmentSlot.Feet);
-        unit.Abilities.Add(taunt);
+        AddItem(unit, _itemPotion);
+        AddItem(unit, _itemSword, EquipmentSlot.Weapon);
+        AddItem(unit, _itemHelm, EquipmentSlot.Head);
+        AddItem(unit, _itemPlate, EquipmentSlot.Chest);
+        AddItem(unit, _itemGreaves, EquipmentSlot.Legs);
+        AddItem(unit, _itemSabatons, EquipmentSlot.Feet);
+        unit.Abilities.Add(_abilityTaunt);
         unit.Stat = new Stat
         {
             HitPoints = 30,
@@ -626,7 +624,7 @@ public class SeedHandler
         unit.Name = "Poltergeist";
         unit.Class = "Ghost";
         unit.Level = 1;
-        AddItem(unit, axe, EquipmentSlot.Weapon);
+        AddItem(unit, _itemAxe, EquipmentSlot.Weapon);
         unit.Stat = new Stat
         {
             HitPoints = 25,
@@ -641,7 +639,7 @@ public class SeedHandler
             Defense = 5,
             Resistance = 4
         };
-        unit.Abilities.Add(fly);
+        unit.Abilities.Add(_abilityFly);
         unit.CurrentRoom = GetRandomRoom();
         _db.Units.Add(unit);
         _db.Stats.Add(unit.Stat);
@@ -652,7 +650,7 @@ public class SeedHandler
         unit.Name = "Ruthless Treasure-Gather";
         unit.Class = "Goblin";
         unit.Level = 2;
-        AddItem(unit, sword, EquipmentSlot.Weapon);
+        AddItem(unit, _itemSword, EquipmentSlot.Weapon);
         unit.Stat = new Stat
         {
             HitPoints = 28,
@@ -677,7 +675,7 @@ public class SeedHandler
         unit.Name = "Sniper";
         unit.Class = "Archer";
         unit.Level = 3;
-        AddItem(unit, bow, EquipmentSlot.Weapon);
+        AddItem(unit, _itemBow, EquipmentSlot.Weapon);
 
         unit.Stat = new Stat
         {
@@ -704,8 +702,8 @@ public class SeedHandler
         unit.Class = "Mage";
         unit.Level = 4;
  
-        AddItem(unit, lightning, EquipmentSlot.Weapon);
-        AddItem(unit, potion);
+        AddItem(unit, _itemLightning, EquipmentSlot.Weapon);
+        AddItem(unit, _itemPotion);
         unit.Stat = new Stat
         {
             HitPoints = 26,
@@ -730,11 +728,11 @@ public class SeedHandler
         unit.Name = "Doctor of the Fallen";
         unit.Class = "Cleric";
         unit.Level = 5;
-        AddItem(unit, potion);
-        AddItem(unit, mace);
-        AddItem(unit, plate, EquipmentSlot.Chest);
-        AddItem(unit, smite, EquipmentSlot.Weapon);
-        unit.Abilities.Add(heal);
+        AddItem(unit, _itemPotion);
+        AddItem(unit, _itemMace);
+        AddItem(unit, _itemPlate, EquipmentSlot.Chest);
+        AddItem(unit, _itemSmite, EquipmentSlot.Weapon);
+        unit.Abilities.Add(_abilityHeal);
         unit.Stat = new Stat
         {
             HitPoints = 29,
@@ -758,10 +756,10 @@ public class SeedHandler
 
     private void GenerateAbilities()
     {
-        _db.Abilities.Add(fly);
-        _db.Abilities.Add(heal);
-        _db.Abilities.Add(steal);
-        _db.Abilities.Add(taunt);
+        _db.Abilities.Add(_abilityFly);
+        _db.Abilities.Add(_abilityHeal);
+        _db.Abilities.Add(_abilitySteal);
+        _db.Abilities.Add(_abilityTaunt);
     }
 
     private void GenerateDungeons()
