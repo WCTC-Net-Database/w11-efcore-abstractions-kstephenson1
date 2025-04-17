@@ -213,7 +213,7 @@ public class CharacterUtilities
     public void DisplayCharacters()                       //Displays each c's information.
     {
         Console.Clear();
-        List<Unit> units = _db.Units.ToList();
+        List<Unit> units = _db.Units.Where(u => !u.UnitType.Contains("Enemy")).ToList();
 
         _characterUI.DisplayCharacterInfo(units);
     }
