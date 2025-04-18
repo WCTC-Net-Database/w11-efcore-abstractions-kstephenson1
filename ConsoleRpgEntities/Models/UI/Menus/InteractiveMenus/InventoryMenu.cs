@@ -1,14 +1,12 @@
-﻿using ConsoleRpgEntities.DataTypes;
-using ConsoleRpgEntities.Models.Interfaces;
+﻿using ConsoleRpgEntities.Models.Interfaces;
 using ConsoleRpgEntities.Models.Interfaces.ItemBehaviors;
 
 namespace ConsoleRpgEntities.Models.UI.Menus.InteractiveMenus;
 
 public class InventoryMenu : InteractiveSelectionMenu<IItem>
 {
-
-    // The MainMenu contains items that have 4 parts, the index, the name, the description, and the action that
-    // is completed when that menu item is chosen.
+    // InventoryMenu is used to display a unit's inventory.  It takes in a unit and a prompt, and displays the
+    // unit's inventory then returns the selected item or null if the user exits the menu.
 
     public override void Display(string errorMessage)
     {

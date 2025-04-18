@@ -4,6 +4,7 @@ namespace ConsoleRpgEntities.Models.Abilities;
 
 public class FlyAbility : Ability
 {
+    // FlyAbility represents the ability to fly.
     public override string AbilityType { get; set; } = "FlyAbility";
 
     public FlyAbility()
@@ -11,7 +12,6 @@ public class FlyAbility : Ability
         Name = "Fly";
         Description = "Flies to a location within flight range.";
     }
-
 
     public override void Execute(Unit unit, Unit target)
     {

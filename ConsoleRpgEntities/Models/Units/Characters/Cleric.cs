@@ -13,15 +13,6 @@ public class Cleric : Character, ICleric
     {
         
     }
-    //public Cleric(string name, string characterClass, int level, Inventory inventory, Stat stats)
-    //{
-    //    Name = name;
-    //    Class = characterClass;
-    //    Level = level;
-    //    Inventory = inventory;
-    //    Stat = stats;
-    //    Inventory.Unit = this;
-    //}
 
     [NotMapped]
     public virtual CastCommand CastCommand { get; set; } = null!;

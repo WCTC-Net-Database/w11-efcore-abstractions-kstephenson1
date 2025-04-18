@@ -1,16 +1,14 @@
-﻿using ConsoleRpgEntities.Models.Combat;
-using ConsoleRpgEntities.Models.Units.Abstracts;
-using ConsoleRpgEntities.Services;
-using ConsoleRpgEntities.Data;
+﻿using ConsoleRpgEntities.Data;
+using ConsoleRpgEntities.Models.Combat;
 using ConsoleRpgEntities.Models.Interfaces;
+using ConsoleRpgEntities.Models.Units.Abstracts;
 
 namespace ConsoleRpgEntities.Models.UI.Menus.InteractiveMenus;
 
 public class UnitSelectionMenu : InteractiveSelectionMenu<IUnit>
 {
-
-    // The MainMenu contains items that have 4 parts, the index, the name, the description, and the action that
-    // is completed when that menu item is chosen.
+    // UnitSelectionMenu is used to select a unit from a list of units.  It takes in a prompt and an exit message,
+    // and displays a list of units to select from. It returns the selected unit or null if the user exits the menu.
 
     private readonly GameContext _db;
 

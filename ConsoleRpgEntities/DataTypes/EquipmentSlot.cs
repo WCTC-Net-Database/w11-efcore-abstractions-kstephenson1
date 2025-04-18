@@ -1,7 +1,9 @@
-﻿using System.Text.Json.Serialization;
-
-namespace ConsoleRpgEntities.DataTypes
+﻿namespace ConsoleRpgEntities.DataTypes
 {
+    /// <summary>
+    /// Represents the slot where an item can be equipped.
+    /// '0' is used to represent unequipped items in the inventory.
+    /// </summary>
     public enum EquipmentSlot
     {
         None = 0,

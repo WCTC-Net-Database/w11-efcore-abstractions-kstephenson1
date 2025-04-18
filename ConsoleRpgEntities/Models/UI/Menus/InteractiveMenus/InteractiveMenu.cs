@@ -1,6 +1,4 @@
 ﻿using Spectre.Console;
-using System.Data;
-using ConsoleRpgEntities.Models.UI.Menus;
 
 namespace ConsoleRpgEntities.Models.UI.Menus.InteractiveMenus;
 

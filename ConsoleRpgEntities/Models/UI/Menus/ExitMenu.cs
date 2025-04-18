@@ -4,9 +4,8 @@ namespace ConsoleRpgEntities.Models.UI.Menus;
 
 public class ExitMenu : Menu
 {
-    // The Menus class is an abstract(ish) class to build other menus off of.  The Menus class holds a table which is part of the user interface
-    // which is displayed to the user.  The Menu also holds menu items, which can store different types of data.  It can be used by itself if you
-    // want a simple message box.
+    // ExitMenu is used to display a message to the user when they exit the game.  It is used to thank the user for
+    // using the game and to provide any other information that may be relevant.
 
     protected Table _table = new();
     protected List<MenuItem> _menuItems = new();

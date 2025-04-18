@@ -8,7 +8,7 @@ public static class ConfigurationHelper
     {
         basePath ??= Directory.GetCurrentDirectory();
 
-        var builder = new ConfigurationBuilder()
+        IConfigurationBuilder builder = new ConfigurationBuilder()
             .SetBasePath(basePath)
             .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true);
 

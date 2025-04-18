@@ -1,11 +1,9 @@
-﻿using System.Reflection;
-using ConsoleRpgEntities.Data;
+﻿using ConsoleRpgEntities.Data;
 using ConsoleRpgEntities.Helpers;
 using ConsoleRpgEntities.Models.UI;
 using ConsoleRpgEntities.Models.UI.Character;
 using ConsoleRpgEntities.Models.UI.Menus;
 using ConsoleRpgEntities.Models.UI.Menus.InteractiveMenus;
-using ConsoleRpgEntities.Models.Units.Abstracts;
 using ConsoleRpgEntities.Services;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -19,37 +17,29 @@ public static class Startup
 {
     public static void ConfigureServices(IServiceCollection services)
     {
-        // Build configuration
-        var configuration = ConfigurationHelper.GetConfiguration();
+        // Get the configuration from appsettings.json
+        IConfiguration configuration = ConfigurationHelper.GetConfiguration();
 
-        // Create and bind FileLoggerOptions
-        var fileLoggerOptions = new FileLoggerOptions();
+        // Configure FileLoggerOptions from configuration
+        FileLoggerOptions fileLoggerOptions = new FileLoggerOptions();
         configuration.GetSection("Logging:File").Bind(fileLoggerOptions);
 
         // Configure logging
         services.AddLogging(loggingBuilder =>
         {
+            // Clear existing providers to avoid duplicate logs
             loggingBuilder.ClearProviders();
             loggingBuilder.AddConfiguration(configuration.GetSection("Logging"));
 
             // Add Console logger
             loggingBuilder.AddConsole();
 
-            // Add File logger using the correct constructor
-            var logFileName = "Logs/log.txt"; // Specify the log file path
-
+            // Add File logger with options from configuration
+            string? logFileName = "Logs/log.txt"; // Specify the log file path
             loggingBuilder.AddProvider(new FileLoggerProvider(logFileName, fileLoggerOptions));
         });
 
-        // Register DbContext with dependency injection
-        services.AddDbContext<GameContext>(options =>
-            options
-                .UseSqlServer(configuration.GetConnectionString("DbConnection"))
-                .UseLazyLoadingProxies()
-        );
-
-
-        // Register your services
+        // Register services for dependency injection
         services.AddTransient<CharacterUtilities>();
         services.AddTransient<CharacterUI>();
         services.AddTransient<CombatHandler>();

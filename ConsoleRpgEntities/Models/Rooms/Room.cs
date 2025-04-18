@@ -2,8 +2,6 @@
 
 public class Room : RoomBase
 {
-    public Room(string name, string description) : base(name, description)
-    {
-        
-    }
+    // Room is a class that represents a room in the game.
+    public Room(string name, string description) : base(name, description) { }
 }

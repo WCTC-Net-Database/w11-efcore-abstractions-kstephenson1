@@ -7,8 +7,8 @@ using System.ComponentModel.DataAnnotations.Schema;
 [PrimaryKey("UnitId", "ItemId")]
 public class UnitItem
 {
-    //[Key]
-    //public int UnitItemId { get; set; }
+    // UnitItem is a class that holds the properties of an item that is owned by a unit. It is used to store the
+    // properties of an item that is owned by a unit.
 
     [ForeignKey("Unit")]
     public int UnitId { get; set; }

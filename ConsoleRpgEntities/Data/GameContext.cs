@@ -15,6 +15,7 @@ namespace ConsoleRpgEntities.Data;
 
 public class GameContext : DbContext
 {
+    // DbSet properties for each entity type that will be mapped to the database
     public DbSet<Dungeon> Dungeons { get; set; }
     public DbSet<Room> Rooms { get; set; }
     public DbSet<Unit> Units { get; set; }
@@ -27,6 +28,7 @@ public class GameContext : DbContext
 
     protected override void OnModelCreating(ModelBuilder builder)
     {
+        // Configures the GameContext to be able to use the UnitType property as a discriminator for the Unit entity
         builder.Entity<Unit>()
             .HasDiscriminator(unit => unit.UnitType)
             .HasValue<Cleric>(nameof(Cleric))
@@ -41,6 +43,7 @@ public class GameContext : DbContext
             .HasValue<EnemyGoblin>(nameof(EnemyGoblin))
             .HasValue<EnemyMage>(nameof(EnemyMage));
 
+        // Configures the GameContext to be able to use the ItemType property as a discriminator for the Item entity
         builder.Entity<Item>()
             .HasDiscriminator(item => item.ItemType)
             .HasValue<GenericItem>(nameof(GenericItem))
@@ -57,6 +60,7 @@ public class GameContext : DbContext
             .HasValue<LegArmorItem>(nameof(LegArmorItem))
             .HasValue<FeetArmorItem>(nameof(FeetArmorItem));
 
+        // Configures the GameContext to be able to use the AbilityType property as a discriminator for the Ability entity
         builder.Entity<Ability>()
             .HasDiscriminator(ability => ability.AbilityType)
             .HasValue<FlyAbility>(nameof(FlyAbility))
@@ -64,26 +68,10 @@ public class GameContext : DbContext
             .HasValue<StealAbility>(nameof(StealAbility))
             .HasValue<TauntAbility>(nameof(TauntAbility));
 
+        // Creates a many-to-many relationship between Unit and Item and maps it to the UnitItems table
         builder.Entity<Unit>()
         .HasMany(unit => unit.Abilities)
         .WithMany(ability => ability.Units)
         .UsingEntity(join => join.ToTable("UnitAbility"));
-
-        //builder.Entity<Unit>()
-        //.HasMany(unit => unit.Items)
-        //.WithMany(item => item.Units)
-        //.UsingEntity(join => join.ToTable("UnitItems"));
-
-        //builder.Entity<UnitItem>()
-        //    .HasOne(ui => ui.Unit)
-        //    .WithMany(u => u.UnitItems)
-        //    .HasForeignKey(ui => ui.UnitId)
-        //    .HasConstraintName("FK_UnitItems_UnitId");
-
-        //builder.Entity<UnitItem>()
-        //    .HasOne(ui => ui.Item)
-        //    .WithMany(i => i.UnitItems)
-        //    .HasForeignKey(ui => ui.ItemId)
-        //    .HasConstraintName("FK_UnitItems_ItemId");
     }
 }

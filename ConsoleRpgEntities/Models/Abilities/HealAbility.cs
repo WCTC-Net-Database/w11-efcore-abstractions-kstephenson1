@@ -5,6 +5,7 @@ namespace ConsoleRpgEntities.Models.Abilities;
 
 public class HealAbility : Ability
 {
+    // HealAbility represents the ability to heal.
     public override string AbilityType { get; set; } = "HealAbility";
 
     public HealAbility()

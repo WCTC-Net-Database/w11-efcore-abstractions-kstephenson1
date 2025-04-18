@@ -1,11 +1,11 @@
 ﻿using ConsoleRpgEntities.DataTypes;
-using ConsoleRpgEntities.Models.Units.Characters;
 using ConsoleRpgEntities.Models.Interfaces.ItemBehaviors;
 
 namespace ConsoleRpgEntities.Models.Items.EquippableItems.ArmorItems;
 
 public abstract class ArmorItem : EquippableItem, IEquippableArmor
 {
+    // ArmorItem is an abstract class that holds armor item information.
     public abstract ArmorType ArmorType { get; set; }
     public int Defense { get; set; }
     public int Resistance { get; set; }

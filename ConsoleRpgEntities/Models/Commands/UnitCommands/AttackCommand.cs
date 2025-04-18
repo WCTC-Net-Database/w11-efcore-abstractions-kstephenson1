@@ -8,16 +8,17 @@ namespace ConsoleRpgEntities.Models.Commands.UnitCommands;
 
 public class AttackCommand : ICommand
 {
-    // A generic attack command.  It takes in an attacking unit and a target, creates a new encounter object, and calculates whether or
-    // not the unit hit/crit and calculates damage.  If the unit cannot attack, a message is provided to the user.
+    // AttackCommand is used to attack a target unit.  It takes in a unit and a target, and attacks the target with
+    // the unit's equipped weapon. It also prints a message to the console indicating that the unit has attacked the
+    // target. If the unit is not an IAttack, a message is printed to the console indicating that the unit cannot attack.
+    // If the unit is attacking itself, a message is printed to the console indicating that the unit should not attack
+    // itself.
+        
     private readonly IUnit _unit;
     private readonly IUnit _target;
     private readonly Encounter _encounter;
 
-    public AttackCommand()
-    {
-        
-    }
+    public AttackCommand() { }
     public AttackCommand(IUnit unit, IUnit target)
     {
         if (unit == null || target == null)
@@ -32,8 +33,6 @@ public class AttackCommand : ICommand
         {
             if (_unit != _target)
             {
-                
-
                 if (_encounter.Unit.GetEquippedWeapon() is PhysicalWeaponItem)
                 {
                     Console.WriteLine($"{_unit.Name} attacks {_target.Name} with {_encounter.Unit.GetEquippedWeapon().Name}\n");

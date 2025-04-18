@@ -5,9 +5,7 @@ namespace ConsoleRpgEntities.Models.UI.Menus.InteractiveMenus;
 
 public class UnitClassMenu : InteractiveSelectionMenu<Type>
 {
-
-    // The MainMenu contains items that have 4 parts, the index, the name, the description, and the action that
-    // is completed when that menu item is chosen.
+    // UnitClassMenu is used to select a unit class from a list of unit classes.  It's used for character creation.
 
     public UnitClassMenu()
     {

@@ -1,10 +1,10 @@
 ﻿using ConsoleRpgEntities.DataTypes;
-using ConsoleRpgEntities.Models.Interfaces;
 
 namespace ConsoleRpgEntities.Models.Interfaces.ItemBehaviors;
 
 public interface IEquippableItem : IItem
 {
+    // Interface that allows items to be equipped by units.
     public Rank RequiredRank { get; set; }
     public int MaxDurability { get; set; }
     public int Durability { get; set; }

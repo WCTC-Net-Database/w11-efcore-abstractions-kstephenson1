@@ -6,14 +6,13 @@ namespace ConsoleRpgEntities.Models.Commands.UnitCommands;
 
 public class CastCommand : ICommand
 {
-    // The CastCommand takes in a casting unit and a spell name.  If the unit is a caster, it will cast the spell.
+    // CastCommand is used to cast a spell from a unit.  It takes in a unit and a spell name, and casts the spell
+    // from the unit. It also prints a message to the console indicating that the spell has been cast. If the unit is
+    // not a spellcaster, a message is printed to the console indicating that the unit is not a spellcaster.
 
     private readonly IUnit _unit;
     private readonly string _spellName;
-    public CastCommand()
-    {
-        
-    }
+    public CastCommand() { }
     public CastCommand(IUnit unit, string spellName)
     {
         _unit = unit;

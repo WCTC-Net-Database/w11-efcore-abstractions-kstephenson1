@@ -4,6 +4,7 @@ namespace ConsoleRpgEntities.Models.Abilities;
 
 public class TauntAbility : Ability
 {
+    // TauntAbility represents the ability to taunt an enemy to attack the unit.
     public override string AbilityType { get; set; } = "TauntAbility";
 
     public TauntAbility()

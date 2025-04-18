@@ -5,13 +5,12 @@ namespace ConsoleRpgEntities.Models.Commands.UnitCommands;
 
 public class MoveCommand : ICommand
 {
-    // The MoveCommand takes in a unit and a position, checks to see if the unit can move, then moves to that position of able.
+    // MoveCommand is used to move a unit.  It takes in a unit and moves it. It also prints a message to the console
+    // indicating that the unit has moved. If the unit is not able to move, a message is printed to the console
+    // indicating that the unit cannot move.
 
     private readonly IUnit _unit;
-    public MoveCommand()
-    {
-        
-    }
+    public MoveCommand() { }
 
     public MoveCommand(IUnit unit)
     {
@@ -27,6 +26,5 @@ public class MoveCommand : ICommand
         {
             Console.WriteLine($"{_unit.Name} cannot move!");
         }
-
     }
 }

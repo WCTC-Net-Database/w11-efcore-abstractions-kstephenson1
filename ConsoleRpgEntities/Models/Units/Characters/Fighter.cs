@@ -1,5 +1,4 @@
-﻿using ConsoleRpgEntities.Models.Combat;
-using ConsoleRpgEntities.Models.Units.Abstracts;
+﻿using ConsoleRpgEntities.Models.Units.Abstracts;
 
 namespace ConsoleRpgEntities.Models.Units.Characters;
 

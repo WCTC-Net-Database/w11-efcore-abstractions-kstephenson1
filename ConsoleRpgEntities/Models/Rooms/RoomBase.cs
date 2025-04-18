@@ -6,6 +6,7 @@ namespace ConsoleRpgEntities.Models.Rooms;
 
 public abstract class RoomBase : IRoom
 {
+    // RoomBase is an abstract class that holds basic room properties and functions.
     public int RoomId { get; set; }
     public string Name { get; set; }
     public string Description { get; set; }

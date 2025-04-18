@@ -6,8 +6,9 @@ namespace ConsoleRpgEntities.Models.Commands.ItemCommands;
 
 public class UseItemCommand : ICommand
 {
-    // A generic attack command.  It takes in an attacking unit and a target, creates a new encounter object, and calculates whether or
-    // not the unit hit/crit and calculates damage.  If the unit cannot attack, a message is provided to the user.
+    // UseItemCommand is used to use an item from a unit.  It takes in a unit and an item, and uses the item on the
+    // unit. It also prints a message to the console indicating that the item has been used. If the item is not usable,
+    // a message is printed to the console indicating that the item is not usable.
 
     private readonly IUnit _unit;
     private readonly IItem _item;
@@ -26,6 +27,5 @@ public class UseItemCommand : ICommand
         {
             Console.WriteLine("This item is not usable.");
         }
-
     }
 }

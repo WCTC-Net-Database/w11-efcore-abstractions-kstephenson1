@@ -4,6 +4,7 @@ namespace ConsoleRpgEntities.Models.Items.EquippableItems.ArmorItems;
 
 public class LegArmorItem : ArmorItem
 {
+    // LegArmorItem is a class that represents a leg armor item.
     public override string ItemType { get; set; } = "LegArmorItem";
     public override ArmorType ArmorType { get; set; } = ArmorType.Legs;
     public LegArmorItem() : base() { }

@@ -9,17 +9,17 @@ namespace ConsoleRpgEntities.Data
     {
         public GameContext CreateDbContext(string[] args)
         {
-            // Build configuration
-            var configuration = ConfigurationHelper.GetConfiguration();
+            // Get configuration
+            IConfigurationRoot configuration = ConfigurationHelper.GetConfiguration();
 
             // Get connection string
-            var connectionString = configuration.GetConnectionString("DbConnection");
+            string? connectionString = configuration.GetConnectionString("DbConnection");
 
             // Build DbContextOptions
-            var optionsBuilder = new DbContextOptionsBuilder<GameContext>();
+            DbContextOptionsBuilder<GameContext> optionsBuilder = new DbContextOptionsBuilder<GameContext>();
             optionsBuilder.UseSqlServer(connectionString);
 
-            // Create and return the context
+            // Create and return the GameContext
             return new GameContext(optionsBuilder.Options);
         }
     }

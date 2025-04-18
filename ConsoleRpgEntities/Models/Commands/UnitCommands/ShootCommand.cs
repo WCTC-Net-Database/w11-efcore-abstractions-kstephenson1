@@ -8,16 +8,14 @@ namespace ConsoleRpgEntities.Models.Commands.UnitCommands;
 
 public class ShootCommand : ICommand
 {
-    // The ShootCommand takes an attacking unit and a target, checks to see if the unit is able to shoot, then shoots at the target if available,
-    // using an Encounter to calculate the damage and hit/crit chances.
+    // ShootCommand is used to shoot a target from a unit.  It takes in a unit and a target, and shoots the target
+    // from the unit. It also prints a message to the console indicating that the target has been shot.
+
 
     private readonly IUnit _unit;
     private readonly IUnit _target;
     private readonly Encounter _encounter;
-    public ShootCommand()
-    {
-        
-    }
+    public ShootCommand() { }
     public ShootCommand(IUnit unit, IUnit target)
     {
         _unit = unit;
@@ -31,8 +29,6 @@ public class ShootCommand : ICommand
         {
             if (_unit != _target)
             {
-
-
                 if (_encounter.Unit.GetEquippedWeapon() is PhysicalWeaponItem)
                 {
                     Console.WriteLine($"{_unit.Name} attacks {_target.Name} with {_encounter.Unit.GetEquippedWeapon().Name}\n");

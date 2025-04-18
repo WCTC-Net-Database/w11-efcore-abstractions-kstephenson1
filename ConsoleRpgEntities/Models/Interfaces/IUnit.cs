@@ -12,7 +12,7 @@ namespace ConsoleRpgEntities.Models.Interfaces;
 
 public interface IUnit : ITargetable, IAttack, IHaveInventory, IUseItems
 {
-    // Interface tha allows units to exist.
+    // Interface that allows units to exist.
     public int UnitId { get; set; }
     MoveCommand MoveCommand { set; get; }
     AbilityCommand AbilityCommand { set; get; }

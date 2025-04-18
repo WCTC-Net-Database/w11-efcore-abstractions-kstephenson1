@@ -1,10 +1,12 @@
-﻿namespace ConsoleRpgEntities.DataTypes
+﻿namespace ConsoleRpgEntities.DataTypes;
+
+/// <summary>
+/// Represents the type of armor.
+/// </summary>
+public enum ArmorType
 {
-    public enum ArmorType
-    {
-        Head = 0,
-        Chest = 1,
-        Legs = 2,
-        Feet = 3
-    }
+    Head = 0,
+    Chest = 1,
+    Legs = 2,
+    Feet = 3
 }

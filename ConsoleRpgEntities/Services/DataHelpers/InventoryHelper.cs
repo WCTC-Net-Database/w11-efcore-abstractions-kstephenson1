@@ -1,10 +1,8 @@
-﻿using System.Linq;
-using ConsoleRpgEntities.DataTypes;
-using ConsoleRpgEntities.Models.Items;
-using ConsoleRpgEntities.Models.Items.WeaponItems;
-using ConsoleRpgEntities.Models.Units.Abstracts;
+﻿using ConsoleRpgEntities.DataTypes;
 using ConsoleRpgEntities.Models.Interfaces;
 using ConsoleRpgEntities.Models.Interfaces.ItemBehaviors;
+using ConsoleRpgEntities.Models.Items;
+using ConsoleRpgEntities.Models.Units.Abstracts;
 
 namespace ConsoleRpgEntities;
 

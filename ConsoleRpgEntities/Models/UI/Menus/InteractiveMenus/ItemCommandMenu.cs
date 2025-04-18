@@ -7,9 +7,9 @@ namespace ConsoleRpgEntities.Models.UI.Menus.InteractiveMenus;
 
 public class ItemCommandMenu : InteractiveSelectionMenu<ICommand>
 {
-
-    // The MainMenu contains items that have 4 parts, the index, the name, the description, and the action that
-    // is completed when that menu item is chosen.
+    // ItemCommandMenu is used to display a menu of commands that can be performed on an item.  It takes in a unit and an
+    // item, and displays a menu of commands that can be performed on the item, then returns the command that was
+    // selected or returns null if the user exits the menu.
 
     public override void Display(string errorMessage)
     {

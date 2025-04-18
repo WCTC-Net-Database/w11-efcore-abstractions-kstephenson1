@@ -4,6 +4,7 @@ namespace ConsoleRpgEntities.Models.Items.EquippableItems.ArmorItems;
 
 public class FeetArmorItem : ArmorItem
 {
+    // FeetArmorItem is a class that represents an item that can be equipped to the feet of a unit.
     public override string ItemType { get; set; } = "FeetArmorItem";
     public override ArmorType ArmorType { get; set; } = ArmorType.Feet;
     public FeetArmorItem() : base() { }

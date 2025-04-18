@@ -67,6 +67,9 @@ public class SeedHandler
 
     public void SeedDatabase()
     {
+        // Checks if the database is empty before seeding. If it is empty, it generates the items, dungeons, abilities,
+        // and characters. If the database is not empty, it skips the seeding process. A cute 'lil loading screen was
+        // added to make it look like the game is loading.
         if (!_db.Items.Any())
         {
             DisplaySeedProgressBar();
@@ -82,13 +85,15 @@ public class SeedHandler
         if (!_db.Units.Any())
             GenerateCharacters();
 
-        
-
+        // Saves the changes to the database after seeding.
         _db.SaveChanges();
     }
 
     private void GenerateItems()
     {
+        // Generates the items for the game. The items are added to the database and saved.
+
+        // Consumable Items
         _itemPotion = new();
         _itemLockpick = new();
         _itemBook = new();
@@ -756,6 +761,7 @@ public class SeedHandler
 
     private void GenerateAbilities()
     {
+        // Generates the abilities for the game.
         _db.Abilities.Add(_abilityFly);
         _db.Abilities.Add(_abilityHeal);
         _db.Abilities.Add(_abilitySteal);
@@ -764,6 +770,7 @@ public class SeedHandler
 
     private void GenerateDungeons()
     {
+        // Generates the dungeons and rooms for the game.
         Dungeon dungeon = new Dungeon();
         dungeon.Name = "Intro Dungeon";
         dungeon.Description = "The first dungeon in the game";
@@ -794,6 +801,7 @@ public class SeedHandler
 
     private Room GetRandomRoom()
     {
+        // Returns a random room from the list of rooms.
         Random numberGenerator = new Random();
         int random = numberGenerator.Next(0, 7);
         return _rooms[random];
@@ -801,12 +809,14 @@ public class SeedHandler
 
     private void AddItem(Unit unit, Item item)
     {
+        // Adds an item to the unit's inventory
         AddItem(unit, item, EquipmentSlot.None);
     }
 
     private void AddItem(Unit unit, Item item, EquipmentSlot slot)
     {
-        if(unit.UnitItems == null)
+        // Adds an item to the unit's inventory or equipment slot. If the unit's inventory is null, it creates a new list.
+        if (unit.UnitItems == null)
             unit.UnitItems = new();
         unit.UnitItems.Add(new()
         {
@@ -820,7 +830,8 @@ public class SeedHandler
 
     async private void DisplaySeedProgressBar()
     {
-        // Added a progress bar to simulate the progress of the seeding process.
+        // Displays a progress bar while the database is being seeded. The progress bar is displayed using the
+        // Spectre.Console library.
         AnsiConsole.Progress()
         .AutoRefresh(true)
         .AutoClear(false)
@@ -838,14 +849,14 @@ public class SeedHandler
         .Start(ctx =>
         {
             double progress = 55;
-            var taskTotal = ctx.AddTask("[white][[Seeding Database]][/]", true, 21716);
-            var taskItems = ctx.AddTask("[white]Generating Items[/]", true, 8362);
-            var taskRooms = ctx.AddTask("[white]Generating Rooms[/]", true, 1091);
-            var taskDungeon = ctx.AddTask("[white]Generating Dungeon[/]", true, 850);
-            var taskAbilities = ctx.AddTask("[white]Generating Abilties[/]", true, 159);
-            var taskUnits = ctx.AddTask("[white]Generating Units[/]", true, 7643);
-            var taskStats = ctx.AddTask("[white]Generating Stats[/]", true, 2410);
-            var taskInventory = ctx.AddTask("[white]Generating Inventory[/]", true, 1201);
+            ProgressTask taskTotal = ctx.AddTask("[white][[Seeding Database]][/]", true, 21716);
+            ProgressTask taskItems = ctx.AddTask("[white]Generating Items[/]", true, 8362);
+            ProgressTask taskRooms = ctx.AddTask("[white]Generating Rooms[/]", true, 1091);
+            ProgressTask taskDungeon = ctx.AddTask("[white]Generating Dungeon[/]", true, 850);
+            ProgressTask taskAbilities = ctx.AddTask("[white]Generating Abilties[/]", true, 159);
+            ProgressTask taskUnits = ctx.AddTask("[white]Generating Units[/]", true, 7643);
+            ProgressTask taskStats = ctx.AddTask("[white]Generating Stats[/]", true, 2410);
+            ProgressTask taskInventory = ctx.AddTask("[white]Generating Inventory[/]", true, 1201);
 
             while (!ctx.IsFinished)
             {

@@ -2,21 +2,20 @@
 using ConsoleRpgEntities.DataTypes;
 using ConsoleRpgEntities.Models.Abilities;
 using ConsoleRpgEntities.Models.Combat;
-using ConsoleRpgEntities.Models.Items;
-using ConsoleRpgEntities.Models.Items.EquippableItems.ArmorItems;
-using ConsoleRpgEntities.Models.Items.WeaponItems;
-using ConsoleRpgEntities.Models.Rooms;
-using ConsoleRpgEntities.Models.Units.Abstracts;
 using ConsoleRpgEntities.Models.Interfaces;
 using ConsoleRpgEntities.Models.Interfaces.ItemBehaviors;
+using ConsoleRpgEntities.Models.Items;
+using ConsoleRpgEntities.Models.Rooms;
+using ConsoleRpgEntities.Models.Units.Abstracts;
 using Spectre.Console;
 
 namespace ConsoleRpgEntities.Models.UI.Character;
 
 public class CharacterUI
 {
-    private GameContext _db;
     // CharacterUI helps display character information in a nice little table.
+
+    private GameContext _db;
     public CharacterUI(GameContext context)
     {
         _db = context;

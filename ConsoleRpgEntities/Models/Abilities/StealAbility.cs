@@ -4,6 +4,7 @@ namespace ConsoleRpgEntities.Models.Abilities;
 
 public class StealAbility : Ability
 {
+    // StealAbility represents the ability to steal an item from an enemy.
     public override string AbilityType { get; set; } = "StealAbility";
 
     public StealAbility()

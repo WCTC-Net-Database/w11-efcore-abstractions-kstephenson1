@@ -6,8 +6,8 @@ namespace ConsoleRpgEntities.Models.Commands.ItemCommands;
 
 public class EquipCommand : ICommand
 {
-    // A generic attack command.  It takes in an attacking unit and a target, creates a new encounter object, and calculates whether or
-    // not the unit hit/crit and calculates damage.  If the unit cannot attack, a message is provided to the user.
+    // EquipCommand is used to equip an item to a unit.  It takes in a unit and an item, and equips the item to the
+    // unit's inventory. It also prints a message to the console indicating that the item has been equipped. 
 
     private readonly IUnit _unit;
     private readonly IEquippableItem _item;

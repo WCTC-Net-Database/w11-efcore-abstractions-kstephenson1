@@ -1,14 +1,12 @@
-﻿using ConsoleRpgEntities.DataTypes;
-using ConsoleRpgEntities.Models.Rooms;
-using ConsoleRpgEntities.Models.Interfaces.Rooms;
+﻿using ConsoleRpgEntities.Models.Interfaces.Rooms;
 
 namespace ConsoleRpgEntities.Models.UI.Menus.InteractiveMenus;
 
 public class RoomNavigationMenu : InteractiveSelectionMenu<IRoom>
 {
-
-    // The MainMenu contains items that have 4 parts, the index, the name, the description, and the action that
-    // is completed when that menu item is chosen.
+    // The RoomNavigationMenu is used to navigate through the rooms in the game.  It takes in a room and a prompt, and
+    // displays the rooms that are adjacent to the room. It returns the room that is selected by the user or null if the
+    // user exits the menu.
 
     public override void Display(string errorMessage)
     {

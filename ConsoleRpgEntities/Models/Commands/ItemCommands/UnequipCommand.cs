@@ -6,8 +6,8 @@ namespace ConsoleRpgEntities.Models.Commands.ItemCommands;
 
 public class UnequipCommand : ICommand
 {
-    // A generic attack command.  It takes in an attacking unit and a target, creates a new encounter object, and calculates whether or
-    // not the unit hit/crit and calculates damage.  If the unit cannot attack, a message is provided to the user.
+    // UnequipCommand is used to unequip an item from a unit.  It takes in a unit and an item, and unequips the item
+    // from the unit's inventory. It also prints a message to the console indicating that the item has been unequipped.
 
     private readonly IUnit _unit;
     private readonly IEquippableItem _item;

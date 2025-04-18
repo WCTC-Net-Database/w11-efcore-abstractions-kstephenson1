@@ -7,7 +7,7 @@ namespace ConsoleRpgEntities.Models.Interfaces.UnitBehaviors;
 public interface ICastable
 {
     public Stat Stat { get; set; }
-    // Interface tha allows units to cast spells.
+    // Interface that allows units to cast spells.
     CommandInvoker Invoker { set; get; }
     CastCommand CastCommand { set; get; }
     void Cast(string spellName);

@@ -1,6 +1,4 @@
-﻿using ConsoleRpgEntities.Models.UI.Menus;
-
-namespace ConsoleRpgEntities.Models.UI.Menus.InteractiveMenus;
+﻿namespace ConsoleRpgEntities.Models.UI.Menus.InteractiveMenus;
 
 public abstract class InteractiveSelectionMenu<T> : InteractiveMenu
 {
@@ -8,10 +6,7 @@ public abstract class InteractiveSelectionMenu<T> : InteractiveMenu
     // The MainMenu contains items that have 4 parts, the index, the name, the description, and the action that
     // is completed when that menu item is chosen.
 
-    public InteractiveSelectionMenu()
-    {
-
-    }
+    public InteractiveSelectionMenu() { }
 
     public InteractiveSelectionMenu(int selectedIndex)
     {

@@ -48,6 +48,11 @@ public class CharacterUtilities
         character.Class = characterClass.Name;
         character.Level = level;
 
+        List<UnitItem> unitItems = new();
+
+
+        character.UnitItems = unitItems;
+
         Stat stat = new Stat();
         stat.HitPoints = hitPoints;
         stat.MaxHitPoints = hitPoints;

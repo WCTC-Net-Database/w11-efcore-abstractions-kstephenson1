@@ -7,16 +7,13 @@ namespace ConsoleRpgEntities.Models.Commands.AbilityCommands;
 
 public class AbilityCommand : ICommand
 {
-    // A generic attack command.  It takes in an attacking unit and a target, creates a new encounter object, and calculates whether or
-    // not the unit hit/crit and calculates damage.  If the unit cannot attack, a message is provided to the user.
+    // A generic attack command.  It takes in an attacking unit and a target, creates a new encounter object, and
+    // calculates whether or not the unit hit/crit and calculates damage.  If the unit cannot attack, a message is provided to the user.
     private readonly IUnit _unit;
     private readonly IUnit _target;
     private readonly Ability _ability;
 
-    public AbilityCommand()
-    {
-        
-    }
+    public AbilityCommand() { }
     public AbilityCommand(IUnit unit, IUnit target, Ability ability)
     {
         if (unit == null || target == null)

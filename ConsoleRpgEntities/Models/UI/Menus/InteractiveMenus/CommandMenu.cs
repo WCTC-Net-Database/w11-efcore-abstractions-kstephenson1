@@ -11,9 +11,10 @@ namespace ConsoleRpgEntities.Models.UI.Menus.InteractiveMenus;
 
 public class CommandMenu : InteractiveSelectionMenu<ICommand>
 {
-
-    // The MainMenu contains items that have 4 parts, the index, the name, the description, and the action that
-    // is completed when that menu item is chosen.
+    // CommandMenu is used to display a menu of commands that can be executed by a unit. It takes in a unit and a prompt,
+    // and displays the menu of commands. It also takes in an exit message, which is displayed at the bottom of the menu.
+    // The user can select a command by pressing the corresponding key, and the command is executed. If the user presses
+    // the exit key, the menu is exited.
 
     private readonly GameContext _db;
 

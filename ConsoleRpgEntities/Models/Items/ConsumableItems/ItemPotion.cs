@@ -5,6 +5,8 @@ namespace ConsoleRpgEntities.Models.Items.ConsumableItems;
 
 public class ItemPotion : ConsumableItem, IConsumableItem
 {
+    // ItemPotion is a consumable item that can be used to restore hit points to a unit. It has a maximum number of
+    // uses and can be used by a unit to restore hit points.
     public override string ItemType { get; set; } = "ItemPotion";
 
     public ItemPotion()

@@ -1,27 +1,20 @@
-﻿using System.Text.Json.Serialization;
-using ConsoleRpgEntities.DataTypes;
-using ConsoleRpgEntities.Services.DataHelpers;
+﻿using ConsoleRpgEntities.DataTypes;
 using ConsoleRpgEntities.Models.Interfaces.ItemBehaviors;
 
 namespace ConsoleRpgEntities.Models.Items.EquippableItems;
 
 public abstract class EquippableItem : Item, IEquippableItem
 {
-    // Item is a class that holds item information.
 
+    // EquippableItem is a class that holds equippable item information.
 
-
-    [JsonConverter(typeof(JsonStringEnumConverter<Rank>))]
     public Rank RequiredRank { get; set; }
     public int MaxDurability { get; set; }
     public int Durability { get; set; }
     public int Weight { get; set; }
     public int ExpModifier { get; set; }
 
-    protected EquippableItem()
-    {
-        
-    }
+    protected EquippableItem() { }
 
     public EquippableItem(string name, Rank requiredRank, int maxDurability, int weight, int expModifier) : base(name)
     {

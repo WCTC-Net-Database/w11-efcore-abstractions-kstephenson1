@@ -4,6 +4,7 @@ namespace ConsoleRpgEntities.Models.Items.EquippableItems.ArmorItems;
 
 public class ChestArmorItem : ArmorItem
 {
+    // ChestArmorItem represents an item that can be equipped in the chest slot.
     public override string ItemType { get; set; } = "ChestArmorItem";
     public override ArmorType ArmorType { get; set; } = ArmorType.Chest;
     public ChestArmorItem() : base() { }

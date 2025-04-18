@@ -1,5 +1,4 @@
-﻿using ConsoleRpgEntities.Models.Items;
-using ConsoleRpgEntities.Models.Interfaces;
+﻿using ConsoleRpgEntities.Models.Interfaces;
 using ConsoleRpgEntities.Models.Interfaces.Commands;
 using ConsoleRpgEntities.Models.Interfaces.InventoryBehaviors;
 
@@ -7,8 +6,10 @@ namespace ConsoleRpgEntities.Models.Commands.ItemCommands;
 
 public class TradeItemCommand : ICommand
 {
-    // A generic attack command.  It takes in an attacking unit and a target, creates a new encounter object, and calculates whether or
-    // not the unit hit/crit and calculates damage.  If the unit cannot attack, a message is provided to the user.
+    // TradeItemCommand is used to trade an item from one unit to another.  It takes in a unit, an item, and a target
+    // unit, and removes the item from the unit's inventory and adds it to the target's inventory. It also prints a
+    // message to the console indicating that the item has been traded. If the target's inventory is full, a message is
+    // printed to the console indicating that the item could not be traded.
 
     private readonly IUnit _unit;
     private readonly IItem _item;

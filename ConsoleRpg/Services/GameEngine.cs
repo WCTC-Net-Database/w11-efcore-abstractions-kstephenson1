@@ -31,6 +31,7 @@ public class GameEngine
 
     void Test()
     {
+        // This method is only used for testing purposes and should be removed when the "game" is finished.
         Unit rogue = _db.Units.Where(u => u.Class == "Rogue").FirstOrDefault();
         Unit target = _db.Units.FirstOrDefault();
         Ability steal = _db.Abilities.Where(a => a.Units.Contains(rogue)).FirstOrDefault();
@@ -41,26 +42,24 @@ public class GameEngine
 
     public void Initialization()
     {
-        // The Initialization method runs a few things that need to be done before the main part of the program runs.
-
-        //_unitManager.ImportUnits(); //Imports the caracters from the csv or json file.
+        // Seeds the database with initial data. This is only run once when the program is started for the first time.
         _seedHandler.SeedDatabase();
     }
 
     public void Run()
     {
-        // Shows the main menu.  Allows you to add/edit characters before the game is started.
+        // Runs the main game loop. This is where the game starts and runs until the user chooses to exit.
+
+        // Shows the main menu and waits for the user to choose an option.
         _userInterface.MainMenu.Display("[[Start Game]]");
 
-        //Dungeon dungeon = _dungeonFactory.CreateDungeon("intro");
-        //dungeon.EnterDungeon();
-
+        // Starts the combat handler, which is the main game loop.
         _combatHandler.StartCombat();
     }
 
     public void End()
     {
-        // Exports the character list back to the chosen file format and ends the program.
+        // Ends the game and exits the program.
         _userInterface.ExitMenu.Show();
     }
 }

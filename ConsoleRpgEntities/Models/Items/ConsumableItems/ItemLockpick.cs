@@ -1,11 +1,13 @@
-﻿using ConsoleRpgEntities.Services.DataHelpers;
-using ConsoleRpgEntities.Models.Interfaces;
+﻿using ConsoleRpgEntities.Models.Interfaces;
 using ConsoleRpgEntities.Models.Interfaces.ItemBehaviors;
 
 namespace ConsoleRpgEntities.Models.Items.ConsumableItems;
 
 public class ItemLockpick : ConsumableItem, IConsumableItem
 {
+    // ItemLockpick is a consumable item that can be used to unlock doors or chests. It has a limited number of uses
+    // and can be used by a unit. When the item is used, it decrements the number of uses left. If the number of uses
+    // reaches zero, the item is removed from the unit's inventory.
     public override string ItemType { get; set; } = "ItemLockpick";
 
     public ItemLockpick()

@@ -6,6 +6,8 @@ namespace ConsoleRpgEntities.Models.Combat;
 
 public class Stat
 {
+    // Stat is a class that holds the stats of a unit.
+
     [Key, ForeignKey("Unit")]
     public int UnitId { get; set; }
 
@@ -27,8 +29,5 @@ public class Stat
     public int Defense { get; set; }            // DEF
     public int Resistance { get; set; }         // RES
 
-    public Stat()
-    {
-
-    }
+    public Stat() { }
 }

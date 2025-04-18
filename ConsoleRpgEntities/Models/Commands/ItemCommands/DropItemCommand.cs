@@ -1,13 +1,13 @@
-﻿using ConsoleRpgEntities.Models.Items;
-using ConsoleRpgEntities.Models.Interfaces;
+﻿using ConsoleRpgEntities.Models.Interfaces;
 using ConsoleRpgEntities.Models.Interfaces.Commands;
 
 namespace ConsoleRpgEntities.Models.Commands.ItemCommands;
 
 public class DropItemCommand : ICommand
 {
-    // A generic attack command.  It takes in an attacking unit and a target, creates a new encounter object, and calculates whether or
-    // not the unit hit/crit and calculates damage.  If the unit cannot attack, a message is provided to the user.
+    // DropItemCommand is used to drop an item from a unit's inventory.  It takes in a unit and an item, and removes
+    // the item from the unit's inventory. It also prints a message to the console indicating that the item has been
+    // dropped.
 
     private readonly IUnit _unit;
     private readonly IItem _item;
